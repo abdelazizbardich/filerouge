@@ -1,7 +1,9 @@
-import hi from './components/hi.vue'
+import home from './components/pages/home.vue'
+import shop from './components/pages/shop.vue'
 
 const routes = [
-    {path : '/',component : hi},
+    {path : '/',component : home},
+    {path : '/shop',component : shop},
 ]
 
 
