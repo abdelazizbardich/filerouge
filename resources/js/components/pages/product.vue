@@ -90,8 +90,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span>:</h2></div>
-                        <div class="similar-products-grid">
+                        <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
+                        <div class="similar-products-grid text-dark">
                                 <productItem v-for="(i,index) in limit" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
                         </div>
                     </div>

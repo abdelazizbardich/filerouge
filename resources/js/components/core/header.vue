@@ -1,5 +1,5 @@
 <template scoped>
-        <div class="bg-dark text-light">
+        <div class="main-header shadow bg-dark text-light">
         <div class="container header">
             <div class="row">
                 <div class="col">
@@ -51,6 +51,11 @@ li.active .nav-link{
     text-align: left;
     color: #fff;
     opacity: 0.77;
+}
+.main-header{
+    position: sticky;
+    top:0;
+    z-index:9;
 }
 </style>
 
