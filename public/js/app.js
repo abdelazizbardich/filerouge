@@ -21355,80 +21355,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "bg-dark text-light" }, [
+    _c("div", { staticClass: "container header" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("nav", { staticClass: "navbar navbar-expand-lg" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse navbar-collapse justify-content-end",
+                attrs: { id: "headerNavBar" }
+              },
+              [
+                _c("ul", { staticClass: "navbar-nav mt-2 mt-lg-0" }, [
+                  _c(
+                    "li",
+                    { staticClass: "nav-item active" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/" } },
+                        [_vm._v("Home")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: "/shop" } },
+                        [_vm._v("Shop")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-dark text-light" }, [
-      _c("div", { staticClass: "container header" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col" }, [
-            _c("nav", { staticClass: "navbar navbar-expand-lg" }, [
-              _c(
-                "a",
-                { staticClass: "navbar-brand logo", attrs: { href: "#" } },
-                [_c("img", { attrs: { src: "img/logo.png", alt: "" } })]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "navbar-toggler",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "collapse",
-                    "data-target": "#headerNavBar",
-                    "aria-controls": "headerNavBar",
-                    "aria-expanded": "false",
-                    "aria-label": "Toggle navigation"
-                  }
-                },
-                [_c("span", { staticClass: "navbar-toggler-icon" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse navbar-collapse justify-content-end",
-                  attrs: { id: "headerNavBar" }
-                },
-                [
-                  _c("ul", { staticClass: "navbar-nav mt-2 mt-lg-0" }, [
-                    _c("li", { staticClass: "nav-item active" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "#" } },
-                        [_vm._v("Home")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        { staticClass: "nav-link", attrs: { href: "#" } },
-                        [_vm._v("Shop")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "nav-link text-primary",
-                          attrs: { href: "#" }
-                        },
-                        [_c("i", { staticClass: "fas fa-shopping-bag" })]
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ])
-        ])
+    return _c("a", { staticClass: "navbar-brand logo", attrs: { href: "#" } }, [
+      _c("img", { attrs: { src: "img/logo.png", alt: "" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#headerNavBar",
+          "aria-controls": "headerNavBar",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link text-primary", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fas fa-shopping-bag" })
       ])
     ])
   }
@@ -21540,7 +21555,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-auto m-auto my-5" }, [
           _c("span", { staticClass: "h3 text-light display-6" }, [
             _vm._v("Our latested "),
-            _c("span", { staticClass: "text-warning" }, [_vm._v("products")])
+            _c("span", { staticClass: "text-primary" }, [_vm._v("products")])
           ])
         ])
       ])

@@ -12,10 +12,10 @@
                         <div class="collapse navbar-collapse justify-content-end" id="headerNavBar">
                             <ul class="navbar-nav mt-2 mt-lg-0">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home</a>
+                                <router-link class="nav-link" :to="'/'">Home</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Shop</a>
+                                <router-link class="nav-link" :to="'/shop'">Shop</router-link>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-primary" href="#"><i class="fas fa-shopping-bag"></i></a>

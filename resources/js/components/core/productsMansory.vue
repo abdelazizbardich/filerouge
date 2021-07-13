@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row ">
                 <div class="col-auto m-auto my-5">
-                    <span class="h3 text-light display-6">Our latested <span class="text-warning">products</span></span>
+                    <span class="h3 text-light display-6">Our latested <span class="text-primary">products</span></span>
                 </div>
             </div>
         </div>
