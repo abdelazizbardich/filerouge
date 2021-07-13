@@ -11,7 +11,7 @@
             <div class="row ">
                 <div class="col">
                     <div class="products masonry">
-                        <productItem v-for="(i,index) in limit" :key="index"  :path="'/img/mansory/item'+i+'.png'"/>
+                        <productItem v-for="(i,index) in limit" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
     </div>
 </template>
 <style lang="css">
-.masonry { /* Masonry container */
+.masonry {
    display: grid;
    grid-template-columns: repeat(3,1fr);
    grid-gap: 16px;

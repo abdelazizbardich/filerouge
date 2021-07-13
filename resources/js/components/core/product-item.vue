@@ -1,12 +1,12 @@
 <template>
     <div>
-        <a href="#">
+        <router-link  :to="/product/+id">
             <div class="productItem">
                 <span class="title h4">Ingrid</span>
                 <img :src="path">
-                <a class="more" href="#">More info <i class="fas fa-long-arrow-alt-right"></i></a>
+                <router-link  :to="/product/+id" class="more">More info <i class="fas fa-long-arrow-alt-right"></i></router-link>
             </div>
-        </a>
+        </router-link>
     </div>
 </template>
 
@@ -65,7 +65,8 @@ a{
 <script>
 export default {
     props:{
-        path:String
+        path:String,
+        id:Number
     }
 }
 </script>
