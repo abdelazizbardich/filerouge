@@ -35,6 +35,9 @@
     flex-direction: row;
     align-items: stretch;
 }
+.cart-product:hover{
+    background-color: rgba(0,0,0,.05);
+}
 .thumbnail img{
     width:90px;
     height:100px;
@@ -43,7 +46,6 @@
 }
 .details{
     height:100px;
-    background-color: var(--bs-info);
     padding: 8px;
     flex: 1;
     display: flex;
@@ -52,7 +54,6 @@
 }
 .uniq-price{
     height:100px;
-    background-color: var(--bs-info);
     padding: 8px 16px;
     display: flex;
     justify-content: center;
@@ -61,7 +62,6 @@
 }
 .qte-manager{
     height:100px;
-    background-color: var(--bs-info);
     padding: 8px 16px;
     display: flex;
     flex-direction: column;
@@ -91,7 +91,6 @@
 }
 .total-price{
     height:100px;
-    background-color: var(--bs-info);
     padding: 8px 16px;
     display: flex;
     justify-content: center;
@@ -116,31 +115,31 @@
 </style>
 
 <script>
-export default {
-    data:()=>{
-        return {
-            qte:0,
-            price: 300.00,
-            totalPrice: 0.00,
-        }
-    },
-    methods:{
-        removeMe(){
-            this.$emit('remove')
-        },
-        addQte(){
-            this.qte++
-            this.calculateTotalPrice()
-        },
-        MinsQte(){
-            if(this.qte > 0){
-                this.qte--
-                this.calculateTotalPrice()
+    export default {
+        data:()=>{
+            return {
+                qte:0,
+                price: 300.00,
+                totalPrice: 0.00,
             }
         },
-        calculateTotalPrice(){
-            this.totalPrice = this.qte * this.price
+        methods:{
+            removeMe(){
+                this.$emit('remove')
+            },
+            addQte(){
+                this.qte++
+                this.calculateTotalPrice()
+            },
+            MinsQte(){
+                if(this.qte > 0){
+                    this.qte--
+                    this.calculateTotalPrice()
+                }
+            },
+            calculateTotalPrice(){
+                this.totalPrice = this.qte * this.price
+            }
         }
     }
-}
 </script>

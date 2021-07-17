@@ -8,6 +8,7 @@ const routes = [
     {path : '/shop',component : shop},
     {path : '/product/:id',component : product},
     {path : '/cart',component : cart},
+    {path : '/add-to-cart/:id', component: cart}
 ]
 
 

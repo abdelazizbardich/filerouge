@@ -1989,7 +1989,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2960,6 +2959,9 @@ var routes = [{
 }, {
   path: '/cart',
   component: _components_pages_cart_vue__WEBPACK_IMPORTED_MODULE_3__.default
+}, {
+  path: '/add-to-cart/:id',
+  component: _components_pages_cart_vue__WEBPACK_IMPORTED_MODULE_3__.default
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
 
@@ -2982,7 +2984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cart-product{\n    overflow: hidden;\n    border-radius: 5px;\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    align-items: stretch;\n}\n.thumbnail img{\n    width:90px;\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px;\n}\n.details{\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.uniq-price{\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.qte-manager{\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px 16px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.plus{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.mins{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.total-price{\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.close{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n    cursor: pointer;\n    transition: .3s;\n}\n.close:hover{\n    background-color: var(--bs-info);\n    opacity: 0.5;\n    color: red;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cart-product{\n    overflow: hidden;\n    border-radius: 5px;\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    align-items: stretch;\n}\n.cart-product:hover{\n    background-color: rgba(0,0,0,.05);\n}\n.thumbnail img{\n    width:90px;\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px;\n}\n.details{\n    height:100px;\n    padding: 8px;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.uniq-price{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.qte-manager{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.plus{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.mins{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.total-price{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.close{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n    cursor: pointer;\n    transition: .3s;\n}\n.close:hover{\n    background-color: var(--bs-info);\n    opacity: 0.5;\n    color: red;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3102,7 +3104,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.slider[data-v-a7304854]{\r\n    height: calc(100vh - 80px);\r\n    overflow: hidden;\r\n    background-color: var(--bs-primary);\r\n    position: relative;\n}\n.slid[data-v-a7304854]{\r\n    position: absolute;\r\n    left: 0%;\r\n    right: 0%;\r\n    margin: auto;\r\n    width: -webkit-fit-content;\r\n    width: -moz-fit-content;\r\n    width: fit-content;\r\n    height: 70%;\r\n    width: 40%;\r\n    top: 40%;\r\n    transform: translateY(-50%);\r\n    text-align: center;\n}\n.slid img[data-v-a7304854]{\r\n    height: 100%;\n}\n.navigation[data-v-a7304854]{\r\nposition: absolute;\r\nright: 13%;\r\nbottom: 15%;\r\ndisplay: flex;\r\nflex-direction: row;\r\njustify-content: space-between;\r\nalign-items: center;\n}\n.dots[data-v-a7304854]{\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    margin-inline: 16px;\n}\n.dot[data-v-a7304854]{\r\nwidth: 15px;\r\nheight: 5px;\r\nbackground-color: var(--bs-dark);\r\nmargin-inline: 2px;\r\ndisplay: inline-block;\r\nopacity: .3;\n}\n.dot.active[data-v-a7304854]{\r\n    opacity: 1;\n}\n.prev[data-v-a7304854],.next[data-v-a7304854]{\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 40px;\r\n    background-color: var(--bs-white);\r\n    display: inline-block;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.prev[disabled][data-v-a7304854],.next[disabled][data-v-a7304854]{\r\n    opacity: .3;\n}\n.slider-infos[data-v-a7304854]{\r\n    position: absolute;\r\n    left: 7%;\r\n    bottom: 10%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.slider[data-v-a7304854]{\n    height: calc(100vh - 80px);\n    overflow: hidden;\n    background-color: var(--bs-primary);\n    position: relative;\n}\n.slid[data-v-a7304854]{\n    position: absolute;\n    left: 0%;\n    right: 0%;\n    margin: auto;\n    width: -webkit-fit-content;\n    width: -moz-fit-content;\n    width: fit-content;\n    height: 70%;\n    width: 40%;\n    top: 40%;\n    transform: translateY(-50%);\n    text-align: center;\n}\n.slid img[data-v-a7304854]{\n    height: 100%;\n}\n.navigation[data-v-a7304854]{\nposition: absolute;\nright: 13%;\nbottom: 15%;\ndisplay: flex;\nflex-direction: row;\njustify-content: space-between;\nalign-items: center;\n}\n.dots[data-v-a7304854]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    margin-inline: 16px;\n}\n.dot[data-v-a7304854]{\nwidth: 15px;\nheight: 5px;\nbackground-color: var(--bs-dark);\nmargin-inline: 2px;\ndisplay: inline-block;\nopacity: .3;\n}\n.dot.active[data-v-a7304854]{\n    opacity: 1;\n}\n.prev[data-v-a7304854],.next[data-v-a7304854]{\n    width: 40px;\n    height: 40px;\n    border-radius: 40px;\n    background-color: var(--bs-white);\n    display: inline-block;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.prev[disabled][data-v-a7304854],.next[disabled][data-v-a7304854]{\n    opacity: .3;\n}\n.slider-infos[data-v-a7304854]{\n    position: absolute;\n    left: 7%;\n    bottom: 10%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22555,7 +22557,21 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link text-primary",
+                          attrs: { to: "/cart" }
+                        },
+                        [_c("i", { staticClass: "fas fa-shopping-bag" })]
+                      )
+                    ],
+                    1
+                  )
                 ])
               ]
             )
@@ -22593,16 +22609,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link text-primary", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-shopping-bag" })
-      ])
-    ])
   }
 ]
 render._withStripped = true

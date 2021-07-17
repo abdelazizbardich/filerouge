@@ -18,7 +18,7 @@
                                 <router-link class="nav-link" :to="'/shop'">Shop</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary" href="#"><i class="fas fa-shopping-bag"></i></a>
+                                <router-link class="nav-link text-primary" :to="'/cart'"><i class="fas fa-shopping-bag"></i></router-link>
                             </li>
                             </ul>
                         </div>
