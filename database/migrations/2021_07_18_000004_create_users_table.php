@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('zip_code', 45)->nullable();
             $table->integer('state')->nullable();
             $table->text('remember_token')->nullable();
+            $table->string('api_token', 250)->unique()->nullable();
             $table->timestamps();
         });
     }

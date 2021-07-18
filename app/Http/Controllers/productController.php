@@ -10,20 +10,19 @@ class productController extends Controller
 
 
     public function find($id){
-        $products = Product::get();
-        $products->token = csrf_token();
-        return csrf_token();
+        return Product::find($id);
     }
+
 
     public function create(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'categorys_id'=> 'required|max:11|numeric|exists:categorys,id',
+            'categories_id'=> 'required|max:11|numeric|exists:categories,id',
             'name'=> 'required|max:70',
-            'price'=> 'required|max:11|numeric',
+            'price'=> 'required|numeric',
             'description'=> 'required',
             'dimentions'=> 'required|json',
-            'Good to know'=> 'required|max:220',
+            'good_to_know'=> 'required|max:220',
             'stock'=> 'required|max:11',
             'full_description'=> 'required',
         ]);
@@ -31,9 +30,8 @@ class productController extends Controller
         if ($validator->fails()) {
            return $validator->errors();
         }
-
         $product = Product::create([
-            'categorys_id' => $request->input('categorys_id'),
+            'categories_id' => $request->input('categories_id'),
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),

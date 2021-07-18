@@ -19,22 +19,22 @@ class CreateProductsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categorys_id');
+            $table->unsignedBigInteger('categories_id');
             $table->string('name', 70)->nullable();
             $table->decimal('price', 11, 3)->nullable();
             $table->text('description')->nullable();
             $table->string('productscol', 45)->nullable();
             $table->json('dimentions')->nullable();
-            $table->text('Good to know')->nullable();
+            $table->text('good_to_know')->nullable();
             $table->integer('stock')->nullable();
             $table->longText('full_description')->nullable();
             $table->timestamps();
 
-            $table->index(["categorys_id"], 'fk_products_categorys1_idx');
+            $table->index(["categories_id"], 'fk_products_categories1_idx');
 
 
-            $table->foreign('categorys_id', 'fk_products_categorys1_idx')
-                ->references('id')->on('categorys')
+            $table->foreign('categories_id', 'fk_products_categories1_idx')
+                ->references('id')->on('categories')
                 ->onDelete('no action')
                 ->onUpdate('no action');
         });

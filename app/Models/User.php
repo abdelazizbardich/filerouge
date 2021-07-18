@@ -28,7 +28,8 @@ class User extends Authenticatable
         'street',
         'zip_code',
         'state',
-        'remember_token'
+        'remember_token',
+        'api_token'
     ];
 
     /**

@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('/user')->group(function () {
+    Route::post('/signup', [App\Http\Controllers\userController::class,'create']);
+});
+
 Route::prefix('/product')->group(function () {
     Route::get('/{id}', [App\Http\Controllers\productController::class,'find']);
     Route::post('/add', [App\Http\Controllers\productController::class,'create']);
 });
 
-
+Route::prefix('category')->group(function () {
+    Route::post('/add',[App\Http\Controllers\categoryController::class,'create']);
+});
