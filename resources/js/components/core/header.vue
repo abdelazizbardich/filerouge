@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col">
                     <nav class="navbar navbar-expand-lg">
-                        <a class="navbar-brand logo" href="#"><img src="img/logo.png" alt=""></a>
+                        <router-link class="navbar-brand logo" to="/"><img src="img/logo.png" alt=""></router-link>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavBar" aria-controls="headerNavBar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -18,7 +18,10 @@
                                 <router-link class="nav-link" :to="'/shop'">Shop</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link text-primary" :to="'/cart'"><i class="fas fa-shopping-bag"></i></router-link>
+                                <router-link :to="'/cart'" class="cart nav-link text-primary">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span class="count">{{ cartCount }}</span>
+                                </router-link>
                             </li>
                             </ul>
                         </div>
@@ -63,6 +66,11 @@ li.active .nav-link{
 
 <script>
 export default {
+    computed:{
+        cartCount(){
+            return this.$store.state.cartCount
+        }
+    }
 }
 </script>
 

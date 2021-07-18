@@ -8,7 +8,7 @@
                         <h3 class="display-6 text-primary">Cart</h3>
                         <div class="cart-products pt-2 h-100">
                             <div class="overflow-auto h-100">
-                                <product @remove="removeProduct(product)" v-for="(product,index) in products" :key="index" :id="product"/>
+                                <product @remove="removeProduct(product)" v-for="(product,index) in cartData" :key="index" :id="product.productId" :qte="product.count"/>
                             </div>
                         </div>
                     </div>
@@ -38,11 +38,21 @@ export default {
         product
     },
     data:()=>{
-        return {products:[1,2,3,4,5,6]}
+        return {cartData:[]}
+    },
+    created(){
+        this.cartData = this.getCart()
+
     },
     methods:{
         removeProduct(product){
             this.products.pop(product)
+        },
+        getCart(){
+            if(localStorage.getItem('cart') !== null){
+                return JSON.parse(localStorage.getItem('cart'))
+            }
+            return false;
         }
     }
 }

@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/product')->group(function () {
+    Route::get('/{id}', [App\Http\Controllers\productController::class,'find']);
+    Route::post('/add', [App\Http\Controllers\productController::class,'create']);
 });
 
-Route::get('users/delete/{id}', function ($id) {
-    echo "deleteing".$id;
-});
+

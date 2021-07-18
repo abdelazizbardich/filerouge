@@ -20,7 +20,7 @@
                                 <div class="next disabled"><i class="fas fa-chevron-down"></i></div>
                             </div>
                             <div class="slider">
-                                <img src="/img/mansory/item4.png" alt="">
+                                <img :src="'/img/mansory/item'+id+'.png'" alt="">
                             </div>
                     </div>
                     <div class="details">
@@ -49,8 +49,8 @@
                         <hr>
                     </div>
                     <div class="actions">
-                        <div class="add-to-cart shadow">
-                            <a href="#" class="btn text-light">
+                        <div class="add-to-cart shadow cart-btn" @click="addtoCart">
+                            <a  class="btn text-light">
                                 <i class="fas fa-cart-plus"></i>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
                             <a href="#" class="btn btn-warning shadow rounded-pill btn-lg px-5 text-dark mx-3">BUY NOW</a>
                         </div>
                         <div class="stock">
-                            <span :class="'h4 text-'+stockClass">500</span> in stock
+                            <span :class="'h4 text-'+stockClass">{{ stock }}</span> in stock
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="col">
                         <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
                         <div class="similar-products-grid text-dark">
-                                <productItem v-for="(i,index) in limit" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
+                                <productItem v-for="(i,index) in 4" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
                         </div>
                     </div>
 
@@ -228,10 +228,13 @@ export default {
         return {
             stockClass : "success",
             stock:103,
-            limit:4
+            id: 0,
+            inCart:false
+
         }
     },
     created(){
+        this.id = this.$route.params.id
         if(this.stock >= 100){
             this.stockClass = "success"
         }else if(this.stock < 100 && this.stock > 50){
@@ -239,7 +242,24 @@ export default {
         }else{
             this.stockClass = "danger"
         }
+    },
+    methods:{
+        addtoCart(){
+            if(!this.inCart){
+                this.$store.commit('addToCart',this.id)
+                this.inCart = true;
+                this.desableMe()
+                this.stock--
+            }
+        },
+        desableMe(){
+            document.querySelector('.cart-btn').style.opacity = 0.5
+        }
+    },
+    beforeRouteUpdate(to, from, next){
+        this.id = this.$route.params.id
+        this.$router.go()
+        next()
     }
-
 }
 </script>

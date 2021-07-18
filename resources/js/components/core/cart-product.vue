@@ -118,10 +118,16 @@
     export default {
         data:()=>{
             return {
-                qte:0,
+                // qte:0,
                 price: 300.00,
                 totalPrice: 0.00,
             }
+        },
+        props:{
+            qte:Number
+        },
+        created(){
+            this.totalPrice = this.price * this.qte
         },
         methods:{
             removeMe(){
