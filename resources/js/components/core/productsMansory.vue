@@ -11,7 +11,7 @@
             <div class="row ">
                 <div class="col">
                     <div class="products masonry">
-                        <productItem v-for="(i,index) in limit" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
+                        <productItem v-for="(product,index) in products" :product=product :key="index"/>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default {
         productItem
     },
     props:{
-        limit:Number
+        products:Array
     }
 }
 </script>

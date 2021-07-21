@@ -8,7 +8,10 @@
                         <h3 class="display-6 text-primary">Cart</h3>
                         <div class="cart-products pt-2 h-100">
                             <div class="overflow-auto h-100">
-                                <product @remove="removeProduct(product)" v-for="(product,index) in cartData" :key="index" :id="product.productId" :qte="product.count"/>
+                                <product @remove="removeProduct(product)" v-for="(product,index) in cartData" :key="index" :id="product.productId" :product=product :qte="product.count"/>
+                                <div v-if="cartData.length == 0" class="empty-cart">
+                                    Your cart is empty, add some products to your cart to continue !
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -25,12 +28,20 @@
 .main-cart{
     height: calc(100vh - 85px);
 }
+.empty-cart {
+    color: red;
+    padding: 8px 16px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background: #ffe7ef;
+}
 </style>
 
 <script>
 import mainHeader from '../core/header.vue'
 import checkout from '../core/checkout.vue'
 import product from '../core/cart-product.vue'
+import axios from 'axios'
 export default {
     components:{
         mainHeader,
@@ -41,12 +52,18 @@ export default {
         return {cartData:[]}
     },
     created(){
-        this.cartData = this.getCart()
+        if(this.getCart())
+        this.getCart().forEach(pCart => {
+            axios.get('http://127.0.0.1:8000/api/product/'+pCart.productId).then(response=>{
+                response.data.count = pCart.count
+                this.cartData.push(response.data)
+            })
+        });
 
     },
     methods:{
         removeProduct(product){
-            this.products.pop(product)
+            this.cartData.pop(product)
         },
         getCart(){
             if(localStorage.getItem('cart') !== null){

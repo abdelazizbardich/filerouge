@@ -1,5 +1,6 @@
-<template scoped>
+<template>
         <div class="main-header shadow bg-dark text-light">
+        <div class="screen-loader"></div>
         <div class="container header">
             <div class="row">
                 <div class="col">
@@ -60,6 +61,15 @@ li.active .nav-link{
     top:0;
     z-index:9;
 }
+.screen-loader{
+    position:fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.281);
+}
 </style>
 
 
@@ -70,7 +80,10 @@ export default {
         cartCount(){
             return this.$store.state.cartCount
         }
-    }
+    },
+    mounted(){
+      document.querySelector('.screen-loader').style.display = 'none'
+  }
 }
 </script>
 

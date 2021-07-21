@@ -14,9 +14,19 @@ class product extends Model
         'name',
         'price',
         'description',
+        'thumbnail',
         'dimentions',
         'good_to_know',
         'stock',
         'full_description'
     ];
+
+    public function categories()
+    {
+        return $this->belongsTo(category::class);
+    }
+
+    public function materials(){
+        return $this->belongsTo(material::class);
+    }
 }

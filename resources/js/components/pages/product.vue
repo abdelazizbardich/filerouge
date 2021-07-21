@@ -5,7 +5,7 @@
             <div class="row m-0 h-100">
                 <div class="col-8 bg-light h-100 px-3 py-2 showcast">
                     <div class="product-path">
-                        <a href="#">Home</a> / <a href="#">Shop</a> / <a href="#">Category</a> / <strong>Product name</strong>
+                        <router-link to="/">Home</router-link> / <router-link to="/shop">Shop</router-link> / <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link> / <strong>{{ product.title }}</strong>
                     </div>
                     <div class="gallery">
                             <div class="navigation">
@@ -20,32 +20,32 @@
                                 <div class="next disabled"><i class="fas fa-chevron-down"></i></div>
                             </div>
                             <div class="slider">
-                                <img :src="'/img/mansory/item'+id+'.png'" alt="">
+                                <img :src="product.thumbnail" alt="">
                             </div>
                     </div>
                     <div class="details">
                         <div class="category">
-                            <a href="#">Dining chair</a>
+                        <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link>
                         </div>
                         <div class="title">
-                            <h1 class="display-4"><strong>Leifarne</strong></h1>
+                            <h1 class="display-4"><strong>{{ product.title }}</strong></h1>
                         </div>
-                        <div class="price h3 text-danger">$180</div>
+                        <div class="price h3 text-danger">${{ product.price }}</div>
                     </div>
                 </div>
                 <div class="col-4  px-5 py-3 infos text-light">
                     <div class="description">
                         <div><span>Description</span></div>
-                        <p class="small my-3 mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quasi qui inventore voluptate saepe nemo hic sequi, libero laboriosam nam ut dolorem blanditiis dolores, iusto error aspernatur modi. Earum, similique?</p>
+                        <p class="small my-3 mb-5" v-html="product.description"></p>
                     </div>
                     <hr>
                     <div class="p-details">
                         <div><span>Product informations</span></div>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Dimentions:</strong><span class="w-75 d-inline-block">53 x 50 x 60 cm</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Dimentions:</strong><span class="w-75 d-inline-block">Width {{ product.dimentions.w }} × Breadth {{ product.dimentions.b }} × Height {{ product.dimentions.h }} cm</span></div>
                         <hr>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Materials:</strong><span class="w-75 d-inline-block">Solid brich plastic</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Materials:</strong><span class="w-75 d-inline-block">{{ product.materials }}</span></div>
                         <hr>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Good to know:</strong><span class="w-75 d-inline-block">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Good to know:</strong><span class="w-75 d-inline-block">{{ product.goodToKnow }}</span></div>
                         <hr>
                     </div>
                     <div class="actions">
@@ -55,10 +55,10 @@
                             </a>
                         </div>
                         <div class="buy-now">
-                            <a href="#" class="btn btn-warning shadow rounded-pill btn-lg px-5 text-dark mx-3">BUY NOW</a>
+                            <a class="btn btn-warning shadow rounded-pill btn-lg px-5 text-dark mx-3"  @click="buyNow">BUY NOW</a>
                         </div>
                         <div class="stock">
-                            <span :class="'h4 text-'+stockClass">{{ stock }}</span> in stock
+                            <span :class="'h4 text-'+product.stockClass">{{ product.stock }}</span> in stock
                         </div>
                     </div>
                 </div>
@@ -69,19 +69,7 @@
                 <div class="row">
                     <div class="col">
                         <div><h2 class="mb-5">Full description:</h2></div>
-                        <div>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <br><br>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <br><br>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                            <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, aperiam cumque veniam vel distinctio dolor, eius voluptatem consequatur voluptas quia quibusdam nisi ducimus recusandae tempora. Necessitatibus id quo nobis quidem?</p>
-                        </div>
+                        <div v-html="product.full_description"></div>
                     </div>
                 </div>
             </div>
@@ -92,7 +80,7 @@
                     <div class="col">
                         <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
                         <div class="similar-products-grid text-dark">
-                                <productItem v-for="(i,index) in 4" :key="index"  :id=i :path="'/img/mansory/item'+i+'.png'"/>
+                                <productItem v-for="(product,index) in similarProducts" :key="index" :product=product />
                         </div>
                     </div>
 
@@ -219,6 +207,7 @@ hr{
 <script>
 import MainHeader from '../core/header.vue'
 import productItem from '../core/product-item.vue'
+import axios from 'axios'
 export default {
     components:{
         MainHeader,
@@ -226,40 +215,91 @@ export default {
     },
     data(){
         return {
+        product : {
+            inCart:false,
             stockClass : "success",
             stock:103,
             id: 0,
-            inCart:false
+            title:'',
+            price:0.00,
+            description:'',
+            thumbnail:'',
+            full_description:'',
+            dimentions:{},
+            materials:[],
+            goodToKnow:'',
+            gallery:[],
+            categoryName:'',
+            categoryId:1
+        },
+        similarProducts:[
+
+        ]
 
         }
     },
     created(){
-        this.id = this.$route.params.id
-        if(this.stock >= 100){
-            this.stockClass = "success"
-        }else if(this.stock < 100 && this.stock > 50){
-            this.stockClass = "warning"
+        this.product.id = this.$route.params.id
+        if(this.product.stock >= 100){
+            this.product.stockClass = "success"
+        }else if(this.product.stock < 100 && this.product.stock > 50){
+            this.product.stockClass = "warning"
         }else{
-            this.stockClass = "danger"
+            this.product.stockClass = "danger"
         }
+        this.setProductData()
+        this.setSimilarProducts()
     },
     methods:{
         addtoCart(){
-            if(!this.inCart){
-                this.$store.commit('addToCart',this.id)
-                this.inCart = true;
+            if(!this.product.inCart){
+                this.$store.commit('ADD_TO_CART',this.product.id)
+                this.product.inCart = true;
                 this.desableMe()
-                this.stock--
+                this.product.stock--
             }
         },
-        desableMe(){
+        buyNow(){
+            this.addtoCart()
+            this.$router.push('/cart')
+        },
+        desableMe(ok = true){
+            if(ok)
             document.querySelector('.cart-btn').style.opacity = 0.5
+            else
+            document.querySelector('.cart-btn').style.opacity = 1
+        },
+        setProductData(){
+            axios.get('http://127.0.0.1:8000/api/product/'+this.product.id).then((response)=>{
+                if(response.status == 200){
+                    this.product.inCart = false
+                    this.product.stock = response.data.stock
+                    this.product.title = response.data.name
+                    this.product.price = response.data.price
+                    this.product.description = response.data.description
+                    this.product.thumbnail = response.data.thumbnail
+                    this.product.full_description = response.data.full_description
+                    this.product.dimentions.w = JSON.parse(response.data.dimentions).w
+                    this.product.dimentions.b = JSON.parse(response.data.dimentions).b
+                    this.product.dimentions.h = JSON.parse(response.data.dimentions).h
+                    this.product.materials = [],
+                    this.product.goodToKnow = response.data.good_to_know,
+                    this.product.gallery = [],
+                    this.product.categoryName = response.data.categories.name,
+                    this.product.categoryId = response.data.categories.id
+                }
+            });
+        },
+        setSimilarProducts(){
+            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/4').then(response=>{
+                this.similarProducts = response.data
+            })
         }
     },
     beforeRouteUpdate(to, from, next){
-        this.id = this.$route.params.id
-        this.$router.go()
         next()
+        this.desableMe(false)
+        this.setProductData()
     }
 }
 </script>

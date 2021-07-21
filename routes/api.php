@@ -16,13 +16,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/user')->group(function () {
     Route::post('/signup', [App\Http\Controllers\userController::class,'create']);
+    Route::post('/login', [App\Http\Controllers\userController::class,'login']);
+
+    Route::get('/', [App\Http\Controllers\userController::class,'get']);
+    Route::get('/{id}', [App\Http\Controllers\userController::class,'find']);
+
+    Route::delete('/{id}', [App\Http\Controllers\userController::class,'delete']);
+    Route::post('/{id}', [App\Http\Controllers\userController::class,'update']);
 });
 
 Route::prefix('/product')->group(function () {
+    Route::get('/', [App\Http\Controllers\productController::class,'get']);
     Route::get('/{id}', [App\Http\Controllers\productController::class,'find']);
-    Route::post('/add', [App\Http\Controllers\productController::class,'create']);
+    Route::get('/catergoy/{id}/{limit}', [App\Http\Controllers\productController::class,'getByCategroy']);
+    Route::post('/', [App\Http\Controllers\productController::class,'create']);
+    Route::post('/{id}', [App\Http\Controllers\productController::class,'update']);
+    Route::delete('/{id}', [App\Http\Controllers\productController::class,'delete']);
 });
 
 Route::prefix('category')->group(function () {
-    Route::post('/add',[App\Http\Controllers\categoryController::class,'create']);
+    Route::post('/',[App\Http\Controllers\categoryController::class,'create']);
+    Route::get('/{id}',[App\Http\Controllers\categoryController::class,'find']);
+    Route::get('/',[App\Http\Controllers\categoryController::class,'get']);
+    Route::delete('/{id}',[App\Http\Controllers\categoryController::class,'delete']);
+    Route::post('/{id}',[App\Http\Controllers\categoryController::class,'update']);
 });

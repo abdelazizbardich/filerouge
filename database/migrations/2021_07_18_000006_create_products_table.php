@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
             $table->string('name', 70)->nullable();
             $table->decimal('price', 11, 3)->nullable();
             $table->text('description')->nullable();
-            $table->string('productscol', 45)->nullable();
             $table->json('dimentions')->nullable();
+            $table->text('thumbnail')->nullable()->default('dummy path');
             $table->text('good_to_know')->nullable();
             $table->integer('stock')->nullable();
             $table->longText('full_description')->nullable();

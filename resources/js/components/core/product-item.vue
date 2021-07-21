@@ -1,10 +1,10 @@
 <template>
     <div>
-        <router-link  :to="/product/+id">
+        <router-link  :to="/product/+product.id">
             <div class="productItem">
-                <span class="title h4">Ingrid</span>
-                <img :src="path">
-                <router-link  :to="/product/+id" class="more">More info <i class="fas fa-long-arrow-alt-right"></i></router-link>
+                <span class="title h4">{{ product.name }}</span>
+                <img :src="product.thumbnail">
+                <router-link  :to="/product/+product.id" class="more">More info <i class="fas fa-long-arrow-alt-right"></i></router-link>
             </div>
         </router-link>
     </div>
@@ -65,8 +65,10 @@ a{
 <script>
 export default {
     props:{
-        path:String,
-        id:Number
+        product:Object
+    },
+    created(){
+        console.log(this.product);
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <MainHeader/>
-        <productsMansory :limit="7"/>
+        <productsMansory :products=products />
     </div>
 </template>
 
@@ -17,6 +17,18 @@ export default {
         MainHeader,
         slider,
         productsMansory
+    },
+    data:()=>{
+        return {
+            products : []
+        }
+    },
+    created(){
+        axios.get('http://127.0.0.1:8000/api/product/')
+            .then(response => {
+                console.log(response.data.data);
+                this.products = response.data.data
+        })
     }
 }
 </script>

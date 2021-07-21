@@ -2,14 +2,14 @@
     <div>
         <div class="cart-product text-dark mb-3">
             <div class="thumbnail">
-                <img src="/img/mansory/item1.png" alt="">
+                <img :src="product.thumbnail" alt="">
             </div>
             <div class="details">
-                <strong class="h3">Ekebol</strong>
-                <span class="small">#QSDCSDGFDF</span>
+                <strong class="h3">{{ product.name }}</strong>
+                <!-- <span class="small">#QSDCSDGFDF</span> -->
             </div>
             <div class="uniq-price">
-                <span>{{ price }}$</span>
+                <span>{{ product.price }}$</span>
             </div>
             <div class="qte-manager">
                 <div class="plus text-light" @click="addQte()">+</div>
@@ -119,19 +119,21 @@
         data:()=>{
             return {
                 // qte:0,
-                price: 300.00,
+                // price: 300.00,
                 totalPrice: 0.00,
             }
         },
         props:{
-            qte:Number
+            qte:Number,
+            product:Object
         },
         created(){
-            this.totalPrice = this.price * this.qte
+            this.totalPrice = this.product.price * this.qte
         },
         methods:{
             removeMe(){
-                this.$emit('remove')
+                    this.$store.commit('REMOVE_FROM_CART',this.product.id)
+                    this.$emit('remove')
             },
             addQte(){
                 this.qte++
