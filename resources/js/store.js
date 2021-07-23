@@ -8,11 +8,15 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state:{
         cartCount:0,
-        products:{}
+        products:{},
+        toatalCart:0
     },
     getters: {
         getProducts: state => {
             return state.products
+        },
+        getTotalCart: state => {
+            return state.toatalCart
         }
     },
     mutations:{
@@ -76,6 +80,13 @@ export const store = new Vuex.Store({
         },
         SET_PRODUCTS(state, products) {
             state.products = products
+        },
+        ADD_TO_TOTAL_CART(state,totalPrice){
+            state.toatalCart += totalPrice
+        },
+        CHANGE_CART_TOTAL_PRICE(state,oldP,NewP){
+            state.toatalCart -= oldP
+            state.toatalCart += NewP
         }
     },
     actions:{
@@ -84,6 +95,6 @@ export const store = new Vuex.Store({
                 .then(response => {
                     commit('SET_PRODUCTS', response.data.data)
             })
-        }
+        },
     }
 })

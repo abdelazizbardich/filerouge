@@ -31,6 +31,16 @@
    grid-template-columns: repeat(3,1fr);
    grid-gap: 16px;
 }
+@media screen and (max-width:600px) {
+    .masonry {
+        grid-template-columns: 1fr;
+    }
+}
+@media screen and (min-width: 600px) and (max-width:775px) {
+    .masonry {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 </style>
 
 <script>

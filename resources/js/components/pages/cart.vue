@@ -3,12 +3,12 @@
         <mainHeader/>
         <div class="main-cart bg-dark">
             <div class="row m-0 h-100">
-                <div class="col-8 text-light bg-light h-100 overflow-hidden">
+                <div class="col-12 col-md-8 text-light bg-light h-100 overflow-hidden">
                     <div class="p-5 h-100">
-                        <h3 class="display-6 text-primary">Cart</h3>
+                        <h3 class="display-6 text-primary">Cart</h3> <span class="text-danger">TotalCart: <span>{{ totalCart }}</span></span>
                         <div class="cart-products pt-2 h-100">
                             <div class="overflow-auto h-100">
-                                <product @remove="removeProduct(product)" v-for="(product,index) in cartData" :key="index" :id="product.productId" :product=product :qte="product.count"/>
+                                <product @remove="removeProduct(product)" @addTotal="addTotal" v-for="(product,index) in cartData" :key="index" :id="product.productId" :product=product :qte="product.count"/>
                                 <div v-if="cartData.length == 0" class="empty-cart">
                                     Your cart is empty, add some products to your cart to continue !
                                 </div>
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <checkout/>
                 </div>
             </div>
@@ -49,7 +49,10 @@ export default {
         product
     },
     data:()=>{
-        return {cartData:[]}
+        return {
+            cartData:[],
+            // totalCart:0
+        }
     },
     created(){
         if(this.getCart())
@@ -61,6 +64,11 @@ export default {
         });
 
     },
+    computed:{
+        totalCart(){
+            return this.totalCart = this.$store.getters.getTotalCart
+        }
+    },
     methods:{
         removeProduct(product){
             this.cartData.pop(product)
@@ -70,6 +78,14 @@ export default {
                 return JSON.parse(localStorage.getItem('cart'))
             }
             return false;
+        },
+        addTotal(Data){
+            // alert(rray data)
+            if(this.totalCart.Data[1]){
+                this.totalCart.Data[1] = Data[0];
+            }else{
+                this.totalCart.Data[1] = Data[0];
+            }
         }
     }
 }

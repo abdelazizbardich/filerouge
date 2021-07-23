@@ -7,7 +7,7 @@
                     <nav class="navbar navbar-expand-lg">
                         <router-link class="navbar-brand logo" to="/"><img src="img/logo.png" alt=""></router-link>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavBar" aria-controls="headerNavBar" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                            <i class="fas fa-bars"></i>
                         </button>
 
                         <div class="collapse navbar-collapse justify-content-end" id="headerNavBar">
@@ -70,6 +70,13 @@ li.active .nav-link{
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.281);
 }
+ button.navbar-toggler i {
+    color: var(--bs-primary);
+    font-size: 2rem;
+}
+/* @media screen and (max-width:600px) {
+
+}*/
 </style>
 
 

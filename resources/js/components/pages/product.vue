@@ -3,7 +3,7 @@
         <MainHeader/>
         <div class="product-panel bg-dark">
             <div class="row m-0 h-100">
-                <div class="col-8 bg-light h-100 px-3 py-2 showcast">
+                <div class="col-12 col-md-8 bg-light h-100 px-3 py-2 showcast">
                     <div class="product-path">
                         <router-link to="/">Home</router-link> / <router-link to="/shop">Shop</router-link> / <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link> / <strong>{{ product.title }}</strong>
                     </div>
@@ -33,7 +33,7 @@
                         <div class="price h3 text-danger">${{ product.price }}</div>
                     </div>
                 </div>
-                <div class="col-4  px-5 py-3 infos text-light">
+                <div class="col-12 col-md-4  px-5 py-3 infos text-light">
                     <div class="description">
                         <div><span>Description</span></div>
                         <p class="small my-3 mb-5" v-html="product.description"></p>
@@ -121,6 +121,7 @@ a{
 .slider img{
     max-width: 350px;
     max-height: 350px;
+    width: 100%;
 }
 .navigation{
     position: absolute;
@@ -201,6 +202,35 @@ hr{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 16px;
+}
+@media screen and (max-width:600px){
+    .similar-products-grid{
+        grid-template-columns:1fr;
+    }
+    .product-panel,.showcast{
+        height: auto;
+        min-height: calc(100vh - 85px);
+    }
+    .actions{
+        flex-direction: column;
+    }
+    .actions > *{
+        margin-bottom: 16px;
+    }
+}
+@media screen and (min-width:600px) and (max-width:930px) {
+    .similar-products-grid{
+        grid-template-columns: 1fr 1fr;
+    }
+    .product-panel,.showcast{
+        height: auto;
+        min-height: calc(100vh - 85px);
+    }
+}
+@media screen and (min-width:930px) and (max-width:1020px) {
+    .similar-products-grid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 </style>
 

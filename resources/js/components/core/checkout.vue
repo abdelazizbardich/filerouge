@@ -143,12 +143,14 @@ export default {
             if(this.adress == "")
                 this.errors.push("Adress is emplty"); ErrorFound = true
             if(this.payWith == "")
-                this.errors.push("Select a paiement pethod"); ErrorFound = true
+                this.errors.push("Select a paiement pethod");
+                ErrorFound = true
 
             return ErrorFound
         },
         checkout(){
-            if(this.validateForm()) alert('dwcdc')
+            if(!this.validateForm())
+                console.log(this.validateForm());
         }
     }
 }

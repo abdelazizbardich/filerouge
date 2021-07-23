@@ -118,8 +118,7 @@
     export default {
         data:()=>{
             return {
-                // qte:0,
-                // price: 300.00,
+                price: 0,
                 totalPrice: 0.00,
             }
         },
@@ -128,12 +127,15 @@
             product:Object
         },
         created(){
+            this.price = this.product.price
             this.totalPrice = this.product.price * this.qte
+            this.$store.commit('ADD_TO_TOTAL_CART',this.totalPrice)
         },
         methods:{
             removeMe(){
                     this.$store.commit('REMOVE_FROM_CART',this.product.id)
                     this.$emit('remove')
+                    this.$store.commit('CHANGE_CART_TOTAL_PRICE',this.totalPrice,0)
             },
             addQte(){
                 this.qte++
@@ -146,7 +148,10 @@
                 }
             },
             calculateTotalPrice(){
-                this.totalPrice = this.qte * this.price
+                let oldP = this.totalPrice
+                let NewP = this.qte * parseInt(this.price,10)
+                this.totalPrice = NewP
+                this.$store.commit('CHANGE_CART_TOTAL_PRICE',oldP,NewP)
             }
         }
     }
