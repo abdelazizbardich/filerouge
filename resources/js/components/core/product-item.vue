@@ -31,7 +31,7 @@ a{
 .productItem img{max-width:100%;
     transition: .3s;}
 .productItem:hover{
-    box-shadow: rgb(0 0 0) 0px 8px 19px 6px;
+    box-shadow: rgba(0 0 0,0.13) 0px 8px 19px 6px;
 }
 .productItem:hover img{
     transform: scale(1.05);

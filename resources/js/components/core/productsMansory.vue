@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-dark p-5">
+    <div class="bg-white p-5">
         <div class="container">
             <div class="row ">
                 <div class="col-auto m-auto my-5">
-                    <span class="h3 text-light display-6">Our latested <span class="text-primary">products</span></span>
+                    <span class="h3 text-dark display-6">Our latested <span class="text-primary">products</span></span>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="#" class="btn btn-light btn-lg px-5 rounded-pill mx-auto">View more</a>
+                    <a href="#" class="btn btn-primary btn-lg px-5 rounded-pill mx-auto">View more</a>
                 </div>
             </div>
         </div>

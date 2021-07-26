@@ -1,7 +1,7 @@
 <template>
     <div>
         <MainHeader/>
-        <div class="product-panel bg-dark">
+        <div class="product-panel bg-white">
             <div class="row m-0 h-100">
                 <div class="col-12 col-md-8 bg-light h-100 px-3 py-2 showcast">
                     <div class="product-path">
@@ -33,7 +33,7 @@
                         <div class="price h3 text-danger">${{ product.price }}</div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4  px-5 py-3 infos text-light">
+                <div class="col-12 col-md-4  px-5 py-3 infos text-dark">
                     <div class="description">
                         <div><span>Description</span></div>
                         <p class="small my-3 mb-5" v-html="product.description"></p>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-full-description bg-dark text-light py-5">
+        <div class="product-full-description bg-white text-dark py-5">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="related-products bg-dark py-5 text-center text-light">
+        <div class="related-products bg-white py-5 text-center text-dark">
             <div class="container">
                 <div class="row">
                     <div class="col">

@@ -1,9 +1,9 @@
 <template>
     <div>
         <mainHeader/>
-        <div class="main-cart bg-dark">
+        <div class="main-cart bg-white">
             <div class="row m-0 h-100">
-                <div class="col-12 col-md-8 text-light bg-light h-100 overflow-hidden">
+                <div class="col-12 col-md-6 text-light bg-light h-100 overflow-hidden">
                     <div class="p-5 h-100">
                         <h3 class="display-6 text-primary">Cart</h3> <span class="text-danger">TotalCart: <span>{{ totalCart }}</span></span>
                         <div class="cart-products pt-2 h-100">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6 bg-primary">
                     <checkout/>
                 </div>
             </div>

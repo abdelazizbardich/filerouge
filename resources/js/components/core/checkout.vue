@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="p-5">
+        <div style="overflow: auto;max-height: calc(100vh - 80px);" class="p-5">
             <div class="p-2">
-                <h3 class="display-6 text-primary">Checkout</h3>
+                <h3 class="display-6 text-dark">Checkout</h3>
                 <p class="text-light small">Lorem ipsum dolor sit amet consectetur adipisicing elit. mollitia autem deserunt.</p>
                 <p class="form-error" v-if="errors.length">
                     <b>Please correct the following error(s):</b>
-                    <ul>
-                        <li v-for="(error,index) in errors" :key="index" >{{ error }}</li>
+                    <ul class="p-0">
+                        <li class="small m-1 d-inline-block" v-for="(error,index) in errors" :key="index" >- {{ error }}</li>
                     </ul>
                 </p>
             </div>
@@ -41,17 +41,17 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <select name="country" class="form-control" id="" v-model="country">
-                                    <option class="bg-dark text-light" value="" disabled><span>Country...</span></option>
-                                    <option value="morocco" selected class="bg-dark">Morocco</option>
+                                    <option value="" disabled><span>Country...</span></option>
+                                    <option value="morocco" selected>Morocco</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-6">
                             <select name="city" class="form-control" id="" v-model="city">
-                                    <option class="bg-dark text-light" value="" disabled selected>City...</option>
-                                    <option class="bg-dark text-light" value="marrakech">Marrakech</option>
-                                    <option class="bg-dark text-light" value="Rabet">Rabet</option>
-                                    <option class="bg-dark text-light" value="Asfi">Asfi</option>
+                                    <option value="" disabled selected>City...</option>
+                                    <option value="marrakech">Marrakech</option>
+                                    <option value="Rabet">Rabet</option>
+                                    <option value="Asfi">Asfi</option>
                                 </select>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
                         <div class="col">
                             <div class="form-group">
                                 <select name="paywith" class="form-control" id="" v-model="payWith">
-                                    <option class="bg-dark text-light" value="" disabled selected><span>Pay with...</span></option>
-                                    <option class="bg-dark text-light" value="paypal">Paypal</option>
-                                    <option class="bg-dark text-light" value="visa">Visa</option>
-                                    <option class="bg-dark text-light" value="mastercard">MasterCard</option>
+                                    <option value="" disabled selected><span>Pay with...</span></option>
+                                    <option value="paypal">Paypal</option>
+                                    <option value="visa">Visa</option>
+                                    <option value="mastercard">MasterCard</option>
                                 </select>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                     <div class="row m-0">
                         <div class="col">
                             <div class="form-group">
-                                <p class="small text-light">By filling this form you're agree with our <a href="#">Terms & conditions</a></p>
+                                <p class="small text-light">By filling this form you're agree with our <a href="#" class="text-warning">Terms & conditions</a></p>
                             </div>
                         </div>
                     </div>
@@ -94,12 +94,10 @@
     </div>
 </template>
 
-<style lang="css">
+<style lang="css" scoped >
 .form-control{
     border-radius: 0px;
-    background-color: rgba(255,255,255,0.15);
     padding: 8px 16px;
-    color: #ffffff;
 }
 .form-error {
     color: white;

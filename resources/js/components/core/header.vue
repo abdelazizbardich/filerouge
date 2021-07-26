@@ -1,5 +1,5 @@
 <template>
-        <div class="main-header shadow bg-dark text-light">
+        <div class="main-header  bg-white text-primary">
         <div class="screen-loader"></div>
         <div class="container header">
             <div class="row">
