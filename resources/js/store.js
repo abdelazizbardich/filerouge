@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
     state:{
         cartCount:0,
         products:{},
-        toatalCart:0
+        toatalCart:0,
+        cartProducts:[]
     },
     getters: {
         getProducts: state => {
@@ -17,19 +18,22 @@ export const store = new Vuex.Store({
         },
         getTotalCart: state => {
             return state.toatalCart
+        },
+        getCart:state => {
+            return this.cartProducts
         }
     },
     mutations:{
         ADD_TO_CART(state,id){
             if(localStorage.getItem('cart')){
-                state.products = JSON.parse(localStorage.getItem('cart'))
+                state.cartProducts = JSON.parse(localStorage.getItem('cart'))
             }
-            if(state.products.length == 0){
-                state.products.push({productId : id,count:1})
+            else if(state.cartProducts.length == 0){
+                state.cartProducts.push({productId : id,count:1})
                 // state.cartCount++
             }
-            if(state.products.findIndex(x => x.productId == id) == -1){
-                state.products.push({productId : id,count:1})
+            else if(state.cartProducts.findIndex(x => x.productId == id) == -1){
+                state.cartProducts.push({productId : id,count:1})
                 // state.cartCount++
             }else{
                 Toastify({
@@ -39,10 +43,8 @@ export const store = new Vuex.Store({
                   }).showToast();
 
                 return false;
-                // state.products[state.products.findIndex(x => x.productId == id)].count++
-                // state.cartCount++
             }
-            localStorage.setItem('cart', JSON.stringify(state.products))
+            localStorage.setItem('cart', JSON.stringify(state.cartProducts))
             if(localStorage.getItem('cartCount') !== null){
                 state.cartCount = parseInt(localStorage.getItem('cartCount'),10) + 1
             }else{
@@ -84,9 +86,10 @@ export const store = new Vuex.Store({
         ADD_TO_TOTAL_CART(state,totalPrice){
             state.toatalCart += totalPrice
         },
-        CHANGE_CART_TOTAL_PRICE(state,oldP,NewP){
-            state.toatalCart -= oldP
-            state.toatalCart += NewP
+        CHANGE_CART_TOTAL_PRICE(state,data){
+            console.log(data)
+            if(data.op == '+'){state.toatalCart += price}
+            if(data.op == '-'){state.toatalCart -= price}
         }
     },
     actions:{

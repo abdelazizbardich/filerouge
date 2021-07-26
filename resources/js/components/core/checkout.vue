@@ -12,7 +12,7 @@
                 </p>
             </div>
             <div class="checkout-form">
-                <form action="#" method="post" v-on:submit.prevent="onSubmit">
+                <form action="#" method="post" v-on:submit.prevent="">
                     <div class="row m-0 mb-3">
                         <div class="col-6">
                             <div class="form-group">
@@ -108,6 +108,7 @@
 </style>
 
 <script>
+import axios from 'axios';
 export default {
     data:()=>{
         return {
@@ -143,12 +144,34 @@ export default {
             if(this.payWith == "")
                 this.errors.push("Select a paiement pethod");
                 ErrorFound = true
-
             return ErrorFound
         },
         checkout(){
-            if(!this.validateForm())
-                console.log(this.validateForm());
+            if(!this.validateForm()){ console.log(this.validateForm()); return false; }
+            if(JSON.parse(localStorage.getItem('cart')).length == 0){
+                Toastify({
+                    text: "You can't checkout an ampty cart!",
+                    backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
+                    className: "info",
+                }).showToast();
+                return false;
+            }
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            axios.post('http://127.0.0.1:8000/api/cart/checkout',{
+                'firstName' : this.firstName,
+                'lastName' : this.lastName,
+                'phone' : this.phone,
+                'email' : this.email,
+                'country' : this.country,
+                'city' : this.city,
+                'adress' : this.adress,
+                'payWith' : this.payWith,
+                'cart' : localStorage.getItem('cart')
+            }).then(response => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error.response.data);
+            })
         }
     }
 }

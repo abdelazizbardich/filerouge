@@ -13,7 +13,7 @@
             </div>
             <div class="qte-manager">
                 <div class="plus text-light" @click="addQte()">+</div>
-                <div class="qte h4 m-0">{{ qte }}</div>
+                <div class="qte h4 m-0">{{ pQte }}</div>
                 <div class="mins text-light" @click="MinsQte()">-</div>
             </div>
             <div class="total-price">
@@ -120,6 +120,7 @@
             return {
                 price: 0,
                 totalPrice: 0.00,
+                pQte : 0
             }
         },
         props:{
@@ -127,8 +128,9 @@
             product:Object
         },
         created(){
+            this.pQte = this.qte
             this.price = this.product.price
-            this.totalPrice = this.product.price * this.qte
+            this.totalPrice = this.product.price * this.pQte
             this.$store.commit('ADD_TO_TOTAL_CART',this.totalPrice)
         },
         methods:{
@@ -138,20 +140,21 @@
                     this.$store.commit('CHANGE_CART_TOTAL_PRICE',this.totalPrice,0)
             },
             addQte(){
-                this.qte++
+                this.pQte++
+                this.$store.commit('CHANGE_CART_TOTAL_PRICE',{op:'+','price':this.product.price})
                 this.calculateTotalPrice()
             },
             MinsQte(){
-                if(this.qte > 0){
-                    this.qte--
+                if(this.pQte > 0){
+                    this.pQte--
+                    this.$store.commit('CHANGE_CART_TOTAL_PRICE',{op:'-','price':this.product.price})
                     this.calculateTotalPrice()
                 }
             },
             calculateTotalPrice(){
                 let oldP = this.totalPrice
-                let NewP = this.qte * parseInt(this.price,10)
+                let NewP = this.pQte * parseInt(this.price,10)
                 this.totalPrice = NewP
-                this.$store.commit('CHANGE_CART_TOTAL_PRICE',oldP,NewP)
             }
         }
     }

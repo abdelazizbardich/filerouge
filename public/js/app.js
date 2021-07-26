@@ -1997,7 +1997,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       price: 0,
-      totalPrice: 0.00
+      totalPrice: 0.00,
+      pQte: 0
     };
   },
   props: {
@@ -2005,8 +2006,9 @@ __webpack_require__.r(__webpack_exports__);
     product: Object
   },
   created: function created() {
+    this.pQte = this.qte;
     this.price = this.product.price;
-    this.totalPrice = this.product.price * this.qte;
+    this.totalPrice = this.product.price * this.pQte;
     this.$store.commit('ADD_TO_TOTAL_CART', this.totalPrice);
   },
   methods: {
@@ -2016,20 +2018,27 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit('CHANGE_CART_TOTAL_PRICE', this.totalPrice, 0);
     },
     addQte: function addQte() {
-      this.qte++;
+      this.pQte++;
+      this.$store.commit('CHANGE_CART_TOTAL_PRICE', {
+        op: '+',
+        'price': this.product.price
+      });
       this.calculateTotalPrice();
     },
     MinsQte: function MinsQte() {
-      if (this.qte > 0) {
-        this.qte--;
+      if (this.pQte > 0) {
+        this.pQte--;
+        this.$store.commit('CHANGE_CART_TOTAL_PRICE', {
+          op: '-',
+          'price': this.product.price
+        });
         this.calculateTotalPrice();
       }
     },
     calculateTotalPrice: function calculateTotalPrice() {
       var oldP = this.totalPrice;
-      var NewP = this.qte * parseInt(this.price, 10);
+      var NewP = this.pQte * parseInt(this.price, 10);
       this.totalPrice = NewP;
-      this.$store.commit('CHANGE_CART_TOTAL_PRICE', oldP, NewP);
     }
   }
 });
@@ -2047,6 +2056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2156,6 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2193,7 +2205,36 @@ __webpack_require__.r(__webpack_exports__);
       return ErrorFound;
     },
     checkout: function checkout() {
-      if (!this.validateForm()) console.log(this.validateForm());
+      if (!this.validateForm()) {
+        console.log(this.validateForm());
+        return false;
+      }
+
+      if (JSON.parse(localStorage.getItem('cart')).length == 0) {
+        Toastify({
+          text: "You can't checkout an ampty cart!",
+          backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
+          className: "info"
+        }).showToast();
+        return false;
+      }
+
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://127.0.0.1:8000/api/cart/checkout', {
+        'firstName': this.firstName,
+        'lastName': this.lastName,
+        'phone': this.phone,
+        'email': this.email,
+        'country': this.country,
+        'city': this.city,
+        'adress': this.adress,
+        'payWith': this.payWith,
+        'cart': localStorage.getItem('cart')
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+      });
     }
   }
 });
@@ -2679,7 +2720,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     totalCart: function totalCart() {
-      return this.totalCart = this.$store.getters.getTotalCart;
+      return this.$store.getters.getTotalCart;
     }
   },
   methods: {
@@ -3245,6 +3286,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var toastify_js_src_toastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! toastify-js/src/toastify.css */ "./node_modules/toastify-js/src/toastify.css");
+var _this = undefined;
+
 
 
 
@@ -3255,7 +3298,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
   state: {
     cartCount: 0,
     products: {},
-    toatalCart: 0
+    toatalCart: 0,
+    cartProducts: []
   },
   getters: {
     getProducts: function getProducts(state) {
@@ -3263,25 +3307,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
     },
     getTotalCart: function getTotalCart(state) {
       return state.toatalCart;
+    },
+    getCart: function getCart(state) {
+      return _this.cartProducts;
     }
   },
   mutations: {
     ADD_TO_CART: function ADD_TO_CART(state, id) {
       if (localStorage.getItem('cart')) {
-        state.products = JSON.parse(localStorage.getItem('cart'));
-      }
-
-      if (state.products.length == 0) {
-        state.products.push({
+        state.cartProducts = JSON.parse(localStorage.getItem('cart'));
+      } else if (state.cartProducts.length == 0) {
+        state.cartProducts.push({
           productId: id,
           count: 1
         }); // state.cartCount++
-      }
-
-      if (state.products.findIndex(function (x) {
+      } else if (state.cartProducts.findIndex(function (x) {
         return x.productId == id;
       }) == -1) {
-        state.products.push({
+        state.cartProducts.push({
           productId: id,
           count: 1
         }); // state.cartCount++
@@ -3291,11 +3334,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
           backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
           className: "info"
         }).showToast();
-        return false; // state.products[state.products.findIndex(x => x.productId == id)].count++
-        // state.cartCount++
+        return false;
       }
 
-      localStorage.setItem('cart', JSON.stringify(state.products));
+      localStorage.setItem('cart', JSON.stringify(state.cartProducts));
 
       if (localStorage.getItem('cartCount') !== null) {
         state.cartCount = parseInt(localStorage.getItem('cartCount'), 10) + 1;
@@ -3338,9 +3380,16 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
     ADD_TO_TOTAL_CART: function ADD_TO_TOTAL_CART(state, totalPrice) {
       state.toatalCart += totalPrice;
     },
-    CHANGE_CART_TOTAL_PRICE: function CHANGE_CART_TOTAL_PRICE(state, oldP, NewP) {
-      state.toatalCart -= oldP;
-      state.toatalCart += NewP;
+    CHANGE_CART_TOTAL_PRICE: function CHANGE_CART_TOTAL_PRICE(state, data) {
+      console.log(data);
+
+      if (data.op == '+') {
+        state.toatalCart += price;
+      }
+
+      if (data.op == '-') {
+        state.toatalCart -= price;
+      }
     }
   },
   actions: {
@@ -3437,7 +3486,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cart-product{\r\n    overflow: hidden;\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: stretch;\n}\n.cart-product:hover{\r\n    background-color: rgba(0,0,0,.05);\n}\n.thumbnail img{\r\n    width:90px;\r\n    height:100px;\r\n    background-color: var(--bs-info);\r\n    padding: 8px;\n}\n.details{\r\n    height:100px;\r\n    padding: 8px;\r\n    flex: 1;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\n}\n.uniq-price{\r\n    height:100px;\r\n    padding: 8px 16px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex: 1;\n}\n.qte-manager{\r\n    height:100px;\r\n    padding: 8px 16px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex: 1;\n}\n.plus{\r\n    width: 25px;\r\n    height: 25px;\r\n    border-radius: 5px;\r\n    background-color: var(--bs-dark);\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\n}\n.mins{\r\n    width: 25px;\r\n    height: 25px;\r\n    border-radius: 5px;\r\n    background-color: var(--bs-dark);\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\n}\n.total-price{\r\n    height:100px;\r\n    padding: 8px 16px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex: 1;\n}\n.close{\r\n    height:100px;\r\n    padding: 8px 16px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    flex: 1;\r\n    cursor: pointer;\r\n    transition: .3s;\n}\n.close:hover{\r\n    background-color: var(--bs-info);\r\n    opacity: 0.5;\r\n    color: red;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cart-product{\n    overflow: hidden;\n    border-radius: 5px;\n    width: 100%;\n    display: flex;\n    flex-direction: row;\n    align-items: stretch;\n}\n.cart-product:hover{\n    background-color: rgba(0,0,0,.05);\n}\n.thumbnail img{\n    width:90px;\n    height:100px;\n    background-color: var(--bs-info);\n    padding: 8px;\n}\n.details{\n    height:100px;\n    padding: 8px;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.uniq-price{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.qte-manager{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.plus{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.mins{\n    width: 25px;\n    height: 25px;\n    border-radius: 5px;\n    background-color: var(--bs-dark);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n}\n.total-price{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n}\n.close{\n    height:100px;\n    padding: 8px 16px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex: 1;\n    cursor: pointer;\n    transition: .3s;\n}\n.close:hover{\n    background-color: var(--bs-info);\n    opacity: 0.5;\n    color: red;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23154,7 +23203,7 @@ var render = function() {
           [_vm._v("+")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "qte h4 m-0" }, [_vm._v(_vm._s(_vm.qte))]),
+        _c("div", { staticClass: "qte h4 m-0" }, [_vm._v(_vm._s(_vm.pQte))]),
         _vm._v(" "),
         _c(
           "div",
@@ -23266,7 +23315,6 @@ var render = function() {
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.onSubmit.apply(null, arguments)
                 }
               }
             },

@@ -41,3 +41,8 @@ Route::prefix('category')->group(function () {
     Route::delete('/{id}',[App\Http\Controllers\categoryController::class,'delete']);
     Route::post('/{id}',[App\Http\Controllers\categoryController::class,'update']);
 });
+
+
+Route::prefix('cart')->group(function () {
+    Route::post('/checkout', [App\Http\Controllers\CartController::class,'checkout']);
+});

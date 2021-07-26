@@ -66,7 +66,7 @@ export default {
     },
     computed:{
         totalCart(){
-            return this.totalCart = this.$store.getters.getTotalCart
+           return this.$store.getters.getTotalCart
         }
     },
     methods:{
