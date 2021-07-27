@@ -1,8 +1,8 @@
 <template>
     <div>
         <MainHeader/>
-        <slider/>
-        <productsMansory :products=products />
+        <slider :products=[products[0],products[1],products[2],products[3],products[4]] />
+        <productsMansory :products=products :limit=12 :loadMore=true />
     </div>
 </template>
 
@@ -21,14 +21,19 @@ export default {
     },
     data:()=>{
         return {
-            products : []
+            products :[]
         }
     },
     created(){
-        axios.get('http://127.0.0.1:8000/api/product/')
-            .then(response => {
-                this.products = response.data.data
-        })
+        this.getProducts()
+    },
+    methods:{
+        async getProducts(){
+            axios.get('http://127.0.0.1:8000/api/product/')
+                .then(response => {
+                    this.products = response.data.data
+            })
+        }
     }
 }
 </script>

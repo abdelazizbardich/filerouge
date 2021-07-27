@@ -27,7 +27,10 @@ class CreateProductsTable extends Migration
             $table->text('thumbnail')->nullable()->default('dummy path');
             $table->text('good_to_know')->nullable();
             $table->integer('stock')->nullable();
+            $table->boolean('on_sale')->default(false);
+            $table->boolean('in_slider')->default(false);
             $table->longText('full_description')->nullable();
+            $table->integer('points')->unsigned()->default(0);
             $table->timestamps();
 
             $table->index(["categories_id"], 'fk_products_categories1_idx');

@@ -1,9 +1,10 @@
 <template>
     <div>
         <router-link  :to="/product/+product.id">
-            <div class="productItem">
-                <span class="title h4">{{ product.name }}</span>
-                <img :src="product.thumbnail">
+            <div class="productItem shadow-sm">
+                <span class="title h5 text-center">{{ product.name }}</span>
+                <div class="thumbnail" v-bind:style="'background-image:url('+product.thumbnail+')'">
+                </div>
                 <router-link  :to="/product/+product.id" class="more">More info <i class="fas fa-long-arrow-alt-right"></i></router-link>
             </div>
         </router-link>
@@ -11,13 +12,22 @@
 </template>
 
 <style lang="css" scoped>
+.thumbnail{
+    margin-top: 16px;
+    margin-bottom: 32px;
+    width:293px;
+    height:373px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 a{
     text-decoration: none;
     color: inherit;
 }
 .productItem {
     position: relative;
-    background-color: var(--bs-info);
+    background-color: var(--bs-white);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -54,7 +64,7 @@ a{
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    background-color: var(--bs-white);
+    background-color: var(--bs-primary);
     position: absolute;
     left: -20px;
     top:-50%;

@@ -12,9 +12,9 @@
                 <span>{{ product.price }}$</span>
             </div>
             <div class="qte-manager">
-                <div class="plus text-light" @click="addQte()">+</div>
+                <div class="plus text-light" style="user-select:none;" @click="addQte()">+</div>
                 <div class="qte h4 m-0">{{ pQte }}</div>
-                <div class="mins text-light" @click="MinsQte()">-</div>
+                <div class="mins text-light" style="user-select:none;" @click="MinsQte()">-</div>
             </div>
             <div class="total-price">
                 <span>{{ totalPrice }}$</span>

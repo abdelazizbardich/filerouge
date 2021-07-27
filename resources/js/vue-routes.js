@@ -8,7 +8,7 @@ const routes = [
     {path : '*',component : pageNotFound},
     {path : '/',component : home},
     {path : '/shop',component : shop},
-    {path : '/product/:id',component : product},
+    {path : '/product/:id',component : product,  props: true},
     {path : '/cart',component : cart},
 ]
 

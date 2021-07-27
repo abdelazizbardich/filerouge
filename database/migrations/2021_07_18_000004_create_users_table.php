@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('city', 50)->nullable();
             $table->string('street', 150)->nullable();
             $table->string('zip_code', 45)->nullable();
-            $table->integer('state')->nullable();
+            $table->integer('state')->nullable()->default(1);
             $table->text('remember_token')->nullable();
             $table->string('api_token', 250)->unique()->nullable();
             $table->timestamps();

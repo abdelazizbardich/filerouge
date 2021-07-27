@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col">
                     <nav class="navbar navbar-expand-lg">
-                        <router-link class="navbar-brand logo" to="/"><img src="img/logo.png" alt=""></router-link>
+                        <router-link class="navbar-brand logo" to="/"><img src="/img/logo.png" alt=""></router-link>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavBar" aria-controls="headerNavBar" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fas fa-bars"></i>
                         </button>

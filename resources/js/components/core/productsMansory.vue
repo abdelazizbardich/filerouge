@@ -25,7 +25,7 @@
         </div>
     </div>
 </template>
-<style lang="css">
+<style lang="css" scoped>
 .masonry {
    display: grid;
    grid-template-columns: repeat(3,1fr);
@@ -50,7 +50,9 @@ export default {
         productItem
     },
     props:{
-        products:Array
+        products:Array,
+        limit:Number,
+        loadMore:Boolean
     }
 }
 </script>

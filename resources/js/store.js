@@ -25,10 +25,21 @@ export const store = new Vuex.Store({
     },
     mutations:{
         ADD_TO_CART(state,id){
+            alert(id)
+            if(localStorage.getItem('cart') == null){
+                state.cartCount++
+                localStorage.setItem('cart',JSON.stringify([{productId : id,count:1}]))
+                Toastify({
+                    text: "Product added to cart successfully",
+                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                    className: "info",
+                  }).showToast();
+                  return true;
+            }
             if(localStorage.getItem('cart')){
                 state.cartProducts = JSON.parse(localStorage.getItem('cart'))
             }
-            else if(state.cartProducts.length == 0){
+            if(state.cartProducts.length == 0){
                 state.cartProducts.push({productId : id,count:1})
                 // state.cartCount++
             }
@@ -87,9 +98,8 @@ export const store = new Vuex.Store({
             state.toatalCart += totalPrice
         },
         CHANGE_CART_TOTAL_PRICE(state,data){
-            console.log(data)
-            if(data.op == '+'){state.toatalCart += price}
-            if(data.op == '-'){state.toatalCart -= price}
+            if(data.op == '+'){state.toatalCart += parseFloat(data.price)}
+            if(data.op == '-'){state.toatalCart -= parseFloat(data.price)}
         }
     },
     actions:{
@@ -99,5 +109,5 @@ export const store = new Vuex.Store({
                     commit('SET_PRODUCTS', response.data.data)
             })
         },
-    }
+    },
 })

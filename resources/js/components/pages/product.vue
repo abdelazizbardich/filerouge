@@ -3,7 +3,7 @@
         <MainHeader/>
         <div class="product-panel bg-white">
             <div class="row m-0 h-100">
-                <div class="col-12 col-md-8 bg-light h-100 px-3 py-2 showcast">
+                <div class="col-12 col-md-8 h-100 px-3 py-2 showcast">
                     <div class="product-path">
                         <router-link to="/">Home</router-link> / <router-link to="/shop">Shop</router-link> / <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link> / <strong>{{ product.title }}</strong>
                     </div>
@@ -28,19 +28,19 @@
                         <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link>
                         </div>
                         <div class="title">
-                            <h1 class="display-4"><strong>{{ product.title }}</strong></h1>
+                            <h1 class="display-6"><strong>{{ product.title }}</strong></h1>
                         </div>
-                        <div class="price h3 text-danger">${{ product.price }}</div>
+                        <div class="price h3 text-danger"><strong>${{ product.price }}</strong></div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4  px-5 py-3 infos text-dark">
+                <div class="col-12 col-md-4  bg-light px-5 py-3 infos text-dark">
                     <div class="description">
-                        <div><span>Description</span></div>
-                        <p class="small my-3 mb-5" v-html="product.description"></p>
+                        <div><span>Description: </span></div>
+                        <p class="small my-3 mb-5">{{ product.description }}</p>
                     </div>
                     <hr>
                     <div class="p-details">
-                        <div><span>Product informations</span></div>
+                        <div><span>Product informations: </span></div>
                         <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Dimentions:</strong><span class="w-75 d-inline-block">Width {{ product.dimentions.w }} × Breadth {{ product.dimentions.b }} × Height {{ product.dimentions.h }} cm</span></div>
                         <hr>
                         <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Materials:</strong><span class="w-75 d-inline-block">{{ product.materials }}</span></div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-full-description bg-white text-dark py-5">
+        <div class="product-full-description bg-light text-dark py-5">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -80,7 +80,8 @@
                     <div class="col">
                         <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
                         <div class="similar-products-grid text-dark">
-                                <productItem v-for="(product,index) in similarProducts" :key="index" :product=product />
+                                <!-- <productItem v-for="(product,index) in similarProducts"  :key="index" :product=product /> -->
+                                <productItem v-for="(i,index) in 3" :product=similarProducts[i] :key="index"/>
                         </div>
                     </div>
 
@@ -200,7 +201,7 @@ hr{
 }
 .similar-products-grid{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(3,1fr);
     grid-gap: 16px;
 }
 @media screen and (max-width:600px){
@@ -243,6 +244,7 @@ export default {
         MainHeader,
         productItem
     },
+    props: ['id'],
     data(){
         return {
         product : {
@@ -278,14 +280,13 @@ export default {
             this.product.stockClass = "danger"
         }
         this.setProductData()
-        this.setSimilarProducts()
     },
     methods:{
         addtoCart(){
             if(!this.product.inCart){
                 this.$store.commit('ADD_TO_CART',this.product.id)
                 this.product.inCart = true;
-                this.desableMe()
+                // this.desableMe()
                 this.product.stock--
             }
         },
@@ -299,29 +300,32 @@ export default {
             else
             document.querySelector('.cart-btn').style.opacity = 1
         },
-        setProductData(){
-            axios.get('http://127.0.0.1:8000/api/product/'+this.product.id).then((response)=>{
+        setProductData(id = this.id){
+            axios.get('http://127.0.0.1:8000/api/product/'+id).then((response)=>{
                 if(response.status == 200){
+                    console.log(response.data);
                     this.product.inCart = false
                     this.product.stock = response.data.stock
                     this.product.title = response.data.name
                     this.product.price = response.data.price
-                    this.product.description = response.data.description
+                    if(response.data.description.length > 250){this.product.description = response.data.description.substring(0,250)+'...'}else{this.product.description = response.data.description}
                     this.product.thumbnail = response.data.thumbnail
                     this.product.full_description = response.data.full_description
                     this.product.dimentions.w = JSON.parse(response.data.dimentions).w
                     this.product.dimentions.b = JSON.parse(response.data.dimentions).b
                     this.product.dimentions.h = JSON.parse(response.data.dimentions).h
-                    this.product.materials = [],
-                    this.product.goodToKnow = response.data.good_to_know,
+                    this.product.materials = []
+                    this.product.goodToKnow = response.data.good_to_know
                     this.product.gallery = [],
-                    this.product.categoryName = response.data.categories.name,
+                    this.product.categoryName = response.data.categories.name
                     this.product.categoryId = response.data.categories.id
+                    this.setSimilarProducts()
                 }
             });
         },
         setSimilarProducts(){
-            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/4').then(response=>{
+
+            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/12').then(response=>{
                 this.similarProducts = response.data
             })
         }
@@ -329,7 +333,8 @@ export default {
     beforeRouteUpdate(to, from, next){
         next()
         this.desableMe(false)
-        this.setProductData()
+        this.product.inCart = false;
+        this.setProductData(this.$route.params.id)
     }
 }
 </script>
