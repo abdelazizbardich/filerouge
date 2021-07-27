@@ -10,7 +10,7 @@ class productController extends Controller
 
 
     public function find($id){
-        return Product::with(['categories','materials'])->find($id);
+        return Product::with(['categories','materials','medias'])->find($id);
     }
 
 
@@ -46,7 +46,7 @@ class productController extends Controller
     }
 
     public function get(){
-        return Product::with(['categories','materials'])->orderBy('id')->paginate(12);
+        return Product::with(['categories','medias'])->orderBy('id')->paginate(12);
     }
 
     public function update($id,Request $request){
