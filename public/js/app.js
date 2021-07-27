@@ -3183,10 +3183,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -3215,6 +3211,7 @@ __webpack_require__.r(__webpack_exports__);
         categoryName: '',
         categoryId: 1
       },
+      currentSlide: 0,
       similarProducts: []
     };
   },
@@ -3232,6 +3229,36 @@ __webpack_require__.r(__webpack_exports__);
     this.setProductData();
   },
   methods: {
+    goToSlide: function goToSlide(slide) {
+      this.currentSlide = slide;
+    },
+    prevSlide: function prevSlide() {
+      if (this.currentSlide > 0) {
+        this.currentSlide--;
+      }
+    },
+    nextSlide: function nextSlide() {
+      if (this.currentSlide < this.product.gallery.length - 1) {
+        this.currentSlide++;
+      }
+    },
+    setSlide: function setSlide(slide) {
+      /* ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * You stoped Here
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* *
+       * ************************************************* */
+    },
     addtoCart: function addtoCart() {
       if (!this.product.inCart) {
         this.$store.commit('ADD_TO_CART', this.product.id);
@@ -3271,9 +3298,12 @@ __webpack_require__.r(__webpack_exports__);
           _this.product.dimentions.w = JSON.parse(response.data.dimentions).w;
           _this.product.dimentions.b = JSON.parse(response.data.dimentions).b;
           _this.product.dimentions.h = JSON.parse(response.data.dimentions).h;
-          _this.product.materials = [];
+          response.data.materials.forEach(function (material) {
+            _this.product.materials.push(material.name);
+          });
+          _this.product.materials = _this.product.materials.join();
           _this.product.goodToKnow = response.data.good_to_know;
-          _this.product.gallery = [], _this.product.categoryName = response.data.categories.name;
+          _this.product.gallery = response.data.medias, _this.product.categoryName = response.data.categories.name;
           _this.product.categoryId = response.data.categories.id;
 
           _this.setSimilarProducts();
@@ -25265,7 +25295,54 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "gallery" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "navigation" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "prev",
+                      staticStyle: { cursor: "pointer" },
+                      on: {
+                        click: function($event) {
+                          return _vm.prevSlide()
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-up" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "dots" },
+                    _vm._l(_vm.product.gallery, function(photo, index) {
+                      return _c("div", {
+                        key: index,
+                        staticClass: "dot",
+                        class: index == _vm.currentSlide ? "active" : "",
+                        staticStyle: { cursor: "pointer" },
+                        on: {
+                          click: function($event) {
+                            return _vm.goToSlide(index)
+                          }
+                        }
+                      })
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "next",
+                      staticStyle: { cursor: "pointer" },
+                      on: {
+                        click: function($event) {
+                          return _vm.nextSlide()
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-down" })]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "slider" }, [
                   _c("img", { attrs: { src: _vm.product.thumbnail, alt: "" } })
@@ -25310,7 +25387,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "description" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("p", { staticClass: "small my-3 mb-5" }, [
                   _vm._v(_vm._s(_vm.product.description))
@@ -25320,7 +25397,7 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "p-details" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "small my-3 d-flex" }, [
                   _c("strong", { staticClass: "w-25 d-inline-block" }, [
@@ -25371,7 +25448,7 @@ var render = function() {
                     staticClass: "add-to-cart shadow cart-btn",
                     on: { click: _vm.addtoCart }
                   },
-                  [_vm._m(3)]
+                  [_vm._m(2)]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "buy-now" }, [
@@ -25405,7 +25482,7 @@ var render = function() {
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col" }, [
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("div", {
                   domProps: { innerHTML: _vm._s(_vm.product.full_description) }
@@ -25423,7 +25500,7 @@ var render = function() {
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -25446,32 +25523,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "navigation" }, [
-      _c("div", { staticClass: "prev" }, [
-        _c("i", { staticClass: "fas fa-chevron-up" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "dots" }, [
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot active" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dot" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "next disabled" }, [
-        _c("i", { staticClass: "fas fa-chevron-down" })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -9,15 +9,11 @@
                     </div>
                     <div class="gallery">
                             <div class="navigation">
-                                <div class="prev"><i class="fas fa-chevron-up"></i></div>
+                                <div class="prev" style="cursor:pointer;" @click="prevSlide()"><i class="fas fa-chevron-up"></i></div>
                                 <div class="dots">
-                                    <div class="dot"></div>
-                                    <div class="dot active"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
+                                    <div style="cursor:pointer;" v-for="(photo,index) in product.gallery" :class="(index == currentSlide)?'active':''" :key=index class="dot" @click="goToSlide(index)"></div>
                                 </div>
-                                <div class="next disabled"><i class="fas fa-chevron-down"></i></div>
+                                <div class="next" style="cursor:pointer;" @click="nextSlide()"><i class="fas fa-chevron-down"></i></div>
                             </div>
                             <div class="slider">
                                 <img :src="product.thumbnail" alt="">
@@ -247,27 +243,25 @@ export default {
     props: ['id'],
     data(){
         return {
-        product : {
-            inCart:false,
-            stockClass : "success",
-            stock:103,
-            id: 0,
-            title:'',
-            price:0.00,
-            description:'',
-            thumbnail:'',
-            full_description:'',
-            dimentions:{},
-            materials:[],
-            goodToKnow:'',
-            gallery:[],
-            categoryName:'',
-            categoryId:1
-        },
-        similarProducts:[
-
-        ]
-
+            product : {
+                inCart:false,
+                stockClass : "success",
+                stock:103,
+                id: 0,
+                title:'',
+                price:0.00,
+                description:'',
+                thumbnail:'',
+                full_description:'',
+                dimentions:{},
+                materials:[],
+                goodToKnow:'',
+                gallery:[],
+                categoryName:'',
+                categoryId:1
+            },
+            currentSlide:0,
+            similarProducts:[]
         }
     },
     created(){
@@ -282,6 +276,36 @@ export default {
         this.setProductData()
     },
     methods:{
+        goToSlide(slide){
+            this.currentSlide = slide
+        },
+        prevSlide(){
+            if(this.currentSlide > 0){
+                this.currentSlide--
+            }
+        },
+        nextSlide(){
+            if(this.currentSlide < this.product.gallery.length - 1){
+                this.currentSlide++
+            }
+        },
+        setSlide(slide){
+            /* ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * You stoped Here
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* *
+             * ************************************************* */
+        },
         addtoCart(){
             if(!this.product.inCart){
                 this.$store.commit('ADD_TO_CART',this.product.id)
@@ -314,9 +338,12 @@ export default {
                     this.product.dimentions.w = JSON.parse(response.data.dimentions).w
                     this.product.dimentions.b = JSON.parse(response.data.dimentions).b
                     this.product.dimentions.h = JSON.parse(response.data.dimentions).h
-                    this.product.materials = []
+                    response.data.materials.forEach(material => {
+                        this.product.materials.push(material.name)
+                    });
+                    this.product.materials = this.product.materials.join()
                     this.product.goodToKnow = response.data.good_to_know
-                    this.product.gallery = [],
+                    this.product.gallery = response.data.medias,
                     this.product.categoryName = response.data.categories.name
                     this.product.categoryId = response.data.categories.id
                     this.setSimilarProducts()
