@@ -21,6 +21,7 @@ class CreateOrdersHasProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('orders_id');
             $table->unsignedBigInteger('products_id');
+            $table->integer('qte')->unsigned()->nullable()->default(12);
             $table->timestamps();
 
             $table->index(["products_id"], 'fk_orders_has_products_products1_idx');

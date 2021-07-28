@@ -5,7 +5,7 @@
                 <img :src="product.thumbnail" alt="">
             </div>
             <div class="details">
-                <strong class="h3">{{ product.name }}</strong>
+                <strong class="h6">{{ product.name }}</strong>
                 <!-- <span class="small">#QSDCSDGFDF</span> -->
             </div>
             <div class="uniq-price">
@@ -41,7 +41,7 @@
 .thumbnail img{
     width:90px;
     height:100px;
-    background-color: var(--bs-info);
+    background-color: var(--bs-white);
     padding: 8px;
 }
 .details{

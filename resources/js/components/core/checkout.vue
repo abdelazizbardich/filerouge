@@ -108,6 +108,8 @@
 </style>
 
 <script>
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 import axios from 'axios';
 export default {
     data:()=>{
@@ -168,7 +170,13 @@ export default {
                 'payWith' : this.payWith,
                 'cart' : localStorage.getItem('cart')
             }).then(response => {
-                console.log(response);
+                if(response.status == 200 && response.data == 1){
+                    Toastify({
+                    text: "We recived you order successfully",
+                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                    className: "info",
+                  }).showToast();
+                }
             }).catch((error) => {
                 console.log(error.response.data);
             })

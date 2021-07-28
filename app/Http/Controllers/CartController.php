@@ -7,6 +7,7 @@ use Validator;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\shipping_adress;
+use App\Models\orders_has_product;
 
 class CartController extends Controller
 {
@@ -21,7 +22,8 @@ class CartController extends Controller
             'city'=> 'required',
             'email' => 'email',
             'adress'=> 'required',
-            'payWith'=> 'required'
+            'payWith'=> 'required',
+            'cart' => 'required',
         ]);
 
         if($Validator->fails()){
@@ -55,7 +57,13 @@ class CartController extends Controller
         ]);
         if($order)
         foreach(json_decode($request->input('cart')) as $product){
-            echo "";
+            $orderProducts = orders_has_product::create([
+                'orders_id' => $order->id,
+                'products_id' => $product->productId,
+                'qte' => $product->count
+            ]);
+            if(!$order){return false;}
         }
+        return true;
     }
 }

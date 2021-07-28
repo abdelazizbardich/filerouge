@@ -16,7 +16,7 @@
                                 <div class="next" style="cursor:pointer;" @click="nextSlide()"><i class="fas fa-chevron-down"></i></div>
                             </div>
                             <div class="slider">
-                                <img :src="product.thumbnail" alt="">
+                                <img :src="slide.thumbnail" alt="">
                             </div>
                     </div>
                     <div class="details">
@@ -76,8 +76,7 @@
                     <div class="col">
                         <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
                         <div class="similar-products-grid text-dark">
-                                <!-- <productItem v-for="(product,index) in similarProducts"  :key="index" :product=product /> -->
-                                <productItem v-for="(i,index) in 3" :product=similarProducts[i] :key="index"/>
+                            <productItem v-for="(product,index) in similarProducts"  :key="index" :product=product />
                         </div>
                     </div>
 
@@ -261,7 +260,13 @@ export default {
                 categoryId:1
             },
             currentSlide:0,
+            slide:[],
             similarProducts:[]
+        }
+    },
+    watch:{
+        product: ()=>{
+            alert("sdqsd")
         }
     },
     created(){
@@ -278,33 +283,26 @@ export default {
     methods:{
         goToSlide(slide){
             this.currentSlide = slide
+            this.setSlide(this.currentSlide)
         },
         prevSlide(){
             if(this.currentSlide > 0){
                 this.currentSlide--
+            }else{
+                this.currentSlide = this.product.gallery.length - 1
             }
+            this.setSlide(this.currentSlide)
         },
         nextSlide(){
             if(this.currentSlide < this.product.gallery.length - 1){
                 this.currentSlide++
+            }else{
+                this.currentSlide = 0
             }
+            this.setSlide(this.currentSlide)
         },
         setSlide(slide){
-            /* ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * You stoped Here
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* *
-             * ************************************************* */
+            this.slide.thumbnail = this.product.gallery[slide].path
         },
         addtoCart(){
             if(!this.product.inCart){
@@ -343,16 +341,22 @@ export default {
                     });
                     this.product.materials = this.product.materials.join()
                     this.product.goodToKnow = response.data.good_to_know
-                    this.product.gallery = response.data.medias,
+                    this.product.gallery = response.data.medias
                     this.product.categoryName = response.data.categories.name
                     this.product.categoryId = response.data.categories.id
                     this.setSimilarProducts()
+                    this.setSlide(0)
+                    this.loopSlide()
                 }
             });
         },
+        loopSlide(){
+            setInterval(() => {
+                this.nextSlide()
+            }, 5000);
+        },
         setSimilarProducts(){
-
-            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/12').then(response=>{
+            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/3').then(response=>{
                 this.similarProducts = response.data
             })
         }
@@ -362,6 +366,8 @@ export default {
         this.desableMe(false)
         this.product.inCart = false;
         this.setProductData(this.$route.params.id)
+        this.setSlide(0)
+        this.currentSlide = 0
     }
 }
 </script>

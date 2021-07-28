@@ -98,8 +98,8 @@ export const store = new Vuex.Store({
             state.toatalCart += totalPrice
         },
         CHANGE_CART_TOTAL_PRICE(state,data){
-            if(data.op == '+'){state.toatalCart += parseFloat(data.price)}
-            if(data.op == '-'){state.toatalCart -= parseFloat(data.price)}
+            if(data.op == '+'){state.toatalCart = parseFloat(state.toatalCart).toFixed(2) + parseFloat(data.price).toFixed(2)}
+            if(data.op == '-'){state.toatalCart = parseFloat(state.toatalCart).toFixed(2) - parseFloat(data.price).toFixed(2)}
         }
     },
     actions:{
