@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background-image: url('/img/dashboard/body-bg.png');
+    background-position: center center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-family: 'Nunito', sans-serif;
+}
+.main-header{
+    width: calc(100vw - 250px);
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0px 16px;
+    align-items: center;
+    color: #ffffff;
+    a{
+        margin: 16px;
+        color: inherit;
+    }
+    .links{
+        margin: 16px;
+        ul{
+            li{
+                display: inline-block;
+            }
+        }
+    }
+    .profile-drop{
+        margin: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        img{
+            margin: 0px 8px;
+        }
+    }
+    .notification{
+        width: 25px;
+        height: 25px;
+        position: relative;
+        i{
+            position: absolute;
+            left: 0px;
+            top: 5px;
+        }
+        span{
+            position: absolute;
+            left: 5px;
+            top: 0px;
+            background-color: red;
+            border-radius: 50px;
+            width: 15px;
+            height: 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.side-bar{
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: rgba(black,0.1) 3px 0px 8px;
+    .logo{
+        img{
+            width: 100%;
+            padding: 32px;
+        }
+    }
+    .menu{
+        width: 100%;
+        ul{
+            width: 100%;
+            li{
+                width: 100%;
+                a{
+                    padding: 8px 16px;
+                    width: 90%;
+                    margin: 5%;
+                    font-size: 1rem;
+                    border-bottom: 1px solid rgba($primary,.1);
+                    display: block;
+                    i{
+                        color: $primary;
+                        margin-right: 16px;
+                    }
+                    &:hover{
+                        background-color: $primary;
+                        color: #ffffff;
+                        i{
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.wrapper{
+    background-color: #ffffff;
+    width: calc(100vw - 350px);
+    height: calc(100vh - 150px);
+    position: fixed;
+    bottom: 50px;
+    right: 16px;
+    border-radius: 15px;
+    box-shadow: rgba(black,0.1) 0px 8px 16px;
+    padding: 32px;
+    .title{
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        .action{
+            padding: 8px 16px;
+            background-color: $primary;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1rem;
+        }
+    }
+    .content{
+        width: 100%;
+        height: calc(100% - 70px);
+        overflow-y: auto;
+    }
+}
+.row{
+    display: flex;
+}
+.col-1{ width: calc(( 100% / 12) * 1); padding: 8px; }
+.col-2{ width: calc(( 100% / 12) * 2); padding: 8px; }
+.col-3{ width: calc(( 100% / 12) * 3); padding: 8px; }
+.col-4{ width: calc(( 100% / 12) * 4); padding: 8px; }
+.col-5{ width: calc(( 100% / 12) * 5); padding: 8px; }
+.col-6{ width: calc(( 100% / 12) * 6); padding: 8px; }
+.col-7{ width: calc(( 100% / 12) * 7); padding: 8px; }
+.col-8{ width: calc(( 100% / 12) * 8); padding: 8px; }
+.col-9{ width: calc(( 100% / 12) * 9); padding: 8px; }
+.col-10{ width: calc(( 100% / 12) * 10); padding: 8px; }
+.col-11{ width: calc(( 100% / 12) * 11); padding: 8px; }
+.col-12{ width: calc(( 100% / 12) * 12); padding: 8px; }
+
+.form-group{
+    label{
+        display: inline-block;
+        white-space: nowrap;
+        color: rgba($primary,1);
+        margin-bottom: 8px;
+        &.inline{
+            display: inline-block;
+            width: auto;
+        }
+    }
+    .form-control{
+        padding: 16px 8px;
+        border-radius: 5px;
+        border: 1px solid rgba(black,.5);
+        width: 100%;
+        font-size: 1rem;
+        &[type="checkbox"]{
+            display: inline-block;
+            width: auto;
+            float: left;
+            margin: 5px;
+        }
+        &::placeholder{
+            color: rgba($primary,.5);
+            font-size: .9rem;
+        }
+    }
+}
+
+hr{
+    border-color: rgba($primary,.1);
+    border-width: 1px;
+}
+.m-0{
+    margin: 0px;
+}
+.p-0{
+    padding: 0px;
+}

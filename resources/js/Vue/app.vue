@@ -17,6 +17,5 @@ export default {
     this.$store.dispatch("getProducts")
     this.$store.commit("SET_CART_COUNT")
   },
-
 }
 </script>

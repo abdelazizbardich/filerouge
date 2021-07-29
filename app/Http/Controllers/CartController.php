@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\shipping_adress;
 use App\Models\orders_has_product;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -63,6 +64,11 @@ class CartController extends Controller
                 'qte' => $product->count
             ]);
             if(!$order){return false;}
+            $newProduct = Product::find($product->productId);
+            $newProduct->stock -= $product->count;
+            $newProduct->save();
+
+
         }
         return true;
     }

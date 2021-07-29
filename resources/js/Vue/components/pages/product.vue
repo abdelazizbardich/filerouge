@@ -144,6 +144,10 @@ a{
     background-color: var(--bs-dark);
     margin-block: 5px;
     opacity: .2;
+    transition: .3s;
+}
+.dot:hover{
+    transform: scale(1.1);
 }
 .dot.active{
     opacity: 1;
@@ -172,6 +176,10 @@ a{
 }
 .next.disabled,.prev.disabled{
     box-shadow: none;
+}
+.next:hover,.prev:hover{
+    background-color: var(--bs-primary);
+    color:#ffffff;
 }
 hr{
     opacity: .5;

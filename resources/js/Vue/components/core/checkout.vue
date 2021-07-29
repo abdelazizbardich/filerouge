@@ -67,9 +67,7 @@
                             <div class="form-group">
                                 <select name="paywith" class="form-control" id="" v-model="payWith">
                                     <option value="" disabled selected><span>Pay with...</span></option>
-                                    <option value="paypal">Paypal</option>
-                                    <option value="visa">Visa</option>
-                                    <option value="mastercard">MasterCard</option>
+                                    <option value="paypal">COD (cash on delevery)</option>
                                 </select>
                             </div>
                         </div>
@@ -176,6 +174,9 @@ export default {
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                     className: "info",
                   }).showToast();
+                  setTimeout(() => {
+                    this.$router.push('/order-confirmed')
+                  }, 2000);
                 }
             }).catch((error) => {
                 console.log(error.response.data);
