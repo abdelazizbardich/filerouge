@@ -10,6 +10,13 @@
             <thead>
                 <th>#</th>
                 <th>Name</th>
+                <th>country</th>
+                <th>region</th>
+                <th>City</th>
+                <th>street</th>
+                <th>zip_code</th>
+                <th>Cart</th>
+                <th>Order price</th>
                 <th>Created at</th>
                 <th>Actions</th>
             </thead>
@@ -17,7 +24,17 @@
                 @foreach ($orders as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->name }}</td>
+                    <td>{{ $order->user->fname }} {{ $order->user->fname }}</td>
+                    <td>{{ $order->shipping_adress->country }}</td>
+                    <td>{{ $order->shipping_adress->region }}</td>
+                    <td>{{ $order->shipping_adress->city }}</td>
+                    <td>{{ $order->shipping_adress->street }}</td>
+                    <td>{{ $order->shipping_adress->zip_code }}</td>
+                    <td>
+                        @foreach ($order->product as $p)
+                            <div>- <a href="{{ url('product/24'.$p->id) }}">{{ $p->name }}</a></div><br>
+                        @endforeach
+                    </td>
                     <td>{{ $order->created_at }}</td>
                     <td><a href="{{ url('/dashboard/order/edit/'.$order->id) }}" class="action">Edit</a> <a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="action text danger">Delete</a></td>
                 </tr>
@@ -25,8 +42,15 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td>#</td>
-                    <td>Name</td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>country</th>
+                    <th>region</th>
+                    <th>City</th>
+                    <th>street</th>
+                    <th>zip_code</th>
+                    <th>Cart</th>
+                    <th>Order price</th>
                     <th>Created at</th>
                     <th>Actions</th>
                 </tr>

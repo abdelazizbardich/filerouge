@@ -11,8 +11,9 @@ class orderController extends Controller
     //
 
     public function index(){
+        $orders = Order::with(['user','shipping_adress','product'])->orderBy('id','DESC')->get();
         $data = [
-            'orders' => Order::orderBy('id','DESC')->get()
+            'orders' => $orders
         ];
         return view('dashboard.order.all',$data);
     }

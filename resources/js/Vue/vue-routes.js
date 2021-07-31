@@ -10,8 +10,8 @@ const routes = [
     {path : '/shop',component : shop},
     {path : '/product/:id',component : product,  props: true},
     {path : '/cart',component : cart},
-    {path : '/order-confirmed',component : orderConfirmed}
-    {path : '*',component : pageNotFound},
+    {path : '/order-confirmed',component : orderConfirmed},
+    {path : '*',component : pageNotFound}
 ]
 
 
