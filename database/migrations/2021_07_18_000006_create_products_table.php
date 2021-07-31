@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categories_id');
             $table->string('name', 70)->nullable();
             $table->decimal('price', 11, 3)->nullable();
             $table->text('description')->nullable();
@@ -33,13 +32,12 @@ class CreateProductsTable extends Migration
             $table->integer('points')->unsigned()->default(0);
             $table->timestamps();
 
+
+            $table->unsignedBigInteger('categories_id');
+
             $table->index(["categories_id"], 'fk_products_categories1_idx');
 
-
-            $table->foreign('categories_id', 'fk_products_categories1_idx')
-                ->references('id')->on('categories')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->foreign('categories_id', 'fk_products_categories1_idx')->references('id')->on('categories')->onDelete('no action')->onUpdate('no action');
         });
     }
 

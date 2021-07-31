@@ -31,6 +31,7 @@ export default {
         async getProducts(){
             axios.get('http://127.0.0.1:8000/api/product/')
                 .then(response => {
+                    console.log(response);
                     this.products = response.data.data
             })
         }

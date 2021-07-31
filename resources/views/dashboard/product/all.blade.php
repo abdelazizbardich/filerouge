@@ -8,76 +8,36 @@
     <div class="content">
         <div class="categories">
             <ul>
-                <li class="active"><a href="#">Body Skin</a></li>
-                <li><a href="#">Body Skin</a></li>
-                <li><a href="#">Body Skin</a></li>
-                <li><a href="#">Body Skin</a></li>
-                <li><a href="#">Body Skin</a></li>
-                <li><a href="#">Body Skin</a></li>
+                @foreach ($categories as $category)
+                    <li data-id="{{ $category->id }}" class="@if($category->id == $active) active @endif"><a href="{{ url('/dashboard/product/category/'.$category->id) }}">{{ $category->name }}</a></li>
+                @endforeach
             </ul>
+            <script>
+                document.querySelector('li[data-id="{{ $active }}"]').scrollIntoView();
+            </script>
         </div>
         <div class="products">
             <div>
-                <a href="#">
-                    <div class="product">
+                @if (count($products) > 0)
+                    @foreach ($products as $product)
+                        <a href="/product/{{ $product->id }}">
+                            <div class="product">
+                                <div>
+                                <div class="thumbnail">
+                                    <img src="{{ $product->thumbnail }}" alt="{{ $product->name }}">
+                                </div>
+                                <div class="name">
+                                    <span>{{ $product->name }}</span>
+                                </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                @else
                         <div>
-                         <div class="thumbnail">
-                             <img src="https://i.pinimg.com/originals/02/54/40/025440523efce9c28dc4d4a3af42b326.png" alt="">
-                         </div>
-                         <div class="name">
-                             <span>dfcsdfsdf</span>
-                         </div>
+                            <span>Not products in this category</span>
                         </div>
-                     </div>
-                </a>
-                <a href="#">
-                    <div class="product">
-                        <div>
-                         <div class="thumbnail">
-                             <img src="https://i.pinimg.com/originals/02/54/40/025440523efce9c28dc4d4a3af42b326.png" alt="">
-                         </div>
-                         <div class="name">
-                             <span>dfcsdfsdf</span>
-                         </div>
-                        </div>
-                     </div>
-                </a>
-                <a href="#">
-                    <div class="product">
-                        <div>
-                         <div class="thumbnail">
-                             <img src="https://i.pinimg.com/originals/02/54/40/025440523efce9c28dc4d4a3af42b326.png" alt="">
-                         </div>
-                         <div class="name">
-                             <span>dfcsdfsdf</span>
-                         </div>
-                        </div>
-                     </div>
-                </a>
-                <a href="#">
-                    <div class="product">
-                        <div>
-                         <div class="thumbnail">
-                             <img src="https://i.pinimg.com/originals/02/54/40/025440523efce9c28dc4d4a3af42b326.png" alt="">
-                         </div>
-                         <div class="name">
-                             <span>dfcsdfsdf</span>
-                         </div>
-                        </div>
-                     </div>
-                </a>
-                <a href="#">
-                    <div class="product">
-                        <div>
-                         <div class="thumbnail">
-                             <img src="https://i.pinimg.com/originals/02/54/40/025440523efce9c28dc4d4a3af42b326.png" alt="">
-                         </div>
-                         <div class="name">
-                             <span>dfcsdfsdf</span>
-                         </div>
-                        </div>
-                     </div>
-                </a>
+                @endif
             </div>
         </div>
     </div>

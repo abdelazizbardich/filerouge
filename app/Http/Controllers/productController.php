@@ -46,7 +46,7 @@ class productController extends Controller
     }
 
     public function get(){
-        return Product::with(['categories','medias'])->orderBy('id')->paginate(12);
+        return Product::with(['categories','medias'])->orderBy('id','DESC')->paginate(12);
     }
 
     public function update($id,Request $request){
@@ -82,6 +82,6 @@ class productController extends Controller
     }
 
     public function getByCategroy($id,$limit){
-        return Product::where('categories_id',$id)->limit($limit)->get();
+        return Product::where('categories_id',$id)->limit($limit)->orderBy('id','DESC')->get();
     }
 }

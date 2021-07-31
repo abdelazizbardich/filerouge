@@ -16,7 +16,7 @@
                                 <div class="next" style="cursor:pointer;" @click="nextSlide()"><i class="fas fa-chevron-down"></i></div>
                             </div>
                             <div class="slider">
-                                <img :src="slide.thumbnail" alt="">
+                                <img :src="product.thumbnail" alt="">
                             </div>
                     </div>
                     <div class="details">
@@ -360,7 +360,7 @@ export default {
         },
         loopSlide(){
             setInterval(() => {
-                this.nextSlide()
+                // this.nextSlide()
             }, 5000);
         },
         setSimilarProducts(){

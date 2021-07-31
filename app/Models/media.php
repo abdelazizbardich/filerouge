@@ -11,6 +11,10 @@ class Media extends Model
 
     protected $table = "medias";
 
+    protected $fillable = [
+        'path',
+        'alt'
+    ];
      /**
       * The products that belong to the media
       *

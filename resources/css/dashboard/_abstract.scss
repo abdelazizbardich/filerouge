@@ -170,9 +170,12 @@ body{
         }
     }
     .form-control{
+        &.is-invalid{
+            border-color: red;
+        }
         padding: 16px 8px;
         border-radius: 5px;
-        border: 1px solid rgba(black,.5);
+        border: 1px solid rgba(black,.2);
         width: 100%;
         font-size: 1rem;
         &[type="checkbox"]{
@@ -197,4 +200,16 @@ hr{
 }
 .p-0{
     padding: 0px;
+}
+.alert{
+    font-size: .9rem;
+    &.alert-danger{
+        color: red;
+    }
+}
+
+.text{
+    &.danger{
+        color: red;
+    }
 }
