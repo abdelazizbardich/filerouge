@@ -386,3 +386,39 @@ hr {
 .all-material .table tr:nth-child(even) {
   background-color: rgba(255, 0, 160, 0.1);
 }
+
+.all-orders .table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.all-orders .table thead, .all-orders .table tfoot {
+  background-color: #FF00A0;
+  color: #fff;
+}
+.all-orders .table td, .all-orders .table th {
+  border: none;
+  text-align: left;
+  padding: 16px 8px;
+}
+.all-orders .table tr:nth-child(even) {
+  background-color: rgba(255, 0, 160, 0.1);
+}
+
+.all-user .table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.all-user .table thead, .all-user .table tfoot {
+  background-color: #FF00A0;
+  color: #fff;
+}
+.all-user .table td, .all-user .table th {
+  border: none;
+  text-align: left;
+  padding: 16px 8px;
+}
+.all-user .table tr:nth-child(even) {
+  background-color: rgba(255, 0, 160, 0.1);
+}

@@ -44,5 +44,14 @@ Route::prefix('/dashboard')->group(function () {
         Route::get('/edit/{id}', [App\Http\Controllers\dashboard\materialController::class,'getUpdate']);
         Route::post('/update/{id}', [App\Http\Controllers\dashboard\materialController::class,'update']);
     });
+
+    Route::prefix('/order')->group(function () {
+        Route::get('/', [App\Http\Controllers\dashboard\orderController::class,'index']);
+    });
+
+    Route::prefix('/user')->group(function () {
+        Route::get('/', [App\Http\Controllers\dashboard\userController::class,'index']);
+        Route::get('/suspend/{id}', [App\Http\Controllers\dashboard\userController::class,'suspend']);
+    });
 });
 Route::get('/{any}', function ($any) {return view('index');})->where('any', '.*');

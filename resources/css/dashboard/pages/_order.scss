@@ -1,0 +1,20 @@
+.all-orders{
+    .table{
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        thead,tfoot{
+            background-color: $primary;
+            color: #fff;
+        }
+        td, th {
+        border: none;
+        text-align: left;
+        padding: 16px 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: rgba($primary,.1);
+        }
+    }
+}
