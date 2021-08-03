@@ -175,7 +175,8 @@ body{
         }
         padding: 16px 8px;
         border-radius: 5px;
-        border: 1px solid rgba(black,.2);
+        border: 1px solid rgba(black,0);
+        background-color: rgba(black,0.05);
         width: 100%;
         font-size: 1rem;
         &[type="checkbox"]{
@@ -212,4 +213,8 @@ hr{
     &.danger{
         color: red;
     }
+}
+
+header.header{
+
 }

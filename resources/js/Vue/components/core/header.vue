@@ -1,5 +1,5 @@
 <template>
-        <div class="main-header  bg-white text-primary">
+        <div class="main-header text-primary">
         <div class="screen-loader"></div>
         <div class="container header">
             <div class="row">
@@ -9,7 +9,6 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavBar" aria-controls="headerNavBar" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fas fa-bars"></i>
                         </button>
-
                         <div class="collapse navbar-collapse justify-content-end" id="headerNavBar">
                             <ul class="navbar-nav mt-2 mt-lg-0">
                             <li class="nav-item active">
@@ -36,6 +35,9 @@
 <style lang="css" scoped>
 header{
     height: 80px;
+}
+.main-header{
+    background-color: var(--bs-dark);
 }
 .header a {
     color:  inherit;

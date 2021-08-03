@@ -18,13 +18,14 @@
         </div>
         <div class="products">
             <div>
+                {{-- {{ $products }} --}}
                 @if (count($products) > 0)
                     @foreach ($products as $product)
                         <a href="/product/{{ $product->id }}">
                             <div class="product">
                                 <div>
                                 <div class="thumbnail">
-                                    <img src="{{ $product->thumbnail }}" alt="{{ $product->name }}">
+                                    <img src="{{ asset('storage/'.$product->thumbnail) }}" alt="{{ $product->name }}">
                                 </div>
                                 <div class="name">
                                     <span>{{ $product->name }}</span>

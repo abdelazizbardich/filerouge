@@ -1,7 +1,7 @@
 <template>
     <div>
         <MainHeader/>
-        <div class="product-panel bg-white">
+        <div class="product-panel text-primary">
             <div class="row m-0 h-100">
                 <div class="col-12 col-md-8 h-100 px-3 py-2 showcast">
                     <div class="product-path">
@@ -20,28 +20,28 @@
                             </div>
                     </div>
                     <div class="details">
-                        <div class="category">
+                        <div class="category text-light small">
                         <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link>
                         </div>
                         <div class="title">
-                            <h1 class="display-6"><strong>{{ product.title }}</strong></h1>
+                            <h1><strong>{{ product.title }}</strong></h1>
                         </div>
-                        <div class="price h3 text-danger"><strong>${{ product.price }}</strong></div>
+                        <div class="price display-4"><strong>${{ product.price }}</strong></div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4  bg-light px-5 py-3 infos text-dark">
+                <div class="col-12 col-md-4 px-5 py-3 infos text-primary">
                     <div class="description">
                         <div><span>Description: </span></div>
-                        <p class="small my-3 mb-5">{{ product.description }}</p>
+                        <p class="small my-3 mb-5 text-light">{{ product.description }}</p>
                     </div>
                     <hr>
                     <div class="p-details">
                         <div><span>Product informations: </span></div>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Dimentions:</strong><span class="w-75 d-inline-block">Width {{ product.dimentions.w }} × Breadth {{ product.dimentions.b }} × Height {{ product.dimentions.h }} cm</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Dimentions:</strong><span class="w-75 d-inline-block text-light">Width {{ product.dimentions.w }} × Breadth {{ product.dimentions.b }} × Height {{ product.dimentions.h }} cm</span></div>
                         <hr>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Materials:</strong><span class="w-75 d-inline-block">{{ product.materials }}</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Materials:</strong><span class="w-75 d-inline-block text-light">{{ product.materials }}</span></div>
                         <hr>
-                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Good to know:</strong><span class="w-75 d-inline-block">{{ product.goodToKnow }}</span></div>
+                        <div class="small my-3 d-flex"><strong class="w-25 d-inline-block">Good to know:</strong><span class="w-75 d-inline-block text-light">{{ product.goodToKnow }}</span></div>
                         <hr>
                     </div>
                     <div class="actions">
@@ -60,17 +60,17 @@
                 </div>
             </div>
         </div>
-        <div class="product-full-description bg-light text-dark py-5">
+        <div class="product-full-description bg-DARK text-primary py-5">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div><h2 class="mb-5">Full description:</h2></div>
-                        <div v-html="product.full_description"></div>
+                        <div v-html="product.full_description" class="text-light"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="related-products bg-white py-5 text-center text-dark">
+        <div class="related-products bg-black py-5 text-center text-primary">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -79,7 +79,6 @@
                             <productItem v-for="(product,index) in similarProducts"  :key="index" :product=product />
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -101,6 +100,7 @@ a{
     position: absolute;
     bottom: 5%;
     left: 10%;
+    height: auto;
 }
 .product-path{
     position: absolute;
@@ -111,7 +111,7 @@ a{
 .slider{
     position: absolute;
     left: 60%;
-    top: 50%;
+    top: 40%;
     transform: translateX(-50%) translateY(-50%);
 }
 .slider img{
@@ -141,7 +141,7 @@ a{
     width: 5px;
     border-radius: 5px;
     height: 20px;
-    background-color: var(--bs-dark);
+    background-color: var(--bs-primary);
     margin-block: 5px;
     opacity: .2;
     transition: .3s;
@@ -156,7 +156,8 @@ a{
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: var(--bg-light);
+    background-color: var(--bs-primary);
+    color: #0a0a0a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -167,7 +168,8 @@ a{
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: var(--bg-light);
+    background-color: var(--bs-primary);
+    color: #0a0a0a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,6 +186,14 @@ a{
 hr{
     opacity: .5;
     background-color: black;
+}
+.title{
+font-family: Raleway;
+font-weight: normal;
+font-size: 48px;
+text-align: left;
+color: #fbc403;
+text-transform: uppercase;
 }
 .actions{
     display: flex;
@@ -274,7 +284,6 @@ export default {
     },
     watch:{
         product: ()=>{
-            alert("sdqsd")
         }
     },
     created(){
@@ -310,13 +319,12 @@ export default {
             this.setSlide(this.currentSlide)
         },
         setSlide(slide){
-            this.slide.thumbnail = this.product.gallery[slide].path
+            this.slide.thumbnail = '/storage/'+this.response.data.data.medias[0].path
         },
         addtoCart(){
             if(!this.product.inCart){
                 this.$store.commit('ADD_TO_CART',this.product.id)
                 this.product.inCart = true;
-                // this.desableMe()
                 this.product.stock--
             }
         },
@@ -333,13 +341,13 @@ export default {
         setProductData(id = this.id){
             axios.get('http://127.0.0.1:8000/api/product/'+id).then((response)=>{
                 if(response.status == 200){
-                    console.log(response.data);
+                    // console.log(response.data.data);
                     this.product.inCart = false
                     this.product.stock = response.data.stock
                     this.product.title = response.data.name
                     this.product.price = response.data.price
                     if(response.data.description.length > 250){this.product.description = response.data.description.substring(0,250)+'...'}else{this.product.description = response.data.description}
-                    this.product.thumbnail = response.data.thumbnail
+                    this.product.thumbnail = '/storage/'+response.data.medias[0].path
                     this.product.full_description = response.data.full_description
                     this.product.dimentions.w = JSON.parse(response.data.dimentions).w
                     this.product.dimentions.b = JSON.parse(response.data.dimentions).b

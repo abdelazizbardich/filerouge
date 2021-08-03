@@ -1,22 +1,20 @@
 <template>
     <div>
-        <div class="slider">
-            <div class="slid" v-bind:style="'background-image:url('+thumbnail+')'">
+        <div class="slider" v-if="(slideCount > 0)">
+            <div class="slid">
+                <div class="slid-inner" v-bind:style="'background-image:url('+thumbnail+')'"></div>
             </div>
             <div class="slider-infos">
                     <div class="category"></div>
-                    <div class="title text-light w-50 display-6 mb-3">{{ title }}</div>
-                    <div class="price text-white h1">${{ price }}</div>
-                    <router-link class="buy btn btn-light btn-lg shadow rounded-pill px-5 my-2" :to="'/product/'+id">More info</router-link>
+                    <div class="title mb-3">{{ title }}</div>
+                    <p class="small description">{{ description }}</p>
+                    <div class="price">${{ price }}</div>
+                    <router-link class="buy btn btn-primary btn-lg shadow rounded-pill px-5 my-2" :to="'/product/'+id">More info</router-link>
             </div>
             <div class="navigation">
                 <div class="prev" @click="pervSlide()"><i style="transform: translateX(-1px);" class="fas fa-chevron-left"></i></div>
                 <div class="dots">
-                    <div class="dot" @click="goToslide(0)" :class="(curentSlide == 0)?'active':''"></div>
-                    <div class="dot" @click="goToslide(1)" :class="(curentSlide == 1)?'active':''"></div>
-                    <div class="dot" @click="goToslide(2)" :class="(curentSlide == 2)?'active':''"></div>
-                    <div class="dot" @click="goToslide(3)" :class="(curentSlide == 3)?'active':''"></div>
-                    <div class="dot" @click="goToslide(4)" :class="(curentSlide == 4)?'active':''"></div>
+                    <div class="dot" v-for="(slide,index) in slideCount" :key=index @click="goToslide(0)" :class="(curentSlide == index)?'active':''"></div>
                 </div>
                 <div class="next" @click="nextSlide()"><i style="transform: translateX(1px);" class="fas fa-chevron-right"></i></div>
             </div>
@@ -28,8 +26,20 @@
 .slider{
     height: calc(100vh - 80px);
     overflow: hidden;
-    background-color: var(--bs-primary);
+    background-color: var(--bs-dark);
+    background-image: url('/img/hero-bg.png');
     position: relative;
+    background-position: center left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: exclusion;
+}
+.title{
+    max-width: 45vw;
+    color: var(--bs-primary);
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .slid{
     position: absolute;
@@ -44,17 +54,44 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+.slid:before{
+    content: '';
+    background-image: url('/img/slider-circle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -3;
+}
 .slid img{
     height: 100%;
 }
+.slid-inner{
+    position: absolute;
+    right: 0%;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 .navigation{
     position: absolute;
-    right: 13%;
-    bottom: 15%;
+    right: 3%;
+    bottom: 0%;
+    top: 0%;
+    margin: auto;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    transform: rotateZ(90deg);
 }
 .dots{
     display: flex;
@@ -64,14 +101,20 @@
     margin-inline: 16px;
 }
 .dot{
-    width: 15px;
+    width: 25px;
     height: 5px;
-    background-color: var(--bs-dark);
+    background-color: var(--bs-primary);
     margin-inline: 2px;
     display: inline-block;
     opacity: .3;
     cursor: pointer;
     user-select: none;
+    border-radius: 50px;
+}
+.price{
+    font-size: 3rem;
+    color: var(--bs-primary);
+    font-weight: lighter;
 }
 .dot.active{
     opacity: 1;
@@ -83,7 +126,7 @@
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: var(--bs-white);
+    background-color: var(--bs-primary);
     display: inline-block;
     display: flex;
     justify-content: center;
@@ -97,7 +140,19 @@
 .slider-infos{
     position: absolute;
     left: 7%;
-    bottom: 10%;
+    top: 0%;
+    bottom: 0%;
+    margin: auto;
+    height: fit-content;
+}
+
+.btn.btn-primary:hover{
+    opacity: .7;
+}
+.description{
+    color: #fbfcd4;
+    max-width: 50%;
+    display: block;
 }
 </style>
 
@@ -110,15 +165,16 @@ export default {
             thumbnail:'',
             price:'',
             curentSlide : 0,
-            loop:''
+            loop:'',
+            slideCount:0,
+            description:'',
+            products:[]
         }
-    },
-    props:{
-        products:Array
     },
     watch:{
         products(){
             this.setSlide(0)
+            this.slideCount = this.products.length
             this.loopSlide()
         },
         curentSlide(){
@@ -129,6 +185,9 @@ export default {
                 document.querySelector('.slid').style.opacity = "1";
             }, 500);
         }
+    },
+    created(){
+        this.getProducts();
     },
     methods:{
         pervSlide(){
@@ -156,14 +215,15 @@ export default {
         setSlide(slide){
             this.id = this.products[slide].id
             this.title = this.products[slide].name
-            this.thumbnail = this.products[slide].thumbnail
+            this.thumbnail = '/storage/'+this.products[slide].thumbnail
             this.price = this.products[slide].price
+            this.description = this.products[slide].description
         },
         goToslide(slide){
             console.log(slide);
             this.id = this.products[slide].id
             this.title = this.products[slide].name
-            this.thumbnail = this.products[slide].thumbnail
+            this.thumbnail = '/storage/'+this.products[slide].thumbnail
             this.price = this.products[slide].price
             this.curentSlide = slide
             clearInterval(this.loop)
@@ -183,6 +243,13 @@ export default {
                 },
                 5000
             );
+        },
+        getProducts(){
+            axios.get('http://127.0.0.1:8000/api/product/inslide')
+                .then(response => {
+                    console.log(response);
+                    this.products = response.data
+            })
         }
     }
 }

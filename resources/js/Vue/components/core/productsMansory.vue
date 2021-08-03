@@ -1,16 +1,16 @@
 <template>
-    <div class="bg-white p-5">
+    <div class="p-5 main-mansory">
         <div class="container">
             <div class="row ">
                 <div class="col-auto m-auto my-5">
-                    <span class="h3 text-dark display-6">Our latested <span class="text-primary">products</span></span>
+                    <span class="h3 text-light display-6">Our latested <span class="text-primary">products</span></span>
                 </div>
             </div>
         </div>
         <div class="container my-5">
             <div class="row ">
                 <div class="col">
-                    <div class="products masonry">
+                    <div class="products masonry text-§">
                         <productItem v-for="(product,index) in products" :product=product :key="index"/>
                     </div>
                 </div>
@@ -19,24 +19,32 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a href="#" class="btn btn-primary btn-lg px-5 rounded-pill mx-auto">View more</a>
+                    <a @click="moreProducts()" class="btn btn-primary btn-lg px-5 rounded-pill mx-auto">View more</a>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <style lang="css" scoped>
+.main-mansory{
+    background-image: url('/img/separator.png');
+    background-position: top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: var(--bs-dark);
+}
 .masonry {
    display: grid;
    grid-template-columns: repeat(3,1fr);
-   grid-gap: 16px;
+   grid-gap: 32px;
+   justify-items: center;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:800px) {
     .masonry {
         grid-template-columns: 1fr;
     }
 }
-@media screen and (min-width: 600px) and (max-width:775px) {
+@media screen and (min-width: 800px) and (max-width:1020px) {
     .masonry {
         grid-template-columns: 1fr 1fr;
     }
@@ -46,13 +54,35 @@
 <script>
 import productItem from './product-item.vue'
 export default {
+    data:()=>{
+        return {
+            currentPage : 0,
+            products:[]
+        }
+    },
     components:{
         productItem
     },
     props:{
-        products:Array,
+        // products:Array,
         limit:Number,
-        loadMore:Boolean
+        loadMore:Boolean,
+        last_page:Number
+    },
+    created(){
+        this.moreProducts()
+    },
+    methods:{
+        moreProducts(){
+            this.currentPage++
+            axios.get('http://127.0.0.1:8000/api/product?page='+this.currentPage)
+            .then(response => {
+                response.data.data.forEach(element => {
+                    console.log(response);
+                   this.products.push(element);
+                });
+            })
+        }
     }
 }
 </script>

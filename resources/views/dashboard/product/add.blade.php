@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="form-group col-8">
                     <label for="title">Title:</label>
-                    <input value="{{ old('title') }}"  class="form-control @error('title') is-invalid @enderror" placeholder="Title..." type="text" name="title" id="title">
+                    <input value="{{ old('title') }}"  maxlength="70" class="form-control @error('title') is-invalid @enderror" placeholder="Title..." type="text" name="title" id="title">
                     @error('title')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="form-group col-12">
                     <label for="description">Description:</label>
-                    <textarea  name="description" placeholder="Description..." id="description" cols="30" rows="10" class="form-control @error('description') is-invalid @enderror">{{ old('fulldescription') }}</textarea>
+                    <textarea  name="description" maxlength="170" placeholder="Description..." id="description" cols="30" rows="10" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                     @error('description')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-6">
                     <label for="gallery">Gallery:</label>
-                    <input value="{{ old('gallery') }}"  type="file" class="form-control @error('gallery') is-invalid @enderror" name="gallery" multiple id="gallery">
+                    <input value="{{ old('gallery') }}"  type="file" class="form-control @error('gallery') is-invalid @enderror" name="gallery[]" multiple id="gallery">
                     @error('gallery')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -138,7 +138,7 @@
             <div class="row">
                 <div class="form-group col-12">
                     <label for="goodtoknow">Good to know:</label>
-                    <textarea name="goodtoknow" id="goodtoknow" cols="30" rows="10" class="form-control @error('goodtoknow') is-invalid @enderror">{{ old('goodtoknow') }}</textarea>
+                    <textarea name="goodtoknow" maxlength="170" id="goodtoknow" cols="30" rows="10" class="form-control @error('goodtoknow') is-invalid @enderror">{{ old('goodtoknow') }}</textarea>
                     @error('goodtoknow')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

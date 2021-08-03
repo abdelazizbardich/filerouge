@@ -25,7 +25,6 @@ export const store = new Vuex.Store({
     },
     mutations:{
         ADD_TO_CART(state,id){
-            alert(id)
             if(localStorage.getItem('cart') == null){
                 state.cartCount++
                 localStorage.setItem('cart',JSON.stringify([{productId : id,count:1}]))
@@ -104,7 +103,7 @@ export const store = new Vuex.Store({
     },
     actions:{
         getProducts({commit}){
-             axios.get('http://127.0.0.1:8000/api/product/')
+            axios.get('http://127.0.0.1:8000/api/product/')
                 .then(response => {
                     commit('SET_PRODUCTS', response.data.data)
             })

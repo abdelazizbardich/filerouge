@@ -20,6 +20,9 @@ class product extends Model
         'dimentions',
         'good_to_know',
         'stock',
+        'points',
+        'on_sale',
+        'in_slider',
         'full_description'
     ];
 

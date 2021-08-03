@@ -49,6 +49,10 @@ class productController extends Controller
         return Product::with(['categories','medias'])->orderBy('id','DESC')->paginate(12);
     }
 
+    public function getSlide(){
+        return Product::where('in_slider',1)->with(['categories','medias'])->orderBy('id','DESC')->get();
+    }
+
     public function update($id,Request $request){
         $validator = Validator::make($request->all(),[
             'categories_id'=> 'required|max:11|numeric|exists:categories,id',

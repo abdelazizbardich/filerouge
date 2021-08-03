@@ -27,6 +27,7 @@ Route::prefix('/user')->group(function () {
 
 Route::prefix('/product')->group(function () {
     Route::get('/', [App\Http\Controllers\productController::class,'get']);
+    Route::get('/inslide', [App\Http\Controllers\productController::class,'getSlide']);
     Route::get('/{id}', [App\Http\Controllers\productController::class,'find']);
     Route::get('/catergoy/{id}/{limit}', [App\Http\Controllers\productController::class,'getByCategroy']);
     Route::post('/', [App\Http\Controllers\productController::class,'create']);

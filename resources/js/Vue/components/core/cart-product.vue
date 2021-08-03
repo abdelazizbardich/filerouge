@@ -2,7 +2,7 @@
     <div>
         <div class="cart-product text-dark mb-3">
             <div class="thumbnail">
-                <img :src="product.thumbnail" alt="">
+                <img :src="'storage'/product.thumbnail" alt="">
             </div>
             <div class="details">
                 <strong class="h6">{{ product.name }}</strong>

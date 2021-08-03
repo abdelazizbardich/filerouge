@@ -1,12 +1,19 @@
 <template>
-    <div>
-    <h1>404</h1>
-    <p>Oops! Something is wrong.</p>
-    <a class="button" href="#"><i class="icon-home"></i> Go back in initial page, is better.</a>
+    <div class="p404">
+    <h1 class="text-primary display-2">404</h1>
+    <p class="text-light">Oops! Something is wrong.</p>
+    <router-link to="/" class="btn btn-primary">Go back to Home page</router-link>
     </div>
 </template>
 <style scoped>
-
+.p404{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
 </style>
 
 <script>

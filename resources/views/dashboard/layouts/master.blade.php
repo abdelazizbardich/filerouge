@@ -30,7 +30,7 @@
     </header>
     <div class="side-bar">
         <div class="logo">
-            <img src="{{ asset('img/logo.png') }}" alt="">
+            <img src="{{ asset('img/dashboard/logo.png') }}" alt="">
         </div>
         <div class="menu">
             <ul>

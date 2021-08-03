@@ -7,7 +7,7 @@
     <span class="title">@yield('title'): <a href="javascript:document.querySelector('#add-material').submit();" class="action">Save</a></span>
     <hr>
     <div class="content">
-        <form action="{{ url('/dashboard/categories/add') }}" id="add-material" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/dashboard/material/add') }}" id="add-material" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="form-group col-12">

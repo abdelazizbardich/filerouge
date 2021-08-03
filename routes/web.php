@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
 Route::prefix('/dashboard')->group(function () {
     // Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
     Route::prefix('/product')->group(function () {
@@ -54,4 +55,5 @@ Route::prefix('/dashboard')->group(function () {
         Route::get('/suspend/{id}', [App\Http\Controllers\dashboard\userController::class,'suspend']);
     });
 });
+
 Route::get('/{any}', function ($any) {return view('index');})->where('any', '.*');
