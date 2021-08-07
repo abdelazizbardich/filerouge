@@ -188,6 +188,7 @@ export default {
     },
     created(){
         this.getProducts();
+        document.addEventListener('keydown',(event)=>{this.moveByKey(event)})
     },
     methods:{
         pervSlide(){
@@ -220,7 +221,6 @@ export default {
             this.description = this.products[slide].description
         },
         goToslide(slide){
-            console.log(slide);
             this.id = this.products[slide].id
             this.title = this.products[slide].name
             this.thumbnail = '/storage/'+this.products[slide].thumbnail
@@ -247,9 +247,14 @@ export default {
         getProducts(){
             axios.get('http://127.0.0.1:8000/api/product/inslide')
                 .then(response => {
-                    console.log(response);
                     this.products = response.data
             })
+        },
+        moveByKey(event){
+            if(event.key == "ArrowLeft")
+                this.nextSlide()
+            else if(event.key == "ArrowRight")
+                this.pervSlide()
         }
     }
 }

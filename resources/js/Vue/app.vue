@@ -15,6 +15,7 @@ export default {
   name: 'App',
   created(){
     this.$store.dispatch("getProducts")
+    this.$store.dispatch("getToken")
     this.$store.commit("SET_CART_COUNT")
   },
 }

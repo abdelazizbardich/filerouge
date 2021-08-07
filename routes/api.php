@@ -45,5 +45,8 @@ Route::prefix('category')->group(function () {
 
 
 Route::prefix('cart')->group(function () {
-    Route::post('/checkout', [App\Http\Controllers\CartController::class,'checkout']);
+    Route::post('/checkout', [App\Http\Controllers\CartController::class,'checkout'])->middleware('apiToken');
 });
+
+
+Route::get('/token', [App\Http\Controllers\userController::class,'getToken'] );

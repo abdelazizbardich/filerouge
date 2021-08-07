@@ -46,4 +46,19 @@ class userController extends Controller
             'api_token' => Str::random(60),
         ]);
     }
+
+
+    public function getToken(){
+        session_start();
+        if(isset($_SESSION['token'])){
+            return [
+                'token' => $_SESSION['token']
+            ];
+        }else{
+            $_SESSION['token'] = Str::random(60);
+            return [
+                'token' => $_SESSION['token']
+            ];
+        }
+    }
 }

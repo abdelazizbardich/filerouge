@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         cartCount:0,
         products:{},
         toatalCart:0,
-        cartProducts:[]
+        cartProducts:[],
+        token:''
     },
     getters: {
         getProducts: state => {
@@ -21,6 +22,9 @@ export const store = new Vuex.Store({
         },
         getCart:state => {
             return this.cartProducts
+        },
+        getToken:state => {
+            return this.token
         }
     },
     mutations:{
@@ -98,7 +102,13 @@ export const store = new Vuex.Store({
         },
         CHANGE_CART_TOTAL_PRICE(state,data){
             if(data.op == '+'){state.toatalCart = parseFloat(state.toatalCart).toFixed(2) + parseFloat(data.price).toFixed(2)}
-            if(data.op == '-'){state.toatalCart = parseFloat(state.toatalCart).toFixed(2) - parseFloat(data.price).toFixed(2)}
+            if(data.op == '-' && this.toatalCart < 0){state.toatalCart = parseFloat(state.toatalCart).toFixed(2) - parseFloat(data.price).toFixed(2)}
+        },
+        SET_TOKEN(state,data){
+            if(data != null){
+                state.token = data
+                localStorage.setItem('token',data)
+            }
         }
     },
     actions:{
@@ -108,5 +118,11 @@ export const store = new Vuex.Store({
                     commit('SET_PRODUCTS', response.data.data)
             })
         },
+        getToken({commit}){
+            axios.get('http://127.0.0.1:8000/api/token/').then(response=>{
+                console.log(response);
+                commit('SET_TOKEN', response.data.token)
+            })
+        }
     },
 })

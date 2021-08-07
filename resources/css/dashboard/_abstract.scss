@@ -46,9 +46,14 @@ body{
         }
     }
     .notification{
-        width: 25px;
-        height: 25px;
+        width: 2.5rem;
+        height: 2.5rem;
         position: relative;
+        font-size: 2rem;
+        cursor: pointer;
+        &:hover{
+            opacity: .7;
+        }
         i{
             position: absolute;
             left: 0px;

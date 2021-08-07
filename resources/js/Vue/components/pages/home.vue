@@ -10,6 +10,14 @@
 <style lang="css" scoped>
 
 </style>
+<style>
+    .main-header {
+    border-bottom: 2px solid var(--bs-primary);
+    }
+    .main-header:after {
+        display: none;
+    }
+</style>
 <script>
 import MainHeader from '../core/header.vue'
 import slider from '../core/slider.vue'

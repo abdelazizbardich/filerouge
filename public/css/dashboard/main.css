@@ -48,9 +48,14 @@ body {
   margin: 0px 8px;
 }
 .main-header .notification {
-  width: 25px;
-  height: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
   position: relative;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.main-header .notification:hover {
+  opacity: 0.7;
 }
 .main-header .notification i {
   position: absolute;
@@ -423,4 +428,45 @@ hr {
 }
 .all-user .table tr:nth-child(even) {
   background-color: rgba(255, 0, 160, 0.1);
+}
+
+.login form {
+  margin: auto;
+  width: 500px;
+  position: relative;
+  margin-top: 50vh;
+  margin-left: 50vw;
+  transform: translateY(-50%) translateX(-50%);
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.205) 0px 3px 8px;
+}
+.login form .title {
+  font-size: 2rem;
+  margin-bottom: 32px;
+  text-align: center;
+  color: #FF00A0;
+  text-transform: uppercase;
+}
+.login .form-group {
+  margin-bottom: 32px;
+}
+.login .btn {
+  background-image: none;
+  padding: 16px;
+  display: block;
+  margin: 8px 0px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.login .btn-primary {
+  background-color: #FF00A0;
+  color: #ffffff;
+}
+.login .btn-primary:hover {
+  box-shadow: rgba(255, 0, 160, 0.6) 0px 3px 8px;
 }

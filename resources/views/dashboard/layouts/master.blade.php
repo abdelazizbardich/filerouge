@@ -21,11 +21,10 @@
         </div>
         <div class="profile-drop">
             <img src="{{ asset('img/dashboard/avatar.png') }}" alt="">
-            <div class="dropdown">Abdelaziz Bardich <i class="fa fa-sort-down"></i></div>
+            <div class="dropdown">Abdelaziz Bardich </div>
         </div>
         <div class="notification">
-            <i class="fa fa-bell"></i>
-            <span>0</span>
+            <a href="{{ url('/logout') }}"><i class="fa fa-sign-out-alt"></i></a>
         </div>
     </header>
     <div class="side-bar">

@@ -264,7 +264,6 @@ export default {
                 inCart:false,
                 stockClass : "success",
                 stock:103,
-                id: 0,
                 title:'',
                 price:0.00,
                 description:'',
@@ -277,13 +276,15 @@ export default {
                 categoryName:'',
                 categoryId:1
             },
+            key:0,
             currentSlide:0,
             slide:[],
             similarProducts:[]
         }
     },
     watch:{
-        product: ()=>{
+        key(){
+            this.id = this.$route.params.id
         }
     },
     created(){
@@ -319,11 +320,11 @@ export default {
             this.setSlide(this.currentSlide)
         },
         setSlide(slide){
-            this.slide.thumbnail = '/storage/'+this.response.data.data.medias[0].path
+            // this.slide.thumbnail = '/storage/'+this.response.data.data.medias[0].path
         },
         addtoCart(){
             if(!this.product.inCart){
-                this.$store.commit('ADD_TO_CART',this.product.id)
+                this.$store.commit('ADD_TO_CART',this.id)
                 this.product.inCart = true;
                 this.product.stock--
             }
@@ -341,7 +342,7 @@ export default {
         setProductData(id = this.id){
             axios.get('http://127.0.0.1:8000/api/product/'+id).then((response)=>{
                 if(response.status == 200){
-                    // console.log(response.data.data);
+                    this.key++
                     this.product.inCart = false
                     this.product.stock = response.data.stock
                     this.product.title = response.data.name

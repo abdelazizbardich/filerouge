@@ -2,7 +2,7 @@
     <div>
         <div style="overflow: auto;max-height: calc(100vh - 80px);" class="p-5">
             <div class="p-2">
-                <h3 class="display-6 text-dark">Checkout</h3>
+                <h3 class="display-6 text-primary">Checkout</h3>
                 <p class="text-light small">Lorem ipsum dolor sit amet consectetur adipisicing elit. mollitia autem deserunt.</p>
                 <p class="form-error" v-if="errors.length">
                     <b>Please correct the following error(s):</b>
@@ -11,7 +11,7 @@
                     </ul>
                 </p>
             </div>
-            <div class="checkout-form">
+            <div class="checkout-form" style="position:relative;z-index:9;">
                 <form action="#" method="post" v-on:submit.prevent="">
                     <div class="row m-0 mb-3">
                         <div class="col-6">
@@ -96,6 +96,9 @@
 .form-control{
     border-radius: 0px;
     padding: 8px 16px;
+    background-color: #0a0a0a;
+    color: lightyellow;
+    border-color: #fbc403;
 }
 .form-error {
     color: white;
@@ -147,10 +150,10 @@ export default {
             return ErrorFound
         },
         checkout(){
-            if(!this.validateForm()){ console.log(this.validateForm()); return false; }
+            if(!this.validateForm()){return false;}
             if(JSON.parse(localStorage.getItem('cart')).length == 0){
                 Toastify({
-                    text: "You can't checkout an ampty cart!",
+                    text: "You can't checkout on an ampty cart!",
                     backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
                     className: "info",
                 }).showToast();
@@ -179,7 +182,6 @@ export default {
                   }, 2000);
                 }
             }).catch((error) => {
-                console.log(error.response.data);
             })
         }
     }

@@ -12,6 +12,8 @@ import {store} from './store'
 // Importation des components
 import App from './app.vue'
 
+import Authentificate from './middlewares/auth'
+
 
 Vue.use(VueRouter)
 

@@ -1,12 +1,9 @@
 <template>
     <div>
-        <div class="cart-product text-dark mb-3">
+    <strong class="h6 mb-2 d-block mt-5">{{ product.name }}</strong>
+        <div class="cart-product mb-3">
             <div class="thumbnail">
-                <img :src="'storage'/product.thumbnail" alt="">
-            </div>
-            <div class="details">
-                <strong class="h6">{{ product.name }}</strong>
-                <!-- <span class="small">#QSDCSDGFDF</span> -->
+                <img :src="'storage/'+product.thumbnail" alt="">
             </div>
             <div class="uniq-price">
                 <span>{{ product.price }}$</span>
@@ -41,7 +38,7 @@
 .thumbnail img{
     width:90px;
     height:100px;
-    background-color: var(--bs-white);
+    background-color: var(--bs-primary);
     padding: 8px;
 }
 .details{
@@ -73,7 +70,7 @@
     width: 25px;
     height: 25px;
     border-radius: 5px;
-    background-color: var(--bs-dark);
+    background-color: var(--bs-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +80,7 @@
     width: 25px;
     height: 25px;
     border-radius: 5px;
-    background-color: var(--bs-dark);
+    background-color: var(--bs-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,9 +105,10 @@
     transition: .3s;
 }
 .close:hover{
-    background-color: var(--bs-info);
-    opacity: 0.5;
-    color: red;
+    background-color: var(--bs-primary);
+    opacity: 1;
+    color: var(--bs-dark);
+
 }
 </style>
 

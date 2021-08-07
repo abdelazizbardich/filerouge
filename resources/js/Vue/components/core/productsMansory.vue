@@ -78,7 +78,6 @@ export default {
             axios.get('http://127.0.0.1:8000/api/product?page='+this.currentPage)
             .then(response => {
                 response.data.data.forEach(element => {
-                    console.log(response);
                    this.products.push(element);
                 });
             })

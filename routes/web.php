@@ -18,8 +18,13 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::prefix('/dashboard')->group(function () {
-    // Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
+Route::get('/login', [App\Http\Controllers\dashboard\loginController::class,'index'])->name('login');
+Route::post('/login', [App\Http\Controllers\dashboard\loginController::class,'login']);
+Route::get('/logout', [App\Http\Controllers\dashboard\loginController::class,'logout']);
+
+
+Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
+    Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
     Route::prefix('/product')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
         Route::get('/category/{id}', [App\Http\Controllers\dashboard\productController::class,'getByCategory']);

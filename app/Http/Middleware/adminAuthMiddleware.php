@@ -4,20 +4,22 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
-class Authenticate
+
+class adminAuthMiddleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return string|null
+     * @param  \Closure  $next
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
+        if($request->session()->has('admin')){
+            return $next($request);
+        }else{
             return redirect('/login');
         }
-        return $next($request);
     }
 }

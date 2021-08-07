@@ -39,6 +39,21 @@ header{
 .main-header{
     background-color: var(--bs-dark);
 }
+.main-header:after{
+    content: '';
+    background-image: url('/img/separator.png');
+    background-position: top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(100%) ;
+}
 .header a {
     color:  inherit;
 }
