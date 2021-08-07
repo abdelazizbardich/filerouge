@@ -5,14 +5,17 @@
         width: 100%;
         thead,tfoot{
             background-color: $primary;
-            color: #fff;
+            color: #000000;
         }
         td, th {
         border: none;
         text-align: left;
         padding: 16px 8px;
+        color: inherit;
         }
-
+        td{
+            color: $primary;
+        }
         tr:nth-child(even) {
         background-color: rgba($primary,.1);
         }

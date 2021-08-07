@@ -13,6 +13,7 @@ body{
     background-size: 100% 100%;
     background-repeat: no-repeat;
     font-family: 'Nunito', sans-serif;
+    background-color: #000000;
 }
 .main-header{
     width: calc(100vw - 250px);
@@ -23,7 +24,7 @@ body{
     justify-content: flex-end;
     padding: 0px 16px;
     align-items: center;
-    color: #ffffff;
+    color: #000000;
     a{
         margin: 16px;
         color: inherit;
@@ -77,7 +78,7 @@ body{
 .side-bar{
     width: 250px;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: #000000;
     position: fixed;
     left: 0;
     top: 0;
@@ -101,15 +102,17 @@ body{
                     font-size: 1rem;
                     border-bottom: 1px solid rgba($primary,.1);
                     display: block;
+                    color: #ffffff;
+                    border-radius: 5px;
                     i{
                         color: $primary;
                         margin-right: 16px;
                     }
                     &:hover{
                         background-color: $primary;
-                        color: #ffffff;
+                        color: #000000;
                         i{
-                            color: #ffffff;
+                            color: #000000;
                         }
                     }
                 }
@@ -118,7 +121,7 @@ body{
     }
 }
 .wrapper{
-    background-color: #ffffff;
+    background-color: #000000;
     width: calc(100vw - 350px);
     height: calc(100vh - 150px);
     position: fixed;
@@ -133,10 +136,12 @@ body{
         justify-content: space-between;
         align-items: center;
         height: 70px;
+        color: $primary;
+        text-transform: uppercase;
         .action{
             padding: 8px 16px;
             background-color: $primary;
-            color: #ffffff;
+            color: #000000;
             text-align: center;
             font-size: 1rem;
         }
@@ -222,4 +227,11 @@ hr{
 
 header.header{
 
+}
+.text-white{
+    color: #ffffff;
+}
+
+a{
+    color: inherit;
 }

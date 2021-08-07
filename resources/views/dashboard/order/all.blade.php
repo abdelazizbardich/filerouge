@@ -35,8 +35,9 @@
                             <div>- <a href="{{ url('product/24'.$p->id) }}">{{ $p->name }}</a></div><br>
                         @endforeach
                     </td>
+                    <td>{{ $order->price }} DH</td>
                     <td>{{ $order->created_at }}</td>
-                    <td><a href="{{ url('/dashboard/order/edit/'.$order->id) }}" class="action">Edit</a> <a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="action text danger">Delete</a></td>
+                    <td><a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="action text danger">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

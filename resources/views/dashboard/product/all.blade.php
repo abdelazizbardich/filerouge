@@ -36,7 +36,7 @@
                     @endforeach
                 @else
                         <div>
-                            <span>Not products in this category</span>
+                            <span class="text-white">No products in this category</span>
                         </div>
                 @endif
             </div>

@@ -53,6 +53,7 @@ Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
 
     Route::prefix('/order')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\orderController::class,'index']);
+        Route::get('/delete/{id}', [App\Http\Controllers\dashboard\orderController::class,'delete']);
     });
 
     Route::prefix('/user')->group(function () {

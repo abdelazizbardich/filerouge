@@ -15,6 +15,7 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: "Nunito", sans-serif;
+  background-color: #000000;
 }
 
 .main-header {
@@ -26,7 +27,7 @@ body {
   justify-content: flex-end;
   padding: 0px 16px;
   align-items: center;
-  color: #ffffff;
+  color: #000000;
 }
 .main-header a {
   margin: 16px;
@@ -79,7 +80,7 @@ body {
 .side-bar {
   width: 250px;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #000000;
   position: fixed;
   left: 0;
   top: 0;
@@ -103,23 +104,25 @@ body {
   width: 90%;
   margin: 5%;
   font-size: 1rem;
-  border-bottom: 1px solid rgba(255, 0, 160, 0.1);
+  border-bottom: 1px solid rgba(251, 196, 2, 0.1);
   display: block;
+  color: #ffffff;
+  border-radius: 5px;
 }
 .side-bar .menu ul li a i {
-  color: #FF00A0;
+  color: #fbc402;
   margin-right: 16px;
 }
 .side-bar .menu ul li a:hover {
-  background-color: #FF00A0;
-  color: #ffffff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .side-bar .menu ul li a:hover i {
-  color: #ffffff;
+  color: #000000;
 }
 
 .wrapper {
-  background-color: #ffffff;
+  background-color: #000000;
   width: calc(100vw - 350px);
   height: calc(100vh - 150px);
   position: fixed;
@@ -135,11 +138,13 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  color: #fbc402;
+  text-transform: uppercase;
 }
 .wrapper .title .action {
   padding: 8px 16px;
-  background-color: #FF00A0;
-  color: #ffffff;
+  background-color: #fbc402;
+  color: #000000;
   text-align: center;
   font-size: 1rem;
 }
@@ -216,7 +221,7 @@ body {
 .form-group label {
   display: inline-block;
   white-space: nowrap;
-  color: #ff00a0;
+  color: #fbc402;
   margin-bottom: 8px;
 }
 .form-group label.inline {
@@ -241,20 +246,20 @@ body {
   margin: 5px;
 }
 .form-group .form-control::-moz-placeholder {
-  color: rgba(255, 0, 160, 0.5);
+  color: rgba(251, 196, 2, 0.5);
   font-size: 0.9rem;
 }
 .form-group .form-control:-ms-input-placeholder {
-  color: rgba(255, 0, 160, 0.5);
+  color: rgba(251, 196, 2, 0.5);
   font-size: 0.9rem;
 }
 .form-group .form-control::placeholder {
-  color: rgba(255, 0, 160, 0.5);
+  color: rgba(251, 196, 2, 0.5);
   font-size: 0.9rem;
 }
 
 hr {
-  border-color: rgba(255, 0, 160, 0.1);
+  border-color: rgba(251, 196, 2, 0.1);
   border-width: 1px;
 }
 
@@ -275,6 +280,14 @@ hr {
 
 .text.danger {
   color: red;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
 }
 
 .products-page .categories {
@@ -298,6 +311,10 @@ hr {
   padding: 8px 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
+  color: #fbc402;
+}
+.products-page .categories ul li a {
+  color: inherit;
 }
 .products-page .categories ul li.active::after {
   content: "";
@@ -306,7 +323,8 @@ hr {
   left: 50%;
   transform: translateX(-50%);
   height: 5px;
-  background-color: #FF00A0;
+  background-color: #fbc402;
+  color: #fbc402;
   border-radius: 50px;
   bottom: -3px;
 }
@@ -325,7 +343,7 @@ hr {
 .products-page .products > div .product > div {
   width: 100%;
   padding-top: 100%;
-  background-color: #ff00a0;
+  background-color: #fbc402;
   position: relative;
   border-radius: 5px;
 }
@@ -354,8 +372,9 @@ hr {
   position: absolute;
   bottom: 5px;
   left: 5px;
-  color: #fff;
+  color: #ffffff;
   font-size: 1rem;
+  text-shadow: black 0px 3px 8px;
 }
 
 .all-categories .table {
@@ -364,16 +383,20 @@ hr {
   width: 100%;
 }
 .all-categories .table thead, .all-categories .table tfoot {
-  background-color: #FF00A0;
-  color: #fff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .all-categories .table td, .all-categories .table th {
   border: none;
   text-align: left;
   padding: 16px 8px;
+  color: inherit;
+}
+.all-categories .table td {
+  color: #fbc402;
 }
 .all-categories .table tr:nth-child(even) {
-  background-color: rgba(255, 0, 160, 0.1);
+  background-color: rgba(251, 196, 2, 0.1);
 }
 
 .all-material .table {
@@ -382,16 +405,20 @@ hr {
   width: 100%;
 }
 .all-material .table thead, .all-material .table tfoot {
-  background-color: #FF00A0;
-  color: #fff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .all-material .table td, .all-material .table th {
   border: none;
   text-align: left;
   padding: 16px 8px;
+  color: inherit;
+}
+.all-material .table td {
+  color: #fbc402;
 }
 .all-material .table tr:nth-child(even) {
-  background-color: rgba(255, 0, 160, 0.1);
+  background-color: rgba(251, 196, 2, 0.1);
 }
 
 .all-orders .table {
@@ -400,16 +427,20 @@ hr {
   width: 100%;
 }
 .all-orders .table thead, .all-orders .table tfoot {
-  background-color: #FF00A0;
-  color: #fff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .all-orders .table td, .all-orders .table th {
   border: none;
   text-align: left;
   padding: 16px 8px;
+  color: inherit;
+}
+.all-orders .table td {
+  color: #fbc402;
 }
 .all-orders .table tr:nth-child(even) {
-  background-color: rgba(255, 0, 160, 0.1);
+  background-color: rgba(251, 196, 2, 0.1);
 }
 
 .all-user .table {
@@ -418,16 +449,20 @@ hr {
   width: 100%;
 }
 .all-user .table thead, .all-user .table tfoot {
-  background-color: #FF00A0;
-  color: #fff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .all-user .table td, .all-user .table th {
   border: none;
   text-align: left;
   padding: 16px 8px;
+  color: inherit;
+}
+.all-user .table td {
+  color: #fbc402;
 }
 .all-user .table tr:nth-child(even) {
-  background-color: rgba(255, 0, 160, 0.1);
+  background-color: rgba(251, 196, 2, 0.1);
 }
 
 .login form {
@@ -437,7 +472,7 @@ hr {
   margin-top: 50vh;
   margin-left: 50vw;
   transform: translateY(-50%) translateX(-50%);
-  background-color: #ffffff;
+  background-color: #000000;
   padding: 16px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.205) 0px 3px 8px;
@@ -446,7 +481,7 @@ hr {
   font-size: 2rem;
   margin-bottom: 32px;
   text-align: center;
-  color: #FF00A0;
+  color: #fbc402;
   text-transform: uppercase;
 }
 .login .form-group {
@@ -464,9 +499,9 @@ hr {
   cursor: pointer;
 }
 .login .btn-primary {
-  background-color: #FF00A0;
-  color: #ffffff;
+  background-color: #fbc402;
+  color: #000000;
 }
 .login .btn-primary:hover {
-  box-shadow: rgba(255, 0, 160, 0.6) 0px 3px 8px;
+  box-shadow: rgba(251, 196, 2, 0.6) 0px 3px 8px;
 }

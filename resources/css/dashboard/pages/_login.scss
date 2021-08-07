@@ -7,7 +7,7 @@
         margin-top: 50vh;
         margin-left: 50vw;
         transform: translateY(-50%) translateX(-50%);
-        background-color: #ffffff;
+        background-color: #000000;
         padding: 16px;
         border-radius: 8px;
         box-shadow: rgba(0, 0, 0, 0.205) 0px 3px 8px;
@@ -34,7 +34,7 @@
         cursor: pointer;
         &-primary{
             background-color: $primary;
-            color: #ffffff;
+            color: #000000;
             &:hover{
                 box-shadow: rgba($primary,0.6) 0px 3px 8px;
             }

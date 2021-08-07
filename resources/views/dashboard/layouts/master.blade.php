@@ -37,7 +37,7 @@
                 <li><a href="{{ url('/dashboard/categories') }}"><i class="fa fa-th"></i> Categories</a></li>
                 {{-- <li><a href="{{ url('/dashboard/medias') }}"><i class="fa fa-photo-video"></i> Medias</a></li> --}}
                 <li><a href="{{ url('/dashboard/material') }}"><i class="fa fa-bong"></i> Materials</a></li>
-                <li><a href="{{ url('/dashboard/orders') }}"><i class="fa fa-luggage-cart"></i> Orders</a></li>
+                <li><a href="{{ url('/dashboard/order') }}"><i class="fa fa-luggage-cart"></i> Orders</a></li>
                 <li><a href="{{ url('/dashboard/user') }}"><i class="fa fa-users"></i> Users</a></li>
             </ul>
         </div>
