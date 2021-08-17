@@ -4,20 +4,26 @@
 @section('pageClass','update-material')
 
 @section('content')
-    <span class="title">@yield('title'): <a href="javascript:document.querySelector('#update-material').submit();" class="action">Update</a></span>
-    <hr>
-    <div class="content">
-        <form action="{{ url('/dashboard/material/update/'.$material->id) }}" id="update-material" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="name">Name:</label>
-                    <input value="@if (old('name')) {{ old('name') }} @else {{ $material->name }} @endif"  class="form-control @error('name') is-invalid @enderror" placeholder="name..." type="text" name="name" id="name">
+<h3 class="text-primary mb-5">Edit material</h3>
+<div>
+    <form action="{{ url('/dashboard/material/update/'.$material->id) }}" id="add-material" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="form-row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="text-primary" for="name">Name</label>
+                    <input value="@if (old('name')) {{ old('name') }} @else {{ $material->name }} @endif" class="border-primary form-control form-control-lg @error('name') is-invalid @enderror" type="text" style="color: rgb(255,255,255);" name="name">
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Save</button></div>
+            </div>
+        </div>
+    </form>
+</div>
 @stop

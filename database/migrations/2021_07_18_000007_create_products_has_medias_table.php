@@ -23,21 +23,10 @@ class CreateProductsHasMediasTable extends Migration
             $table->unsignedBigInteger('medias_id');
             $table->string('type', 45)->default('thumbnail');
             $table->timestamps();
-
             $table->index(["medias_id"], 'fk_products_has_medias_medias1_idx');
-
             $table->index(["products_id"], 'fk_products_has_medias_products1_idx');
-
-
-            $table->foreign('products_id', 'fk_products_has_medias_products1_idx')
-                ->references('id')->on('products')
-                ->onDelete('no action')
-                ->onUpdate('no action');
-
-            $table->foreign('medias_id', 'fk_products_has_medias_medias1_idx')
-                ->references('id')->on('medias')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+            $table->foreign('products_id', 'fk_products_has_medias_products1_idx')->references('id')->on('products')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('medias_id', 'fk_products_has_medias_medias1_idx')->references('id')->on('medias')->onDelete('no action')->onUpdate('no action');
         });
     }
 

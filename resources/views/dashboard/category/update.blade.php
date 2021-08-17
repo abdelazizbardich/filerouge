@@ -4,18 +4,24 @@
 @section('pageClass','update-category')
 
 @section('content')
-    <span class="title">@yield('title'): <a href="javascript:document.querySelector('#update-category').submit();" class="action">Update</a></span>
-    <hr>
-    <div class="content">
-        <form action="{{ url('/dashboard/categories/update/'.$category->id) }}" id="update-category" method="post" enctype="multipart/form-data">
+    <h3 class="text-primary mb-5">Edit category</h3>
+    <div>
+        <form action="{{ url('/dashboard/categories/update/'.$category->id) }}" id="update-category" method="post">
             @csrf
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="name">Name:</label>
-                    <input value="@if (old('name')) {{ old('name') }} @else {{ $category->name }} @endif"  class="form-control @error('name') is-invalid @enderror" placeholder="name..." type="text" name="name" id="name">
-                    @error('name')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+            <div class="form-row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="text-primary" for="name">Name</label>
+                        <input value="@if (old('name')) {{ old('name') }} @else {{ $category->name }} @endif" class="border-primary form-control form-control-lg @error('name') is-invalid @enderror" type="text" style="color: rgb(255,255,255);" name="name">
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Save</button></div>
                 </div>
             </div>
         </form>

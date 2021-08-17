@@ -4,20 +4,26 @@
 @section('pageClass','add-material')
 
 @section('content')
-    <span class="title">@yield('title'): <a href="javascript:document.querySelector('#add-material').submit();" class="action">Save</a></span>
-    <hr>
-    <div class="content">
-        <form action="{{ url('/dashboard/material/add') }}" id="add-material" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="name">Name:</label>
-                    <input value="{{ old('name') }}"  class="form-control @error('name') is-invalid @enderror" placeholder="name..." type="text" name="name" id="name">
+<h3 class="text-primary mb-5">Add material</h3>
+<div>
+    <form action="{{ url('/dashboard/material/add') }}" id="add-material" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="form-row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="text-primary" for="name">Name</label>
+                    <input value="{{ old('name') }}" class="border-primary form-control form-control-lg @error('name') is-invalid @enderror" type="text" style="color: rgb(255,255,255);" name="name">
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Save</button></div>
+            </div>
+        </div>
+    </form>
+</div>
 @stop

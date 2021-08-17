@@ -4,58 +4,60 @@
 @section('pageClass','all-orders')
 
 @section('content')
-    <span class="title">@yield('title'):</span>
-    <div class="content">
-        <table class="table" border="0">
-            <thead>
-                <th>#</th>
-                <th>Name</th>
-                <th>country</th>
-                <th>region</th>
-                <th>City</th>
-                <th>street</th>
-                <th>zip_code</th>
-                <th>Cart</th>
-                <th>Order price</th>
-                <th>Created at</th>
-                <th>Actions</th>
-            </thead>
-            <tbody>
-                @foreach ($orders as $order)
-                <tr>
-                    <td>{{ $order->id }}</td>
-                    <td>{{ $order->user->fname }} {{ $order->user->fname }}</td>
-                    <td>{{ $order->shipping_adress->country }}</td>
-                    <td>{{ $order->shipping_adress->region }}</td>
-                    <td>{{ $order->shipping_adress->city }}</td>
-                    <td>{{ $order->shipping_adress->street }}</td>
-                    <td>{{ $order->shipping_adress->zip_code }}</td>
-                    <td>
-                        @foreach ($order->product as $p)
-                            <div>- <a href="{{ url('product/24'.$p->id) }}">{{ $p->name }}</a></div><br>
+    <h1 class="text-primary mb-4">Orders</h1>
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                <table class="table table-striped table-hover table-sm my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>State</th>
+                            <th>Code</th>
+                            <th><strong>User</strong></th>
+                            <th class="text-nowrap"><strong>Created at</strong><br></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($orders as $order)
+                        <tr>
+                            <td class="text-nowrap">1</td>
+                            <td class="text-nowrap">
+                                @switch($order->state)
+                                    @case(0)
+                                        <span class="badge badge-warning text-dark">Panding</span>
+                                        @break
+                                    @case(1)
+                                        <span class="badge badge-success">Approved</span>
+                                        @break
+                                    @case(2)
+                                        <span class="badge badge-dark">Finished</span>
+                                        @break
+                                    @default
+                                        <span class="badge badge-danger">Error</span>
+                                @endswitch
+                            </td>
+                            <td class="text-nowrap">{{ $order->code }}</td>
+                            <td class="text-nowrap">{{ $order->user->fname }} {{ $order->user->lname }}</td>
+                            <td class="text-nowrap">
+                                <a href="{{ url('/dashboard/order/'.$order->id) }}" class="btn btn-info btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;"><i class="fa fa-eye"></i></a>
+                                <a href="{{ url('/dashboard/order/finished/'.$order->id) }}" class="btn btn-dark btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Set Finished</a>
+                                <a href="{{ url('/dashboard/order/approve/'.$order->id) }}" class="btn btn-success btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Approve</a>
+                                <a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="btn btn-danger btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Delete</a></td>
+                        </tr>
                         @endforeach
-                    </td>
-                    <td>{{ $order->price }} DH</td>
-                    <td>{{ $order->created_at }}</td>
-                    <td><a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="action text danger">Delete</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>country</th>
-                    <th>region</th>
-                    <th>City</th>
-                    <th>street</th>
-                    <th>zip_code</th>
-                    <th>Cart</th>
-                    <th>Order price</th>
-                    <th>Created at</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>#</td>
+                            <td><strong>State</strong><br></td>
+                            <td><strong>Code</strong><br></td>
+                            <td><strong>User</strong></td>
+                            <td class="text-nowrap"><strong>Created at</strong><br></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 @stop

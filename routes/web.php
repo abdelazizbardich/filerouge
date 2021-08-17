@@ -30,7 +30,9 @@ Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
         Route::get('/category/{id}', [App\Http\Controllers\dashboard\productController::class,'getByCategory']);
         Route::get('/add', [App\Http\Controllers\dashboard\productController::class,'add']);
         Route::post('/add', [App\Http\Controllers\dashboard\productController::class,'store']);
-        Route::get('/edit', function () {return view("dashboard.product.edit");});
+        Route::get('/edit/{id}',[App\Http\Controllers\dashboard\productController::class,'edit']);
+        Route::post('/edit/{id}',[App\Http\Controllers\dashboard\productController::class,'update']);
+        Route::get('/delete/{id}',[App\Http\Controllers\dashboard\productController::class,'destroy']);
     });
 
     Route::prefix('/categories')->group(function () {
@@ -54,11 +56,14 @@ Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
     Route::prefix('/order')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\orderController::class,'index']);
         Route::get('/delete/{id}', [App\Http\Controllers\dashboard\orderController::class,'delete']);
+        Route::get('/finished/{id}', [App\Http\Controllers\dashboard\orderController::class,'setFinished']);
+        Route::get('/approve/{id}', [App\Http\Controllers\dashboard\orderController::class,'approve']);
     });
 
     Route::prefix('/user')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\userController::class,'index']);
         Route::get('/suspend/{id}', [App\Http\Controllers\dashboard\userController::class,'suspend']);
+        Route::get('/activate/{id}', [App\Http\Controllers\dashboard\userController::class,'activate']);
     });
 });
 

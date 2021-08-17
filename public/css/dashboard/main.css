@@ -231,8 +231,9 @@ body {
 .form-group .form-control {
   padding: 16px 8px;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid #fbc402;
+  background-color: rgba(251, 196, 2, 0.05);
+  color: #ffffff;
   width: 100%;
   font-size: 1rem;
 }
@@ -276,6 +277,21 @@ hr {
 }
 .alert.alert-danger {
   color: red;
+}
+
+.action {
+  padding: 8px;
+  background: #f3f3f3;
+  border-radius: 5px;
+  color: #ffffff;
+}
+.action-danger {
+  color: #ffffff;
+  background-color: red;
+}
+.action-info {
+  color: #ffffff;
+  background-color: #00ccff;
 }
 
 .text.danger {

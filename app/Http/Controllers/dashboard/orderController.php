@@ -31,4 +31,17 @@ class orderController extends Controller
         $order = Order::destroy($id);
         return redirect('/dashboard/order');
     }
+
+    public function setFinished($id){
+        Order::where('id',$id)->update([
+            "state" => 2
+        ]);
+        return redirect('/dashboard/order');
+    }
+    public function approve($id){
+        Order::where('id',$id)->update([
+            "state" => 1
+        ]);
+        return redirect('/dashboard/order');
+    }
 }

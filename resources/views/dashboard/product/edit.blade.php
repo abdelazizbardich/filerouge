@@ -4,102 +4,182 @@
 @section('pageClass','products-page')
 
 @section('content')
-    <span class="title">@yield('title'): <a href="javascript:document.querySelector('#add-product').submit();" class="action">Update</a></span>
-    <hr>
-    <div class="content">
-        <form action="{{ url('/') }}" id="add-product" method="post">
-            <div class="row">
-                <div class="form-group col-8">
-                    <label for="title">Title:</label>
-                    <input class="form-control" placeholder="Title..." type="text" name="title" id="title">
-                </div>
-                <div class="form-group col-4">
-                    <label for="price">Price:</label>
-                    <input class="form-control" placeholder="Price..." type="text" name="price" id="price">
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="description">Description:</label>
-                    <textarea name="description" placeholder="Description..." id="description" cols="30" rows="10" class="form-control"></textarea>
+
+<h3 class="text-primary mb-5">Edit product</h3>
+<div>
+    <form action="{{ url('/dashboard/product/edit').'/'.$product->id }}" id="add-product" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="form-row">
+            <div class="col-lg-9">
+                <div class="form-group">
+                    <label class="text-primary" for="title">Name</label>
+                    <input required value="{{ $product->name }}" id="title" maxlength="70" class="border-primary form-control form-control-lg @error('title') is-invalid @enderror" type="text" style="color: rgb(255,255,255);" name="title">
+                    @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label for="thumbnail">Thumbnail:</label>
-                    <input type="file" class="form-control" name="thumbnail" id="thumbnail">
-                </div>
-                <div class="form-group col-6">
-                    <label for="gallery">Gallery:</label>
-                    <input type="file" class="form-control" name="gallery" multiple id="gallery">
+            <div class="col">
+                <div class="form-group">
+                    <label class="text-primary" for="price">Price</label>
+                    <input required value="{{ $product->price }}" id="price" class="border-primary form-control form-control-lg @error('price') is-invalid @enderror" type="text" style="color: rgb(255,255,255);" name="price">
+                    @error('price')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-2">
-                    <label for="width">Width:</label>
-                    <input type="text" id="width" name="width" placeholder="width..." class="form-control">
+        </div>
+        <div class="form-row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="form-group">
+                    <label class="text-primary" for="description">Description</label>
+                    <textarea required  id="description" name="description" class="border-primary form-control form-control-lg @error('description') is-invalid @enderror" style="color: rgb(255,255,255);" rows="7">{{ $product->description }}</textarea>
+                    @error('description')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="form-group col-2">
-                    <label for="height">Height:</label>
-                    <input type="text" id="height" name="height" placeholder="height..." class="form-control">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-5 col-xl-5">
+                <div class="form-group">
+                    <label class="text-primary" for="thumbnail">Thumbnail</label>
+                    <input  value="{{ $product->thumbnail }}" id="thumbnail" class="border rounded border-primary form-control-file form-control-lg @error('thumbnail') is-invalid @enderror" type="file" name="thumbnail" style="padding: 6px 16px;">
+                    @error('thumbnail')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="form-group col-2">
-                    <label for="depth">Depth:</label>
-                    <input type="text" id="depth" name="depth" placeholder="depth..." class="form-control">
+                <div class="col-12 p-0 mb-5">
+                        <img class="d-block img-thumbnail mx-1" width="47" height="47" src="{{ asset('/storage').'/'.$product->thumbnail }}" alt="">
                 </div>
-                <div class="form-group col-6">
-                    <label for="category">Category:</label>
-                    <select name="category" id="category" placeholder="category..." class="form-control">
+            </div>
+            <div class="col">
+                <div class="form-group"><label class="text-primary" for="gallery">Gallery</label>
+                    <input value="{{ $product->medias }}" multiple class="border rounded border-primary form-control-file form-control-lg @error('gallery') is-invalid @enderror" id="gallery" type="file" name="gallery[]" style="padding: 6px 16px;">
+                    @error('gallery')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="col-12 p-0 mb-5">
+                    @foreach ($product->medias as $media)
+                    <img class="d-inline-block img-thumbnail mx-1" width="47" height="47" src="{{ asset('/storage').'/'.$media->path }}" alt="">
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-2">
+                <div class="form-group"><label class="text-primary" for="width">Width</label>
+                    <input  required value="{{ json_decode($product->dimentions)->w }}" id="width" class="border-primary form-control form-control-lg @error('width') is-invalid @enderror" type="number" style="color: rgb(255,255,255);" name="width">
+                    @error('width')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group"><label class="text-primary" for="height">Height</label>
+                    <input required  value="{{ json_decode($product->dimentions)->h }}" id="height" class="border-primary form-control form-control-lg @error('height') is-invalid @enderror" type="number" style="color: rgb(255,255,255);" name="height">
+                    @error('height')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group"><label class="text-primary" for="depth">Depth</label>
+                    <input  required value="{{ json_decode($product->dimentions)->d }}" id="depth" class="border-primary form-control form-control-lg @error('depth') is-invalid @enderror" type="number" style="color: rgb(255,255,255);" name="depth">
+                    @error('depth')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group"><label class="text-primary" for="price">Category</label>
+                    <select required  class="border-primary form-control form-control-lg @error('category') is-invalid @enderror" id="category" name="category">
                         <option selected disabled>Category...</option>
-                        <option value="1">Category 1</option>
+                        @foreach ($categories as $category)
+                        <option @if ($product->categories_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
                     </select>
+                    @error('category')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4 p-0">
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="points">Points:</label>
-                            <input type="number" class="form-control" placeholder="Points..." name="points" id="points">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="stock">Stock:</label>
-                            <input type="number" class="form-control" placeholder="Stock..." name="stock" id="stock">
-                        </div>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-2">
+                <div class="form-group"><label class="text-primary" for="points">Points</label>
+                    <input  required value="{{ $product->points }}" id="points" class="border-primary form-control form-control-lg @error('points') is-invalid @enderror" type="number" style="color: rgb(255,255,255);" name="points">
+                    @error('points')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group"><label class="text-primary" for="stock">Stock</label>
+                    <input  required value="{{ $product->stock }}" id="stock" class="border-primary form-control form-control-lg @error('stock') is-invalid @enderror" type="number" style="color: rgb(255,255,255);" name="stock">
+                    @error('stock')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg-2"><label class="text-primary" for="">&nbsp;</label>
+                <div class="form-group">
+                    <div class="form-check"><input value="{{  $product->on_sale }}" @if($product->on_sale == 1) checked="true" @endif class="form-check-input  @error('onsale') is-invalid @enderror" type="checkbox" name="onsale" id="onsale"><label class="form-check-label text-primary" for="onsale">&nbsp;On Sale<br></label>
+                    @error('onsale')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     </div>
                 </div>
-                <div class="col-2" style="display: flex;align-items: center;justify-content: space-between;">
-                    <div class="row" style="display: flex;align-items: center;justify-content: space-between;">
-                        <div class="form-group col" style="margin-right: 16px;">
-                            <input type="checkbox" name="onsale" id="onsale" class="form-check">
-                            <label for="onsale">On Sale</label>
-                        </div>
-                        <div class="form-group col"  style="margin-right: 16px;">
-                            <input type="checkbox" name="inslider" id="inslider" class="form-check">
-                            <label for="inslider">In Slider</label>
-                        </div>
+                <div class="form-group">
+                    <div class="form-check"><input value="{{ $product->in_slider }}" @if($product->in_slider == 1) checked="true" @endif class="form-check-input  @error('inslider') is-invalid @enderror" type="checkbox" name="inslider" id="inslider"><label class="form-check-label text-primary" for="inslider">&nbsp;In Slider<br></label>
+                    @error('inslider')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     </div>
                 </div>
-                <div class="form-group col-6">
-                    <label for="Meterials">Meterials:</label>
-                    <select name="Meterials" multiple id="Meterials" height="50" placeholder="Meterials..." class="form-control">
+            </div>
+            <div class="col">
+                <div class="form-group"><label class="text-primary" for="materials">Materials</label>
+                    <select  required class="border-primary form-control form-control-lg @error('materials') is-invalid @enderror" id="materials" name="materials[]" multiple="">
                         <option selected disabled>Meterials...</option>
-                        <option value="1">Meterials 1</option>
+                        @foreach ($materials as $material)
+                                <option @foreach ($product->materials as $mat) @if ($mat->id == $material->id) selected @endif @endforeach value="{{ $material->id }}">{{ $material->name }}</option>
+                        @endforeach
                     </select>
+                    @error('materials')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="goodtoknow">Good to know:</label>
-                    <textarea name="goodtoknow" id="goodtoknow" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="form-group">
+                    <label class="text-primary" for="goodtoknow">Good to know<br></label>
+                    <textarea required  name="goodtoknow" class="border-primary form-control form-control-lg @error('goodtoknow') is-invalid @enderror" id="goodtoknow" style="color: rgb(255,255,255);" rows="5">{{ $product->good_to_know }}</textarea>
+                    @error('goodtoknow')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-12">
-                    <label for="fulldescription">Full description:</label>
-                    <textarea name="fulldescription" id="fulldescription" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="form-group">
+                    <label class="text-primary" for="fulldescription">Full description<br></label>
+                    <textarea required  name="fulldescription" class="border-primary form-control form-control-lg" id="fulldescription" style="color: rgb(255,255,255); @error('fulldescription') is-invalid @enderror" rows="9">{{ $product->full_description }}</textarea>
+                    @error('fulldescription')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Save</button></div>
+            </div>
+        </div>
+    </form>
+</div>
 @stop

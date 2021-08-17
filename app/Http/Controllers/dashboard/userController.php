@@ -27,4 +27,14 @@ class userController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
     }
+    public function activate($id){
+        $user = user::where('id',$id)->update([
+            'state' => 1
+        ]);
+        if($user){
+            return redirect('/dashboard/user');
+        }else{
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    }
 }
