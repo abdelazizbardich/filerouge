@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 import axios from 'axios'
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
             return state.products
         },
         getTotalCart: state => {
-            return state.toatalCart
+            return state.cartProducts.length
         },
         getCart:state => {
             return this.cartProducts
@@ -74,20 +74,17 @@ export const store = new Vuex.Store({
         },
         SET_CART_COUNT(state){
             if(localStorage.getItem('cartCount') !== null){
-                state.cartCount = parseInt(localStorage.getItem('cartCount'),10)
+                state.cartCount = state.cartProducts.length
             }
         },
         REMOVE_FROM_CART(state,id){
-            let cart = JSON.parse(localStorage.getItem('cart'))
-            cart.forEach(p => {
-                if(p.productId == id){
-                    cart.pop(p)
-                }
-            });
-            state.products = cart
-            localStorage.setItem('cart', JSON.stringify(cart))
-            state.cartCount--
-            localStorage.setItem('cartCount',state.cartCount)
+            state.cartProducts = JSON.parse(localStorage.getItem('cart'))
+            const newProducts = state.cartProducts.filter(cart=>{
+                console.log(cart,cart.id,`${id}`,cart.id != `${id}`)
+                return cart.productId != `${id}`
+            } );
+            state.cartProducts = newProducts
+            localStorage.setItem('cart',JSON.stringify(state.cartProducts))
             Toastify({
                 text: "Product removed from cart",
                 backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
@@ -109,6 +106,11 @@ export const store = new Vuex.Store({
                 state.token = data
                 localStorage.setItem('token',data)
             }
+        },
+        CLEAR_CART(state){
+            localStorage.removeItem('cart')
+            state.cartProducts = [],
+            state.toatalCart = 0
         }
     },
     actions:{
@@ -123,6 +125,12 @@ export const store = new Vuex.Store({
                 console.log(response);
                 commit('SET_TOKEN', response.data.token)
             })
+        },
+        removeFromCart({commit},id){
+            commit('REMOVE_FROM_CART',id);
+        },
+        clearCart({commit}){
+            commit('CLEAR_CART');
         }
     },
 })

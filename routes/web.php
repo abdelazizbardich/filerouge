@@ -24,7 +24,7 @@ Route::get('/logout', [App\Http\Controllers\dashboard\loginController::class,'lo
 
 
 Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
-    Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
+    Route::get('/', [App\Http\Controllers\dashboard\homeController::class,'index']);
     Route::prefix('/product')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\productController::class,'index']);
         Route::get('/category/{id}', [App\Http\Controllers\dashboard\productController::class,'getByCategory']);
@@ -62,8 +62,10 @@ Route::prefix('/dashboard')->middleware(['adminAuth'])->group(function () {
 
     Route::prefix('/user')->group(function () {
         Route::get('/', [App\Http\Controllers\dashboard\userController::class,'index']);
+        Route::get('/profile', [App\Http\Controllers\dashboard\userController::class,'profile']);
         Route::get('/suspend/{id}', [App\Http\Controllers\dashboard\userController::class,'suspend']);
         Route::get('/activate/{id}', [App\Http\Controllers\dashboard\userController::class,'activate']);
+        Route::post('/profile/update', [App\Http\Controllers\dashboard\userController::class,'updateProfile']);
     });
 });
 

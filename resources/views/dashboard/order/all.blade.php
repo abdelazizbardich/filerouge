@@ -14,7 +14,10 @@
                             <th>#</th>
                             <th>State</th>
                             <th>Code</th>
+                            <th>Total price</th>
                             <th><strong>User</strong></th>
+                            <th>Shipping adress</th>
+                            <th>Products</th>
                             <th class="text-nowrap"><strong>Created at</strong><br></th>
                         </tr>
                     </thead>
@@ -38,9 +41,21 @@
                                 @endswitch
                             </td>
                             <td class="text-nowrap">{{ $order->code }}</td>
+                            <td class="text-nowrap text-success">{{ $order->total_price }}$</td>
                             <td class="text-nowrap">{{ $order->user->fname }} {{ $order->user->lname }}</td>
+                            <td class="text-nowrap">{{ $order->shipping_adress->country }}  {{ $order->shipping_adress->region }}  {{ $order->shipping_adress->city }}  {{ $order->shipping_adress->street }} {{ $order->shipping_adress->zip_code }} </td>
                             <td class="text-nowrap">
-                                <a href="{{ url('/dashboard/order/'.$order->id) }}" class="btn btn-info btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;"><i class="fa fa-eye"></i></a>
+                                <ul class="p-1 border bg-dark text-white rounded">
+                                @foreach ($order->product as $product)
+                                        <li class="d-block">- <a class="text-white" href="{{ url('/product/') }}/{{ $product->id }}">{{ $product->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </td>
+
+
+
+                            <td class="text-nowrap">
+                                {{-- <a href="{{ url('/dashboard/order/'.$order->id) }}" class="btn btn-info btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;"><i class="fa fa-eye"></i></a> --}}
                                 <a href="{{ url('/dashboard/order/finished/'.$order->id) }}" class="btn btn-dark btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Set Finished</a>
                                 <a href="{{ url('/dashboard/order/approve/'.$order->id) }}" class="btn btn-success btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Approve</a>
                                 <a href="{{ url('/dashboard/order/delete/'.$order->id) }}" class="btn btn-danger btn-sm" role="button" style="margin-right: 5px;margin-left: 5px;">Delete</a></td>
@@ -52,7 +67,10 @@
                             <td>#</td>
                             <td><strong>State</strong><br></td>
                             <td><strong>Code</strong><br></td>
+                            <td><strong>Total price</strong><br></td>
                             <td><strong>User</strong></td>
+                            <td>Shipping adress</td>
+                            <td>Products</td>
                             <td class="text-nowrap"><strong>Created at</strong><br></td>
                         </tr>
                     </tfoot>

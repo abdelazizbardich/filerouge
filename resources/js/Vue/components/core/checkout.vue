@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div style="overflow: auto;max-height: calc(100vh - 80px);" class="p-5">
+        <div class="bg-dark p-5" style="overflow: auto;max-height: calc(100vh - 80px);">
             <div class="p-2">
-                <h3 class="display-6 text-primary">Checkout</h3>
+                <h3 class="display-6 text-info">Checkout</h3>
                 <p class="text-light small">Lorem ipsum dolor sit amet consectetur adipisicing elit. mollitia autem deserunt.</p>
                 <p class="form-error" v-if="errors.length">
                     <b>Please correct the following error(s):</b>
@@ -82,7 +82,7 @@
                     <div class="row m-0 mb-3">
                         <div class="col">
                             <div class="form-group">
-                                <button @click="checkout()" type="submit" name="submit" class="btn btn-warning btn-lg rounded-0 d-block w-100 confirm-order"><i class="far fa-check-circle"></i> Confirm order</button>
+                                <button @click="checkout()" type="submit" name="submit" class="btn btn-info btn-lg rounded-0 d-block w-100 confirm-order"><i class="far fa-check-circle"></i> Confirm order</button>
                             </div>
                         </div>
                     </div>
@@ -98,12 +98,12 @@
     padding: 8px 16px;
     background-color: #0a0a0a;
     color: lightyellow;
-    border-color: #fbc403;
+    border-color: var(--bs-info);
 }
 .form-error {
     color: white;
     padding: 8px 16px;
-    background-color: #ff9800;
+    background-color: var(--bs-danger);
     border-radius: 5px;
 }
 </style>
@@ -171,17 +171,22 @@ export default {
                 'payWith' : this.payWith,
                 'cart' : localStorage.getItem('cart')
             }).then(response => {
-                if(response.status == 200 && response.data == 1){
+                if(response.status == 200){
                     Toastify({
                     text: "We recived you order successfully",
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                     className: "info",
                   }).showToast();
-                  setTimeout(() => {
+                    localStorage.setItem('orderInfos',JSON.stringify(response.data))
+                    this.$store.dispatch('clearCart')
                     this.$router.push('/order-confirmed')
-                  }, 2000);
+                }else{
+                    Toastify({
+                        text: "unknoun server error!",
+                        backgroundColor: "linear-gradient(to right, #ff0000, #ff5722)",
+                        className: "info",
+                    }).showToast();
                 }
-            }).catch((error) => {
             })
         }
     }

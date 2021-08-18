@@ -133,7 +133,7 @@
             </div>
             <div class="col">
                 <div class="form-group"><label class="text-primary" for="materials">Materials</label>
-                    <select required class="border-primary form-control form-control-lg @error('materials') is-invalid @enderror" id="materials" name="materials" multiple="">
+                    <select required class="border-primary form-control form-control-lg @error('materials') is-invalid @enderror" id="materials" name="materials[]" multiple="">
                         <option selected disabled>Meterials...</option>
                         @foreach ($materials as $material)
                         <option @if (old('materials') == $material->id) selected @endif  value="{{ $material->id }}">{{ $material->name }}</option>

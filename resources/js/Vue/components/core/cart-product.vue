@@ -33,13 +33,12 @@
     align-items: stretch;
 }
 .cart-product:hover{
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0,0,0,.2);
 }
 .thumbnail img{
     width:90px;
     height:100px;
-    background-color: var(--bs-primary);
-    padding: 8px;
+    background-color: var(--bs-info);
 }
 .details{
     height:100px;
@@ -70,7 +69,7 @@
     width: 25px;
     height: 25px;
     border-radius: 5px;
-    background-color: var(--bs-primary);
+    background-color: var(--bs-info);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +79,7 @@
     width: 25px;
     height: 25px;
     border-radius: 5px;
-    background-color: var(--bs-primary);
+    background-color: var(--bs-info);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,9 +104,8 @@
     transition: .3s;
 }
 .close:hover{
-    background-color: var(--bs-primary);
+    background-color: var(--bs-danger);
     opacity: 1;
-    color: var(--bs-dark);
 
 }
 </style>
@@ -133,9 +131,9 @@
         },
         methods:{
             removeMe(){
-                    this.$store.commit('REMOVE_FROM_CART',this.product.id)
+                    this.$store.dispatch('removeFromCart',this.product.id)
                     this.$emit('remove')
-                    this.$store.commit('CHANGE_CART_TOTAL_PRICE',this.totalPrice,0)
+                    // this.$store.commit('CHANGE_CART_TOTAL_PRICE',this.totalPrice,0)
             },
             addQte(){
                 this.pQte++

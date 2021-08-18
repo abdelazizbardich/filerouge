@@ -57,8 +57,8 @@
                         <ul class="navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="text-white d-none d-lg-inline mr-2 small">{{-- ValerieLuna --}}</span><img class="rounded-circle img-profile" src="{{  asset('assets/img/dashboard/avatars/avatar-icon-images-4.jpg')  }}"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="{{ url('/dashboard/profile') }}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ url('/dashboard/logout') }}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger" style="color: var(--red);"></i>&nbsp;Logout</a>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="{{ url('/dashboard/user/profile') }}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger" style="color: var(--red);"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
                             </li>

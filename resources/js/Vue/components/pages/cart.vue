@@ -3,9 +3,9 @@
         <mainHeader/>
         <div class="main-cart">
             <div class="row m-0 h-100">
-                <div class="col-12 col-md-6 text-primary h-100 overflow-hidden">
+                <div class="col-12 col-md-6 text-info h-100 overflow-hidden">
                     <div class="p-5 h-100">
-                        <h3 class="display-6 text-primary">Cart</h3> <span>TotalCart: <span>{{ totalCart }}</span></span>
+                        <h3 class="display-6 text-info">Cart</h3> <span>TotalCart: <span>{{ totalCart }}</span></span>
                         <div class="cart-products pt-2 h-100">
                             <div class="overflow-auto h-100">
                                 <product @remove="removeProduct(product)" @addTotal="addTotal" v-for="(product,index) in cartData" :key="index" :id="product.productId" :product=product :qte="product.count"/>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <checkout/>
+                    <checkout v-if="cartData.length > 0" />
                 </div>
             </div>
         </div>
@@ -29,13 +29,6 @@
 .main-cart{
     height: calc(100vh - 85px);
     overflow: hidden;
-    background-color: var(--bs-dark);
-    background-image: url('/img/hero-bg.png');
-    position: relative;
-    background-position: center left;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-blend-mode: exclusion;
 }
 .empty-cart {
     color: red;

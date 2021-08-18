@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\shipping_adress;
 use App\Models\orders_has_product;
 use App\Models\Product;
+use Mail;
+use Str;
 
 class CartController extends Controller
 {
@@ -18,7 +20,7 @@ class CartController extends Controller
         $Validator = Validator::make($request->all(),[
             'firstName'=> 'required|string',
             'lastName'=> 'required|string',
-            'phone'=> 'required|regex:/[0-9]{9}/',
+            'phone'=> 'required',
             'country'=> 'required',
             'city'=> 'required',
             'email' => 'email',
@@ -54,22 +56,54 @@ class CartController extends Controller
         if($shippingAdress)
         $order = Order::create([
             'users_id' => $user->id,
-            'shipping_adresses_id' => $shippingAdress->id
+            'shipping_adresses_id' => $shippingAdress->id,
         ]);
-        if($order)
-        foreach(json_decode($request->input('cart')) as $product){
-            $orderProducts = orders_has_product::create([
-                'orders_id' => $order->id,
-                'products_id' => $product->productId,
-                'qte' => $product->count
-            ]);
-            if(!$order){return false;}
-            $newProduct = Product::find($product->productId);
-            $newProduct->stock -= $product->count;
-            $newProduct->save();
-
-
+        $code = rand(111,999).$order->id;
+        Order::where('id',$order->id)->update([
+            'code' => $code
+        ]);
+        if($order){
+            $products = [];
+            $totalPrice = 0;
+            $orderTotal = 0;
+            foreach(json_decode($request->input('cart')) as $product){
+                $pData = [];
+                $orderProducts = orders_has_product::create([
+                    'orders_id' => $order->id,
+                    'products_id' => $product->productId,
+                    'qte' => $product->count
+                ]);
+                if(!$order){return false;}
+                $newProduct = Product::find($product->productId);
+                $newProduct->stock -= $product->count;
+                $newProduct->save();
+                $totalPrice += ($newProduct->price * $product->count);
+                $pData['img'] = $newProduct->thumbnail;
+                $pData['unit'] = $product->count;
+                $pData['name'] = $newProduct->name;
+                $pData['price'] = $totalPrice;
+                array_push($products,$pData);
+                $orderTotal += $totalPrice;
+            }
+            if($totalPrice > 0){
+                Order::where('id',$order->id)->update([
+                    'total_price' => $orderTotal
+                ]);
+            }
         }
-        return true;
+        Mail::send('emails.order-invoice', [
+            'data' => $request->all(),
+            'code'=>$code,
+            'date'=>Str::limit($order->created_at, 11,''),
+            'total' => $orderTotal,
+            'products' => $products
+        ], function ($m) use ($request) {
+            $m->from('noreply@luxy-style.com', config('app.name'));
+            $m->to($request->email, $request->lname)->subject('Order invoice');
+        });
+        return [
+            'code' => $code,
+            'date' => Str::limit($order->created_at, 11,'')
+        ];
     }
 }

@@ -3,7 +3,7 @@
         <MainHeader/>
         <div class="product-panel text-primary">
             <div class="row m-0 h-100">
-                <div class="col-12 col-md-8 h-100 px-3 py-2 showcast">
+                <div class="col-12 col-md-8 h-100 bg-white px-3 py-2 showcast">
                     <div class="product-path">
                         <router-link to="/">Home</router-link> / <router-link to="/shop">Shop</router-link> / <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link> / <strong>{{ product.title }}</strong>
                     </div>
@@ -20,16 +20,16 @@
                             </div>
                     </div>
                     <div class="details">
-                        <div class="category text-light small">
+                        <div class="category text-dark small">
                         <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link>
                         </div>
-                        <div class="title">
+                        <div class="title text-info">
                             <h1><strong>{{ product.title }}</strong></h1>
                         </div>
-                        <div class="price display-4"><strong>${{ product.price }}</strong></div>
+                        <div class="price text-danger h1"><strong>${{ product.price }}</strong></div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 px-5 py-3 infos text-primary">
+                <div class="col-12 col-md-4 px-5 py-3 infos text-info">
                     <div class="description">
                         <div><span>Description: </span></div>
                         <p class="small my-3 mb-5 text-light">{{ product.description }}</p>
@@ -51,7 +51,7 @@
                             </a>
                         </div>
                         <div class="buy-now">
-                            <a class="btn btn-warning shadow rounded-pill btn-lg px-5 text-dark mx-3"  @click="buyNow">BUY NOW</a>
+                            <a class="btn btn-info shadow rounded-pill btn-lg px-5 text-dark mx-3"  @click="buyNow">BUY NOW</a>
                         </div>
                         <div class="stock">
                             <span :class="'h4 text-'+product.stockClass">{{ product.stock }}</span> in stock
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-full-description bg-DARK text-primary py-5">
+        <div class="product-full-description bg-DARK text-info py-5">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -70,11 +70,11 @@
                 </div>
             </div>
         </div>
-        <div class="related-products bg-black py-5 text-center text-primary">
+        <div class="related-products border-info py-3 text-center border-top pt-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div><h2 class="mb-5"><i><strong>Similar</strong></i> <span class="text-primary">Products</span></h2></div>
+                        <div class="mb-5  display-4 text-white">Similar <span class="text-info">Products</span></div>
                         <div class="similar-products-grid text-dark">
                             <productItem v-for="(product,index) in similarProducts"  :key="index" :product=product />
                         </div>
@@ -141,7 +141,7 @@ a{
     width: 5px;
     border-radius: 5px;
     height: 20px;
-    background-color: var(--bs-primary);
+    background-color: var(--bs-info);
     margin-block: 5px;
     opacity: .2;
     transition: .3s;
@@ -156,8 +156,8 @@ a{
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: var(--bs-primary);
-    color: #0a0a0a;
+    background-color: var(--bs-info);
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,8 +168,8 @@ a{
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: var(--bs-primary);
-    color: #0a0a0a;
+    background-color: var(--bs-info);
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,8 +180,9 @@ a{
     box-shadow: none;
 }
 .next:hover,.prev:hover{
-    background-color: var(--bs-primary);
+    background-color: var(--bs-info);
     color:#ffffff;
+    opacity: .6;
 }
 hr{
     opacity: .5;
@@ -192,7 +193,6 @@ font-family: Raleway;
 font-weight: normal;
 font-size: 48px;
 text-align: left;
-color: #fbc403;
 text-transform: uppercase;
 }
 .actions{

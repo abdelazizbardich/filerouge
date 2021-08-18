@@ -3,14 +3,14 @@
         <div class="container">
             <div class="row ">
                 <div class="col-auto m-auto my-5">
-                    <span class="h3 text-light display-6">Our latested <span class="text-primary">products</span></span>
+                    <span class="h3 text-light display-6">Our latested <span class="text-info">products</span></span>
                 </div>
             </div>
         </div>
         <div class="container my-5">
             <div class="row ">
                 <div class="col">
-                    <div class="products masonry text-§">
+                    <div class="products masonry">
                         <productItem v-for="(product,index) in products" :product=product :key="index"/>
                     </div>
                 </div>
@@ -19,25 +19,19 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 text-center">
-                    <a @click="moreProducts()" class="btn btn-primary btn-lg px-5 rounded-pill mx-auto">View more</a>
+                    <a @click="moreProducts()" class="btn btn-info btn-lg px-5 rounded-pill mx-auto">View more</a>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <style lang="css" scoped>
-.main-mansory{
-    background-image: url('/img/separator.png');
-    background-position: top center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: var(--bs-dark);
-}
+
 .masonry {
    display: grid;
    grid-template-columns: repeat(3,1fr);
    grid-gap: 32px;
-   justify-items: center;
+    justify-items: stretch;
 }
 @media screen and (max-width:800px) {
     .masonry {

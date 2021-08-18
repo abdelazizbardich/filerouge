@@ -44,7 +44,7 @@ Route::prefix('category')->group(function () {
 });
 
 
-Route::post('/cart/checkout', [App\Http\Controllers\CartController::class,'checkout'])->middleware('apiToken');
+Route::post('/cart/checkout', [App\Http\Controllers\CartController::class,'checkout']);
 
 Route::post('/contact', [App\Http\Controllers\siteController::class,'contact']);
 

@@ -22,6 +22,7 @@ class orderController extends Controller
         $data = [
             'orders' => $orders
         ];
+        // dd($data);
         return view('dashboard.order.all',$data);
     }
 

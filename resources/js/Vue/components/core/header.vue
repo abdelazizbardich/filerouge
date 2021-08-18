@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="main-header text-primary">
+    <div class="main-header border-bottom border-info bg-dark text-info">
         <div class="screen-loader"></div>
         <div class="container header">
             <div class="row">
@@ -19,9 +19,9 @@
                                 <router-link class="nav-link" :to="'/shop'">Shop</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="'/cart'" class="cart nav-link text-primary">
+                                <router-link :to="'/cart'" class="cart nav-link">
                                     <i class="fas fa-shopping-bag"></i>
-                                    <span class="count">{{ cartCount }}</span>
+                                    <span class="count">{{ getTotalCart }}</span>
                                 </router-link>
                             </li>
                             </ul>
@@ -41,9 +41,9 @@
                 <router-link class="nav-link" :to="'/shop'">Shop</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="'/cart'" class="cart nav-link text-primary">
+                <router-link :to="'/cart'" class="cart nav-link">
                     <i class="fas fa-shopping-bag"></i>
-                    <span class="count">{{ cartCount }}</span>
+                    <span class="count">{{ getTotalCart }}</span>
                 </router-link>
             </li>
         </ul>
@@ -55,33 +55,11 @@
 header{
     height: 80px;
 }
-.main-header{
-    background-color: var(--bs-dark);
-}
-.main-header:after{
-    content: '';
-    background-image: url('/img/separator.png');
-    background-position: top center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 250px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    transform: translateY(100%) ;
-}
 .header a {
     color:  inherit;
 }
 .logo img{
     width: 60px;
-}
-li.active .nav-link{
-    opacity: .5;
-    color: var(--bs-primary);
 }
 .nav-link{
     padding-inline: 16px !important;
@@ -89,7 +67,6 @@ li.active .nav-link{
     font-family: Raleway;
     font-weight: normal;
     text-align: left;
-    color: #fff;
     opacity: 0.77;
 }
 .main-header{
@@ -104,10 +81,8 @@ li.active .nav-link{
     right: 0;
     bottom: 0;
     z-index: 99;
-    background-color: rgba(0, 0, 0, 0.281);
 }
  button.navbar-toggler i {
-    color: var(--bs-primary);
     font-size: 2rem;
 }
 .mobile-nav{
@@ -116,12 +91,10 @@ li.active .nav-link{
     top: 0px;
     width: 100%;
     height: 100%;
-    background-color: #000000;
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--bs-primary);
 }
 .mobile-nav ul{
     list-style: none;
@@ -136,19 +109,19 @@ li.active .nav-link{
     height: 25px;
     border-radius: 25px;
     border:none;
-    background-color: var(--bs-primary);
-    color: #000000;
     position: fixed;
     right: 8px;
     top: 8px;
 }
 </style>
 <script>
+import {mapGetters} from 'vuex'
 export default {
     computed:{
         cartCount(){
             return this.$store.state.cartCount
-        }
+        },
+        ...mapGetters(['getTotalCart'])
     },
     data:()=>{
         return {

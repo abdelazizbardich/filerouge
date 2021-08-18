@@ -80,7 +80,7 @@ class productController extends Controller
             'price' => $request->input('price'),
             'description' => $request->input('description'),
             'dimentions' => json_encode($dimentions),
-            'good_to_know' => $request->input('goodtoknwo'),
+            'good_to_know' => $request->input('goodtoknow'),
             'stock' => $request->input('stock'),
             'in_slide' => ($request->input('inslider') == "on")? true : false,
             'in_slide' => ($request->input('in_slide') == "on")? true : false,
@@ -104,6 +104,12 @@ class productController extends Controller
         Product::where('id',$product->id)->update([
             'thumbnail' => $Thumbnail->path
         ]);
+        foreach($request->input('materials') as $mat){
+            product_has_material::create([
+                'products_id' => $product->id,
+                'materials_id' => $mat
+            ]);
+        }
         if($request->file('gallery') !== null){
             foreach($request->file('gallery') as $gallery){
                 $gallery = $gallery->store('gallerys','public');
