@@ -5,9 +5,9 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Models\Category;
-use App\Models\Material;
-use App\Models\Product;
-use App\Models\Media;
+use App\Models\material;
+use App\Models\product;
+use App\Models\media;
 use App\Models\products_has_media;
 use App\Models\product_has_material;
 
@@ -18,7 +18,7 @@ class productController extends Controller
 {
     public function index(){
         $data = [
-            "products" => Product::with(['medias','categories','materials'])->orderBy('id','DESC')->get(),
+            "products" => product::with(['medias','categories','materials'])->orderBy('id','DESC')->get(),
             "active" => 0
         ];
         // dd($data);
@@ -26,7 +26,7 @@ class productController extends Controller
     }
     public function getByCategory($id){
         $data = [
-            "products" => Product::where('categories_id',$id)->orderBy('id','DESC')->get(),
+            "products" => product::where('categories_id',$id)->orderBy('id','DESC')->get(),
             "categories" => Category::orderBy('id','DESC')->get(),
             "active" => $id
         ];
@@ -35,15 +35,15 @@ class productController extends Controller
     public function add(){
         $data = [
             "categories" => Category::orderBy('id','DESC')->get(),
-            'materials' => Material::orderBy('id','DESC')->get()
+            'materials' => material::orderBy('id','DESC')->get()
         ];
         return view("dashboard.product.add",$data);
     }
     public function edit($id){
         $data = [
-            "product" => Product::with(['materials','medias'])->where('id',$id)->first(),
+            "product" => product::with(['materials','medias'])->where('id',$id)->first(),
             "categories" => Category::orderBy('id','DESC')->get(),
-            'materials' => Material::orderBy('id','DESC')->get()
+            'materials' => material::orderBy('id','DESC')->get()
         ];
         // dd($data);
         return view("dashboard.product.edit",$data);
@@ -74,7 +74,7 @@ class productController extends Controller
             "h" => $request->input('height'),
             "d" => $request->input('depth')
         ];
-        $product = Product::create([
+        $product = product::create([
             'categories_id' => $request->input('category'),
             'name' => $request->input('title'),
             'price' => $request->input('price'),
@@ -92,7 +92,7 @@ class productController extends Controller
 
         $thumbnail = $request->file('thumbnail')->store('thumbnail','public');
         if(!$thumbnail) return redirect()->back()->withErrors($validator)->withInput();
-        $Thumbnail = Media::create([
+        $Thumbnail = media::create([
             'path' => $thumbnail,
             'alt' => $request->input('title')
         ]);
@@ -101,7 +101,7 @@ class productController extends Controller
             'medias_id' => $Thumbnail->id,
             'type' => 'thumbnail'
         ]);
-        Product::where('id',$product->id)->update([
+        product::where('id',$product->id)->update([
             'thumbnail' => $Thumbnail->path
         ]);
         foreach($request->input('materials') as $mat){
@@ -114,7 +114,7 @@ class productController extends Controller
             foreach($request->file('gallery') as $gallery){
                 $gallery = $gallery->store('gallerys','public');
                 if(!$gallery) return redirect()->back()->withErrors($validator)->withInput();
-                $gallery = Media::create([
+                $gallery = media::create([
                     'path' => $gallery,
                     'alt' => $request->input('title')
                 ]);
@@ -153,7 +153,7 @@ class productController extends Controller
             "h" => $request->input('height'),
             "d" => $request->input('depth')
         ];
-        $product = Product::where('id',$id)->update([
+        $product = product::where('id',$id)->update([
             'categories_id' => $request->input('category'),
             'name' => $request->input('title'),
             'price' => $request->input('price'),
@@ -172,7 +172,7 @@ class productController extends Controller
         if($request->file('thumbnail') !== null){
             $thumbnail = $request->file('thumbnail')->store('thumbnail','public');
             if(!$thumbnail) return redirect()->back()->withErrors($validator)->withInput();
-            Product::where('id',$id)->update([
+            product::where('id',$id)->update([
                 'thumbnail' => $thumbnail
             ]);
         }
@@ -192,13 +192,13 @@ class productController extends Controller
             if($likedMedias){
                 products_has_media::where('products_id',$id)->delete();
                 foreach($likedMedias as $media){
-                    Media::where('id',$media->medias_id)->delete();
+                    media::where('id',$media->medias_id)->delete();
                 }
             }
             foreach($request->file('gallery') as $gallery){
                 $gallery = $gallery->store('gallerys','public');
                 if(!$gallery) return redirect()->back()->withErrors($validator)->withInput();
-                $gallery = Media::create([
+                $gallery = media::create([
                     'path' => $gallery,
                     'alt' => $request->input('title')
                 ]);
@@ -215,10 +215,10 @@ class productController extends Controller
         $linkedMedias = products_has_media::where('products_id',$id)->get();
         products_has_media::where('products_id',$id)->delete();
         foreach($linkedMedias as $media){
-            Media::where('id',$media->medias_id)->delete();
+            media::where('id',$media->medias_id)->delete();
         }
         product_has_material::where('products_id',$id)->delete();
-        Product::where('id',$id)->delete();
+        product::where('id',$id)->delete();
         return redirect('/dashboard/product');
     }
 }
