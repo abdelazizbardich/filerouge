@@ -4,7 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Material;
+use App\Models\material;
 
 class materialController extends Controller
 {
