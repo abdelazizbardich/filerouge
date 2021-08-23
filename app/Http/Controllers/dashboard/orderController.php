@@ -12,7 +12,7 @@ class orderController extends Controller
     //
 
     public function index(){
-        $orders = Order::with(['user','shipping_adress','product'])->orderBy('id','DESC')->get();
+        $orders = order::with(['user','shipping_adress','product'])->orderBy('id','DESC')->get();
         foreach($orders as $okey => $order){
             $orders[$okey]->price = 0;
             foreach($order->product as $product){
@@ -29,18 +29,18 @@ class orderController extends Controller
 
     public function delete($id){
         $order = orders_has_product::where('orders_id',$id)->delete();
-        $order = Order::destroy($id);
+        $order = order::destroy($id);
         return redirect('/dashboard/order');
     }
 
     public function setFinished($id){
-        Order::where('id',$id)->update([
+        order::where('id',$id)->update([
             "state" => 2
         ]);
         return redirect('/dashboard/order');
     }
     public function approve($id){
-        Order::where('id',$id)->update([
+        order::where('id',$id)->update([
             "state" => 1
         ]);
         return redirect('/dashboard/order');
