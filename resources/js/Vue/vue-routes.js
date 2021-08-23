@@ -9,7 +9,7 @@ import contact from './components/pages/contact.vue'
 // Authentification
 import AuthMiddleware from './middlewares/auth';
 const routes = [
-    {path : '/',component : home, beforeEnter: (to, from, next) => {AuthMiddleware({to,from,next})}},
+    {path : '/',component : home},
     {path : '/shop',component : shop},
     {path : '/product/:id',component : product,  props: true},
     {path : '/cart',component : cart},
