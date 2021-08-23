@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\Order;
-use App\Models\User;
+use App\Models\order;
+use App\Models\user;
 use App\Models\shipping_adress;
 use App\Models\orders_has_product;
-use App\Models\Product;
+use App\Models\product;
 use Mail;
 use Str;
 
@@ -54,12 +54,12 @@ class CartController extends Controller
             'zip_code' => $request->input('zip_code')
         ]);
         if($shippingAdress)
-        $order = Order::create([
+        $order = order::create([
             'users_id' => $user->id,
             'shipping_adresses_id' => $shippingAdress->id,
         ]);
         $code = rand(111,999).$order->id;
-        Order::where('id',$order->id)->update([
+        order::where('id',$order->id)->update([
             'code' => $code
         ]);
         if($order){
@@ -74,7 +74,7 @@ class CartController extends Controller
                     'qte' => $product->count
                 ]);
                 if(!$order){return false;}
-                $newProduct = Product::find($product->productId);
+                $newProduct = product::find($product->productId);
                 $newProduct->stock -= $product->count;
                 $newProduct->save();
                 $totalPrice += ($newProduct->price * $product->count);
@@ -86,7 +86,7 @@ class CartController extends Controller
                 $orderTotal += $totalPrice;
             }
             if($totalPrice > 0){
-                Order::where('id',$order->id)->update([
+                order::where('id',$order->id)->update([
                     'total_price' => $orderTotal
                 ]);
             }

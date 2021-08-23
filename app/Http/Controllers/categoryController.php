@@ -16,7 +16,7 @@ class categoryController extends Controller
         if($validator->fails()){
             return $validator->errors();
         }
-        return Category::create([
+        return category::create([
             "name" => $request->input('name')
         ]);
     }

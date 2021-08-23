@@ -10,7 +10,7 @@ class productController extends Controller
 
 
     public function find($id){
-        return Product::with(['categories','materials','medias'])->find($id);
+        return product::with(['categories','materials','medias'])->find($id);
     }
 
 
@@ -31,7 +31,7 @@ class productController extends Controller
         if ($validator->fails()) {
            return $validator->errors();
         }
-        $product = Product::create([
+        $product = product::create([
             'categories_id' => $request->input('categories_id'),
             'name' => $request->input('name'),
             'price' => $request->input('price'),
@@ -46,11 +46,11 @@ class productController extends Controller
     }
 
     public function get(){
-        return Product::with(['categories','medias'])->orderBy('id','DESC')->paginate(12);
+        return product::with(['categories','medias'])->orderBy('id','DESC')->paginate(12);
     }
 
     public function getSlide(){
-        return Product::where('in_slider',1)->with(['categories','medias'])->orderBy('id','DESC')->get();
+        return product::where('in_slider',1)->with(['categories','medias'])->orderBy('id','DESC')->get();
     }
 
     public function update($id,Request $request){
@@ -68,7 +68,7 @@ class productController extends Controller
         if ($validator->fails()) {
            return $validator->errors();
         }
-        $product = Product::where('id',$id)->update([
+        $product = product::where('id',$id)->update([
             'categories_id' => $request->input('categories_id'),
             'name' => $request->input('name'),
             'price' => $request->input('price'),
@@ -82,10 +82,10 @@ class productController extends Controller
     }
 
     public function delete($id){
-        return Product::where('id',$id)->delete();
+        return product::where('id',$id)->delete();
     }
 
     public function getByCategroy($id,$limit){
-        return Product::where('categories_id',$id)->limit($limit)->orderBy('id','DESC')->get();
+        return product::where('categories_id',$id)->limit($limit)->orderBy('id','DESC')->get();
     }
 }

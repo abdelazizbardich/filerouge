@@ -4,7 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use Validator;
-use App\Models\Category;
+use App\Models\category;
 use App\Models\material;
 use App\Models\product;
 use App\Models\media;
@@ -27,14 +27,14 @@ class productController extends Controller
     public function getByCategory($id){
         $data = [
             "products" => product::where('categories_id',$id)->orderBy('id','DESC')->get(),
-            "categories" => Category::orderBy('id','DESC')->get(),
+            "categories" => category::orderBy('id','DESC')->get(),
             "active" => $id
         ];
         return view("dashboard.product.all",$data);
     }
     public function add(){
         $data = [
-            "categories" => Category::orderBy('id','DESC')->get(),
+            "categories" => category::orderBy('id','DESC')->get(),
             'materials' => material::orderBy('id','DESC')->get()
         ];
         return view("dashboard.product.add",$data);
@@ -42,7 +42,7 @@ class productController extends Controller
     public function edit($id){
         $data = [
             "product" => product::with(['materials','medias'])->where('id',$id)->first(),
-            "categories" => Category::orderBy('id','DESC')->get(),
+            "categories" => category::orderBy('id','DESC')->get(),
             'materials' => material::orderBy('id','DESC')->get()
         ];
         // dd($data);

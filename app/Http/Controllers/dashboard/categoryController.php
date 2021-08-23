@@ -4,7 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\category;
 
 class categoryController extends Controller
 {
@@ -12,7 +12,7 @@ class categoryController extends Controller
 
     public function index(){
         $data = [
-            'categories' => Category::orderBy('id','DESC')->get()
+            'categories' => category::orderBy('id','DESC')->get()
         ];
         return view('dashboard.category.all',$data);
     }
@@ -21,7 +21,7 @@ class categoryController extends Controller
         $validator = $request->validate([
             'name' => 'required|string|max:50'
         ]);
-        $category = Category::create([
+        $category = category::create([
             'name' => $request->input('name')
         ]);
         if($category){
@@ -41,7 +41,7 @@ class categoryController extends Controller
 
     public  function getUpdate($id){
         $data = [
-            'category' => Category::find($id)
+            'category' => category::find($id)
         ];
         return view('dashboard.category.update',$data);
     }
@@ -51,7 +51,7 @@ class categoryController extends Controller
             'name' => 'required|max:50|string',
         ]);
 
-        $category = Category::where('id',$id)->update([
+        $category = category::where('id',$id)->update([
             'name' => $request->input('name')
         ]);
         if($category){
