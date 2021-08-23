@@ -245,7 +245,7 @@ export default {
             );
         },
         getProducts(){
-            axios.get('http://127.0.0.1:8000/api/product/inslide')
+            axios.get('https://alpha.luxy-style.com/api/product/inslide')
                 .then(response => {
                     this.products = response.data
             })

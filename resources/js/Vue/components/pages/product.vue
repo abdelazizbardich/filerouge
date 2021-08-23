@@ -340,7 +340,7 @@ export default {
             document.querySelector('.cart-btn').style.opacity = 1
         },
         setProductData(id = this.id){
-            axios.get('http://127.0.0.1:8000/api/product/'+id).then((response)=>{
+            axios.get('https://alpha.luxy-style.com/api/product/'+id).then((response)=>{
                 if(response.status == 200){
                     this.key++
                     this.product.inCart = false
@@ -373,7 +373,7 @@ export default {
             }, 5000);
         },
         setSimilarProducts(){
-            axios.get('http://127.0.0.1:8000/api/product/catergoy/'+this.product.categoryId+'/3').then(response=>{
+            axios.get('https://alpha.luxy-style.com/api/product/catergoy/'+this.product.categoryId+'/3').then(response=>{
                 this.similarProducts = response.data
             })
         }

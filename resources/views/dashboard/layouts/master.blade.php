@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - Luxy-style</title>
     <meta name="theme-color" content="#4565d2">
-    <meta name="twitter:image" content="http://127.0.0.1:8000/{{  asset('assets/img/dashboard/logo gold.png')  }}">
+    <meta name="twitter:image" content="https://alpha.luxy-style.com/{{  asset('assets/img/dashboard/logo gold.png')  }}">
     <meta property="og:type" content="website">
     <meta name="description" content="E-commerce cache-on-delivery website">
-    <meta property="og:image" content="http://127.0.0.1:8000/{{  asset('assets/img/dashboard/logo gold.png')  }}">
+    <meta property="og:image" content="https://alpha.luxy-style.com/{{  asset('assets/img/dashboard/logo gold.png')  }}">
     <link rel="icon" type="image/png" sizes="182x170" href="{{  asset('assets/img/dashboard/logo%20gold.png')  }}">
     <link rel="icon" type="image/png" sizes="182x170" href="{{  asset('assets/img/dashboard/logo%20gold.png')  }}">
     <link rel="icon" type="image/png" sizes="182x170" href="{{  asset('assets/img/dashboard/logo%20gold.png')  }}">

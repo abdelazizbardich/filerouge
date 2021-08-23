@@ -115,13 +115,13 @@ export const store = new Vuex.Store({
     },
     actions:{
         getProducts({commit}){
-            axios.get('http://127.0.0.1:8000/api/product/')
+            axios.get('https://alpha.luxy-style.com/api/product/')
                 .then(response => {
                     commit('SET_PRODUCTS', response.data.data)
             })
         },
         getToken({commit}){
-            axios.get('http://127.0.0.1:8000/api/token/').then(response=>{
+            axios.get('https://alpha.luxy-style.com/api/token/').then(response=>{
                 console.log(response);
                 commit('SET_TOKEN', response.data.token)
             })

@@ -69,7 +69,7 @@ export default {
     methods:{
         moreProducts(){
             this.currentPage++
-            axios.get('http://127.0.0.1:8000/api/product?page='+this.currentPage)
+            axios.get('https://alpha.luxy-style.com/api/product?page='+this.currentPage)
             .then(response => {
                 response.data.data.forEach(element => {
                    this.products.push(element);

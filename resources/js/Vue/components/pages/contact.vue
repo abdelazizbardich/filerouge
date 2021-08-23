@@ -98,7 +98,7 @@ export default {
         sendMessage(){
             alert('sdfsdf')
             if(this.validate()){
-                axios.post('http://127.0.0.1:8000/api/contact',{
+                axios.post('https://alpha.luxy-style.com/api/contact',{
                     "name" : this.name,
                     "email" : this.email,
                     "subject" : this.subject,

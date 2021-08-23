@@ -61,7 +61,7 @@ export default {
     created(){
         if(this.getCart())
         this.getCart().forEach(pCart => {
-            axios.get('http://127.0.0.1:8000/api/product/'+pCart.productId).then(response=>{
+            axios.get('https://alpha.luxy-style.com/api/product/'+pCart.productId).then(response=>{
                 response.data.count = pCart.count
                 this.cartData.push(response.data)
             })

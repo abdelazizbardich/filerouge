@@ -24,7 +24,7 @@ export default {
         }
     },
     created(){
-        axios.get('http://127.0.0.1:8000/api/product/')
+        axios.get('https://alpha.luxy-style.com/api/product/')
             .then(response => {
                 this.products = response.data.data
         })

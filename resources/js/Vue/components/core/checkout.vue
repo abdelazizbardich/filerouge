@@ -160,7 +160,7 @@ export default {
                 return false;
             }
             let token = document.head.querySelector('meta[name="csrf-token"]');
-            axios.post('http://127.0.0.1:8000/api/cart/checkout',{
+            axios.post('https://alpha.luxy-style.com/api/cart/checkout',{
                 'firstName' : this.firstName,
                 'lastName' : this.lastName,
                 'phone' : this.phone,
