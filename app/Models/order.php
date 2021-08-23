@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\user;
+use App\Models\User;
 use App\Models\shipping_adress;
 
 class order extends Model
