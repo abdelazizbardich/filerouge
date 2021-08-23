@@ -4,7 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\User;
 use App\Models\Admin;
 use Hash;
 
@@ -20,7 +20,7 @@ class userController extends Controller
     }
 
     public function suspend($id){
-        $user = user::where('id',$id)->update([
+        $user = User::where('id',$id)->update([
             'state' => 0
         ]);
         if($user){
@@ -30,7 +30,7 @@ class userController extends Controller
         }
     }
     public function activate($id){
-        $user = user::where('id',$id)->update([
+        $user = User::where('id',$id)->update([
             'state' => 1
         ]);
         if($user){
