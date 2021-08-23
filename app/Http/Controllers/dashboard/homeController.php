@@ -23,7 +23,7 @@ class homeController extends Controller
     }
 
     private function getTotalProducts(){
-        return Product::count();
+        return product::count();
     }
 
     private function getTotalOrders(){
