@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('shipping_adresses_id');
             $table->string('code', 100)->nullable()->default('000000');
-            $table->smallInteger('state')->nullable()->default(12)->comment("0: panding, 1: approved, 2: finised");;
+            $table->smallInteger('state')->nullable()->default(0)->comment("0: panding, 1: approved, 2: finised");;
             $table->decimal('total_price', 11, 2)->nullable()->default(0.00);
             $table->timestamps();
 
