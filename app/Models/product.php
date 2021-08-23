@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use  App\Models\media;
-use  App\Models\Material;
+use  App\Models\material;
 
 class product extends Model
 {
@@ -32,7 +32,7 @@ class product extends Model
     }
 
     public function materials(){
-        return $this->belongsToMany(Material::class, 'products_has_materials', 'products_id', 'materials_id');
+        return $this->belongsToMany(material::class, 'products_has_materials', 'products_id', 'materials_id');
     }
 
 
