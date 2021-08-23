@@ -22,14 +22,13 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('shipping_adresses_id');
             $table->string('code', 100)->nullable()->default('000000');
-            $table->integer('state',1)->unsigned()->nullable()->default(0)->comment("0: panding, 1: approved, 2: finised");
+            $table->integer('state',1)->unsigned()->nullable()->comment("0: panding, 1: approved, 2: finised");
             $table->decimal('total_price', 11, 2)->nullable()->default(0.00);
             $table->timestamps();
 
             $table->index(["users_id"], 'fk_orders_users1_idx');
 
             $table->index(["shipping_adresses_id"], 'fk_orders_shipping_adresses1_idx');
-
 
             $table->foreign('users_id', 'fk_orders_users1_idx')
                 ->references('id')->on('users')
