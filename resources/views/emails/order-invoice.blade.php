@@ -832,7 +832,7 @@
                             >
                               <strong
                                 ><span style="font-size: 20px"
-                                  ><span style="">{{ $date }}}</span></span
+                                  ><span style="">{{ $date }}</span></span
                                 ></strong
                               >
                             </p>
@@ -1438,24 +1438,7 @@
 							  style="outline: none"
 							  tabindex="-1"
 							  target="_blank"
-							  ><img
-								align="center"
-								alt="{{ $product['name'] }}"
-								border="0"
-								class="center fixedwidth fullwidthOnMobile"
-								src=""{{ asset('/storage').'/'.$product['img'] }}"
-								style="
-								  text-decoration: none;
-								  -ms-interpolation-mode: bicubic;
-								  height: auto;
-								  border: 0;
-								  width: 120px;
-								  max-width: 100%;
-								  display: block;
-								"
-								title="{{ $product['name'] }}"
-								width="120"
-							/></span>
+							  ><img width="120" src="{{ asset('storage').'/'.$product['img'] }}" alt=""></span>
 							<div style="font-size: 1px; line-height: 20px"> </div>
 							<!--[if mso]></td></tr></table><![endif]-->
 						  </div>
@@ -1617,7 +1600,7 @@
 									font-size: 17px;
 									mso-ansi-font-size: 18px;
 								  "
-								  >{{ $product['name'] }} - ({{ $product['unit'] }} unit)</span
+								  >{{ Str::limit($product['name'], 12, '...') }} - ({{ $product['unit'] }} unit)</span
 								>
 							  </p>
 							</div>
