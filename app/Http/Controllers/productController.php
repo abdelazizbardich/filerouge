@@ -85,7 +85,7 @@ class productController extends Controller
         return product::where('id',$id)->delete();
     }
 
-    public function getByCategroy($id,$limit){
-        return product::where('categories_id',$id)->limit($limit)->orderBy('id','DESC')->get();
+    public function getByCategroy($id,$limit,$pid){
+        return product::where('categories_id',$id)->where('id','!=',$pid)->limit($limit)->orderBy('id','DESC')->get();
     }
 }

@@ -373,7 +373,7 @@ export default {
             }, 5000);
         },
         setSimilarProducts(){
-            axios.get('https://alpha.luxy-style.com/api/product/catergoy/'+this.product.categoryId+'/3').then(response=>{
+            axios.get('https://alpha.luxy-style.com/api/product/catergoy/'+this.product.categoryId+'/3/'+this.id).then(response=>{
                 this.similarProducts = response.data
             })
         }
