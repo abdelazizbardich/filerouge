@@ -1,260 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('app.name') }}</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400&display=swap" rel="stylesheet">
+    <title>Order invoice</title>
     <style>
-        /* ---------------------------------------------
-    Assets
---------------------------------------------- */
-/* ---------------------------------------------
-    Colors
---------------------------------------------- */
-/* ---------------------------------------------
-    Fonts
---------------------------------------------- */
-/* ---------------------------------------------
-    Stylings
---------------------------------------------- */
-html, body {
-  height: 100%;
+        * {
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  padding: 0;
-  margin: 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  box-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
-  -o-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center;
-  -webkit-box-align: start;
-  -moz-box-align: start;
-  box-align: start;
-  -webkit-align-items: flex-start;
-  -moz-align-items: flex-start;
-  -ms-align-items: flex-start;
-  -o-align-items: flex-start;
-  align-items: flex-start;
-  -ms-flex-align: start;
-  background-color: #00114b;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: roboto;
+  background: rgb(0 17 75);
+  padding:16px;
 }
-@media (min-height: 580px) {
-  body {
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    box-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    -o-align-items: center;
-    align-items: center;
-    -ms-flex-align: center;
+
+
+
+.invoice-container {
+    margin: auto;
+    padding: 0px 20px;
+    background: white;
+}
+
+.invoice-header {
+    display: flex;
+    padding: 70px 0%;
+    width: 100%;
+}
+
+.title {
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: rgb(66, 66, 66);
+}
+
+.date {
+    padding: 5px 0px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: rgb(156, 156, 156);
+}
+
+.invoice-number {
+    font-size: 17px;
+    letter-spacing: 2px;
+    color: rgb(156, 156, 156);
+}
+
+
+.space {
+    width: 50%;
+}
+
+table {
+    table-layout: auto;
+    width: 100%;
+}
+table, th, td {
+    border-collapse: collapse;
   }
+
+th {
+    padding: 10px 0px;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    border-bottom-style: dashed;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: gray;
+    text-align: left;
+
 }
 
-.container {
-  width: 100%;
-  max-width: 420px;
-  padding-right: 20px;
-  padding-left: 20px;
+
+td {
+    padding: 10px 0px;
+    border-bottom: 0.5px solid rgb(226, 226, 226);
+    text-align: left;
+
+
+
 }
 
-.invoice {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.13);
-  margin: 50px 0px;
-  padding: 50px 30px 30px;
+.dashed {
+    border-bottom: 1px solid rgb(187, 187, 187);
+    border-bottom-style: dashed;
 }
-.invoice header {
-  overflow: hidden;
-  margin-bottom: 60px;
+
+.total {
+    font-weight: 800;
+    font-size: 20px !important;
+    color: black;
 }
-.invoice header section:nth-of-type(1) {
-  float: left;
+
+
+input[type=number] {
+    text-align: center ;
+    max-width: 50px;
+    font-size: 15px;
+    padding: 10px;
+    border: none;
+    outline: none;
 }
-.invoice header section:nth-of-type(1) h1 {
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #344760;
-  font-size: 25px;
-  margin-top: 0;
-  margin-bottom: 5px;
+
+input[type=text] {
+    max-width: 170px;
+    text-align: left;
+    font-size: 15px;
+    padding: 10px;
+    border: none;
+    outline: none;
 }
-.invoice header section:nth-of-type(1) span {
-  color: #b7bcc3;
-  font-size: 14px;
-  letter-spacing: 2px;
+
+input[type=text]:focus {
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow:  11px 11px 22px #d9d9d9,
+             -11px -11px 22px #ffffff;
 }
-.invoice header section:nth-of-type(2) {
-  float: right;
+
+input[type=number]:focus {
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow:  11px 11px 22px #d9d9d9,
+             -11px -11px 22px #ffffff;
 }
-.invoice header section:nth-of-type(2) span {
-  font-size: 21px;
-  color: #b7bcc3;
-  letter-spacing: 1px;
-}
-.invoice header section:nth-of-type(2) span:before {
-  content: "#";
-}
-.invoice main {
-  border: 1px dashed #b7bcc3;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.invoice main section {
-  overflow: hidden;
-}
-.invoice main section span {
-  float: left;
-  color: #344760;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-}
-.invoice main section span:nth-of-type(1) {
-  width: 45%;
-  margin-right: 5%;
-}
-.invoice main section span:nth-of-type(2) {
-  width: 22.5%;
-  margin-right: 5%;
-}
-.invoice main section span:nth-of-type(2), .invoice main section span:nth-of-type(3) {
-  text-align: right;
-}
-.invoice main section span:nth-of-type(3) {
-  width: 22.5%;
-}
-.invoice main section:nth-of-type(1) {
-  margin-bottom: 30px;
-}
-.invoice main section:nth-of-type(1) span {
-  color: #b7bcc3;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 13px;
-}
-.invoice main section:nth-of-type(2) {
-  margin-bottom: 30px;
-}
-.invoice main section:nth-of-type(2) figure {
-  overflow: hidden;
+/*Hide Arrows From Input Number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
   margin: 0;
-  margin-bottom: 20px;
-  line-height: 160%;
 }
-.invoice main section:nth-of-type(2) figure:last-of-type {
-  margin-bottom: 0px;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
-.invoice main section:nth-of-type(3) span:nth-of-type(1) {
-  width: 72.5%;
-  font-weight: bold;
+
+
+.float{
+
+    width:40px;
+    height:40px;
+    background-color:#FF1D89;
+    color:#FFF;
+    border-radius:100%;
+    text-align:center;
+    box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.048),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.069),
+  0 12.5px 10px rgba(0, 0, 0, 0.085),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.101),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.122),
+  0 100px 80px rgba(0, 0, 0, 0.17);
 }
-.invoice main section:nth-of-type(3) span:nth-of-type(2) {
-  margin-right: 0 !important;
+
+.float:hover {
+    background-color:#ff057e;
 }
-.invoice footer {
-  text-align: right;
-  margin-top: 30px;
+
+.plus{
+    margin-top:10px;
 }
-.invoice footer a {
-  font-size: 19px;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  position: relative;
-  letter-spacing: 1px;
+
+#sum {
+  margin-top:32px;
+  padding-bottom:32px;
+    text-align: right;
+    width: 100%;
+    font-size: 25px !important;
+  display:flex;
+  justify-content:space-between;
 }
-.invoice footer a:after {
-  content: "";
-  width: 0%;
-  height: 4px;
-  position: absolute;
-  right: 0;
-  bottom: -10px;
-  background-color: inherit;
-  -webkit-transition: width 0.2s ease-in-out;
-  -moz-transition: width 0.2s ease-in-out;
-  transition: width 0.2s ease-in-out;
+
+#sum span{
+    width: 100%;
+    font-size: 33px !important;
+    color: red;
+    text-align: right !important;
+
 }
-.invoice footer a:hover:after {
-  width: 100%;
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    body {
+      background: rgb(0 17 75);
+    }
+    .invoice-container {
+        border: solid 1px gray;
+        width: 60%;
+        margin: 50px auto;
+        padding: 40px;
+        padding-bottom: 100px;
+        border-radius: 5px;
+        background: white;
+        box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+  0 12.5px 10px rgba(0, 0, 0, 0.035),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+  0 100px 80px rgba(0, 0, 0, 0.07);
+    }
+
+    .title-date {
+        width: 20%;
+    }
+    .invoice-number {
+        width: 20%;
+    }
+    .space {
+        width: 80%;
+    }
+
 }
-.invoice footer a:nth-of-type(1) {
-  color: #b7bcc3;
-  margin-right: 30px;
-}
-.invoice footer a:nth-of-type(1):after {
-  background-color: #b7bcc3;
-}
-.invoice footer a:nth-of-type(2) {
-  color: #00114b;
-}
-.invoice footer a:nth-of-type(2):after {
-  background-color: #00114b;
-}
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="invoice">
-          <header>
-            <section>
-              <h1>Invoice</h1>
-              <span>{{ $date }}</span>
-            </section>
-
-            <section>
-              <span>{{ $code }}</span>
-            </section>
-          </header>
-
-          <main>
-            <section>
-              <span>Product</span>
-              <span>Unit</span>
-              <span>Price</span>
-            </section>
-
-            <section>
-              @foreach ($products as $product)
-                <figure>
-                    <span><strong title="{{ $product['name'] }}"><img width="35" src="{{ asset('storage').'/'.$product['img'] }}" alt="">  {{ Str::limit($product['name'], 12, '...') }}</strong></span>
-                    <span>{{ $product['unit'] }}</span>
-                    <span>{{ $product['price'] }}$</span>
-                </figure>
-              @endforeach
-
-            </section>
-            <hr>
-            <section>
-              <span>Total</span>
-              <span>{{ $total }}$</span>
-            </section>
-          </main>
-
-          <footer>
-            <a href="http://127.0.0.1:8000/">Luxy-stle.com</a>
-          </footer>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <div class="title-date">
+                <h2 class="title">INVOICE</h2>
+                <p class="date">{{ $date }}</p>
+            </div>
+            <div class="space"></div>
+            <p class="invoice-number">#{{ $code }}</p>
         </div>
-      </div>
+        <div class="invoice-body">
+            <table>
+                <thead>
+                    <th style="padding-left:12px;">PRODUCT</th>
+                    <th>UNIT</th>
+                    <th>PRICE</th>
+                </thead>
+
+                <tbody id="table-body">
+                <tr class="single-row">
+                    @foreach ($products as $product)
+                        <td><span class="product left" title="{{ $product['name'] }}"><img width="35" src="{{ asset('storage').'/'.$product['img'] }}" alt="">  {{ Str::limit($product['name'], 12, '...') }}</span></td>
+                        <td><span class="unit" id="unit">{{ $product['unit'] }}</span></td>
+                        <td><span class="price" id="price">{{ $product['price'] }}$</span></td>
+                    @endforeach
+                </tr>
+            </tbody>
+            </table>
+            <div id="sum">Total: <span class="total" id="total">{{ $total }}</span></div>
+
+        </div>
+    </div>
 </body>
-</html>
