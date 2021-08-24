@@ -1434,11 +1434,7 @@
 						  >
 							<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 20px;padding-left: 20px;" align="center"><![endif]-->
 							<div style="font-size: 1px; line-height: 20px"> </div>
-							<span
-							  style="outline: none"
-							  tabindex="-1"
-							  target="_blank"
-							  ><img width="120" src="{{ asset('storage').'/'.$product['img'] }}" alt=""></span>
+							<img width="120" src="{{ asset('storage').'/'.$product['img'] }}" alt="">
 							<div style="font-size: 1px; line-height: 20px"> </div>
 							<!--[if mso]></td></tr></table><![endif]-->
 						  </div>
