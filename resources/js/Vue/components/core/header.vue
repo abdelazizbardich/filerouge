@@ -34,14 +34,14 @@
     <div class="mobile-nav" v-if="MobileNav">
     <button class="close-monu" @click="showMobileNav()"><i class="fas fa-times"></i></button>
         <ul>
-            <li class="nav-item active">
-                <router-link class="nav-link" :to="'/'">Home</router-link>
+            <li class="nav-item active" @click="showMobileNav()" >
+                <router-link class="nav-link"  :to="'/'">Home</router-link>
             </li>
-            <li class="nav-item">
-                <router-link class="nav-link" :to="'/shop'">Shop</router-link>
+            <li class="nav-item" @click="showMobileNav()" >
+                <router-link class="nav-link"  :to="'/shop'">Shop</router-link>
             </li>
-            <li class="nav-item">
-                <router-link :to="'/cart'" class="cart nav-link">
+            <li class="nav-item" @click="showMobileNav()" >
+                <router-link :to="'/cart'"  class="cart nav-link">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="count">{{ getTotalCart }}</span>
                 </router-link>
@@ -76,6 +76,7 @@ header{
 }
  button.navbar-toggler i {
     font-size: 2rem;
+    color: #ffffff;
 }
 .mobile-nav{
     position: fixed;
@@ -87,6 +88,8 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #00114b;
+    color: #ffffff;
 }
 .mobile-nav ul{
     list-style: none;
@@ -95,6 +98,9 @@ header{
 .mobile-nav ul li{
     padding: 16px;
     font-size: 1.4rem;
+}
+.mobile-nav ul li a{
+    color: inherit;
 }
 .close-monu{
     width: 25px;
