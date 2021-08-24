@@ -31,6 +31,9 @@ a{
     text-decoration: none;
     color: inherit;
 }
+.productItem{
+    position: relative;
+}
 .productItem img{max-width:100%;
     transition: .3s;}
 .productItem:hover{
