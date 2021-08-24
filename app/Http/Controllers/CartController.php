@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\order;
-use App\Models\user;
+use App\Models\User;
 use App\Models\shipping_adress;
 use App\Models\orders_has_product;
 use App\Models\product;
