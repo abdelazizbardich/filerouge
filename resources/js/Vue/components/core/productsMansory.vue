@@ -70,7 +70,7 @@ export default {
         moreProducts(){
             this.currentPage++
             this.$store.dispatch('showLoader')
-            axios.get('https://alpha.luxy-style.com/api/product?page='+this.currentPage)
+            axios.get(this.$store.state.apiUrl+'/product?page='+this.currentPage)
             .then(response => {
                 this.$store.dispatch('hideLoader')
                 response.data.data.forEach(element => {

@@ -7,16 +7,19 @@ import VueRouter from 'vue-router'
 // 2. Importation de vue-routes
 import routes from './vue-routes'
 
+// Vue Query (reqponsive ui for vue)
+import VueMq from 'vue-mq'
+
 import {store} from './store'
 
 // Importation des components
 import App from './app.vue'
 
-import Authentificate from './middlewares/auth'
 
 
 Vue.use(VueRouter)
-
+Vue.use(VueMq, {
+    breakpoints: {mobile: 450,tablet: 900,laptop: 1250,desktop: Infinity}})
 const router = new VueRouter({
     mode: 'history',
     routes

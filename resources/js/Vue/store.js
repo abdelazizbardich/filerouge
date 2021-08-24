@@ -12,7 +12,10 @@ export const store = new Vuex.Store({
         toatalCart:0,
         cartProducts:[],
         token:'',
-        loading:false
+        loading:false,
+        // make sure to ommit the / from the end of url
+        // apiUrl:'https://alpha.luxy-style.com/api'
+        apiUrl:'http://127.0.0.1:8000/api'
     },
     getters: {
         getProducts: state => {
@@ -121,17 +124,17 @@ export const store = new Vuex.Store({
         }
     },
     actions:{
-        getProducts({commit}){
+        getProducts({commit,state}){
             commit('SHOW_LOADER')
-            axios.get('https://alpha.luxy-style.com/api/product/')
+            axios.get(state.apiUrl+'/product/')
                 .then(response => {
                     commit('HIDE_LOADER')
                     commit('SET_PRODUCTS', response.data.data)
             })
         },
-        getToken({commit}){
+        getToken({commit,state}){
             commit('SHOW_LOADER')
-            axios.get('https://alpha.luxy-style.com/api/token/').then(response=>{
+            axios.get(state.apiUrl+'/token/').then(response=>{
                 commit('HIDE_LOADER')
                 commit('SET_TOKEN', response.data.token)
             })

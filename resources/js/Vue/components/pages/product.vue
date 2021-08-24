@@ -341,7 +341,7 @@ export default {
         },
         setProductData(id = this.id){
             this.$store.dispatch('showLoader')
-            axios.get('https://alpha.luxy-style.com/api/product/'+id).then((response)=>{
+            axios.get(this.$store.state.apiUrl+'/product/'+id).then((response)=>{
                 if(response.status == 200){
                     this.$store.dispatch('hideLoader')
                     this.key++
@@ -375,7 +375,7 @@ export default {
             }, 5000);
         },
         setSimilarProducts(){
-            axios.get('https://alpha.luxy-style.com/api/product/catergoy/'+this.product.categoryId+'/3/'+this.id).then(response=>{
+            axios.get(this.$store.state.apiUrl+'/product/catergoy/'+this.product.categoryId+'/3/'+this.id).then(response=>{
                 this.similarProducts = response.data
             })
         }

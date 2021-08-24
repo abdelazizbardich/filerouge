@@ -99,7 +99,7 @@ export default {
             alert('sdfsdf')
             if(this.validate()){
                 this.$store.dispatch('showLoader')
-                axios.post('https://alpha.luxy-style.com/api/contact',{
+                axios.post(this.$store.state.apiUrl+'/contact',{
                     "name" : this.name,
                     "email" : this.email,
                     "subject" : this.subject,

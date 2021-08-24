@@ -25,7 +25,7 @@ export default {
     },
     created(){
         this.$store.dispatch('showLoader')
-        axios.get('https://alpha.luxy-style.com/api/product/')
+        axios.get(this.$store.state.apiUrl+'/product/')
             .then(response => {
                 this.products = response.data.data
                 this.$store.dispatch('hideLoader')

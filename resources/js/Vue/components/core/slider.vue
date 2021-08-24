@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="slider" v-if="(slideCount > 0)">
+    <div v-if="$mq === 'laptop'">
+        <div class="slider" v-if="(slideCount > 0)" >
             <div class="slid">
                 <div class="slid-inner" v-bind:style="'background-image:url('+thumbnail+')'"></div>
             </div>
@@ -246,7 +246,7 @@ export default {
         },
         getProducts(){
             this.$store.dispatch('showLoader')
-            axios.get('https://alpha.luxy-style.com/api/product/inslide')
+            axios.get(this.$store.state.apiUrl+'/product/inslide')
                 .then(response => {
                     this.$store.dispatch('hideLoader')
                     this.products = response.data

@@ -62,7 +62,7 @@ export default {
         if(this.getCart())
         this.getCart().forEach(pCart => {
             this.$store.dispatch('showLoader')
-            axios.get('https://alpha.luxy-style.com/api/product/'+pCart.productId).then(response=>{
+            axios.get(this.$store.state.apiUrl+'/product/'+pCart.productId).then(response=>{
                 response.data.count = pCart.count
                 this.cartData.push(response.data)
                 this.$store.dispatch('hideLoader')
