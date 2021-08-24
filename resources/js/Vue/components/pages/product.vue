@@ -340,8 +340,10 @@ export default {
             document.querySelector('.cart-btn').style.opacity = 1
         },
         setProductData(id = this.id){
+            this.$store.dispatch('showLoader')
             axios.get('https://alpha.luxy-style.com/api/product/'+id).then((response)=>{
                 if(response.status == 200){
+                    this.$store.dispatch('hideLoader')
                     this.key++
                     this.product.inCart = false
                     this.product.stock = response.data.stock

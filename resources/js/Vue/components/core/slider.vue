@@ -245,8 +245,10 @@ export default {
             );
         },
         getProducts(){
+            this.$store.dispatch('showLoader')
             axios.get('https://alpha.luxy-style.com/api/product/inslide')
                 .then(response => {
+                    this.$store.dispatch('hideLoader')
                     this.products = response.data
             })
         },

@@ -1,5 +1,6 @@
 <template>
 <div>
+    <screenLoader v-if="$store.state.loading"/>
     <div class="main-header border-bottom border-info bg-dark text-info">
         <div class="screen-loader"></div>
         <div class="container header">
@@ -116,7 +117,11 @@ header{
 </style>
 <script>
 import {mapGetters} from 'vuex'
+import screenLoader from '../core/screen-loader.vue'
 export default {
+    components:{
+        screenLoader
+    },
     computed:{
         cartCount(){
             return this.$store.state.cartCount
@@ -129,17 +134,16 @@ export default {
         }
     },
     mounted(){
-      document.querySelector('.screen-loader').style.display = 'none'
-  },
-  methods:{
-      showMobileNav(){
-          if(this.MobileNav){
-              this.MobileNav = false;
-          }else{
-              this.MobileNav = true;
-          }
-      }
-  }
+    },
+    methods:{
+        showMobileNav(){
+            if(this.MobileNav){
+                this.MobileNav = false;
+            }else{
+                this.MobileNav = true;
+            }
+        }
+    }
 }
 </script>
 

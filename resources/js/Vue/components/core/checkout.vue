@@ -160,6 +160,7 @@ export default {
                 return false;
             }
             let token = document.head.querySelector('meta[name="csrf-token"]');
+            this.$store.dispatch('showLoader')
             axios.post('https://alpha.luxy-style.com/api/cart/checkout',{
                 'firstName' : this.firstName,
                 'lastName' : this.lastName,
@@ -171,6 +172,7 @@ export default {
                 'payWith' : this.payWith,
                 'cart' : localStorage.getItem('cart')
             }).then(response => {
+                this.$store.dispatch('hideLoader')
                 if(response.status == 200){
                     Toastify({
                     text: "We recived you order successfully",

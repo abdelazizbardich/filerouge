@@ -69,8 +69,10 @@ export default {
     methods:{
         moreProducts(){
             this.currentPage++
+            this.$store.dispatch('showLoader')
             axios.get('https://alpha.luxy-style.com/api/product?page='+this.currentPage)
             .then(response => {
+                this.$store.dispatch('hideLoader')
                 response.data.data.forEach(element => {
                    this.products.push(element);
                 });

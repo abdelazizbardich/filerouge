@@ -98,13 +98,14 @@ export default {
         sendMessage(){
             alert('sdfsdf')
             if(this.validate()){
+                this.$store.dispatch('showLoader')
                 axios.post('https://alpha.luxy-style.com/api/contact',{
                     "name" : this.name,
                     "email" : this.email,
                     "subject" : this.subject,
                     "message" : this.message
                 }).then(response => {
-                    console.log(response);
+                    this.$store.dispatch('hideLoader')
                 })
             }
         },

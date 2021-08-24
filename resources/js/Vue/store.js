@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
         products:{},
         toatalCart:0,
         cartProducts:[],
-        token:''
+        token:'',
+        loading:false
     },
     getters: {
         getProducts: state => {
@@ -111,18 +112,27 @@ export const store = new Vuex.Store({
             localStorage.removeItem('cart')
             state.cartProducts = [],
             state.toatalCart = 0
+        },
+        SHOW_LOADER(state){
+            state.loading = true
+        },
+        HIDE_LOADER(state){
+            state.loading = false
         }
     },
     actions:{
         getProducts({commit}){
+            commit('SHOW_LOADER')
             axios.get('https://alpha.luxy-style.com/api/product/')
                 .then(response => {
+                    commit('HIDE_LOADER')
                     commit('SET_PRODUCTS', response.data.data)
             })
         },
         getToken({commit}){
+            commit('SHOW_LOADER')
             axios.get('https://alpha.luxy-style.com/api/token/').then(response=>{
-                console.log(response);
+                commit('HIDE_LOADER')
                 commit('SET_TOKEN', response.data.token)
             })
         },
@@ -131,6 +141,12 @@ export const store = new Vuex.Store({
         },
         clearCart({commit}){
             commit('CLEAR_CART');
+        },
+        showLoader({commit}){
+            commit('SHOW_LOADER')
+        },
+        hideLoader({commit}){
+            commit('HIDE_LOADER')
         }
     },
 })
