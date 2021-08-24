@@ -14,8 +14,8 @@ export const store = new Vuex.Store({
         token:'',
         loading:false,
         // make sure to ommit the / from the end of url
-        // apiUrl:'https://alpha.luxy-style.com/api'
-        apiUrl:'http://127.0.0.1:8000/api'
+        apiUrl:'https://alpha.luxy-style.com/api'
+        // apiUrl:'http://127.0.0.1:8000/api'
     },
     getters: {
         getProducts: state => {

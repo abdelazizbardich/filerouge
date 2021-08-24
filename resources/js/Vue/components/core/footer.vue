@@ -28,7 +28,6 @@ footer{
     width:100%;
     padding:8px 16px;
     position: relative;
-    margin-top: 150px;
 }
 .social-links ul{
     padding: 0;

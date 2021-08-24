@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="rounded bg-white p-3 shadow" style="position: relative;">
+        <div class="rounded bg-white p-3 shadow mb-3 mb-md-0" style="position: relative;">
             <router-link  :to="/product/+product.id">
                 <div class="productItem">
                     <span class="d-block title m-3">{{ product.name }}</span>
                     <div class="thumbnail my-3" v-bind:style="'background-image:url(/storage/'+product.thumbnail+')'">
                     </div>
                     <router-link  :to="/product/+product.id" class="more d-block mx-auto my-3">More info <i class="fas fa-long-arrow-alt-right"></i></router-link>
-                    <span class="sale" v-if="product.on_sale">Sale</span>
+                    <span class="sale" :style="($mq === 'mobile')?'right: 10px':''" v-if="product.on_sale">Sale</span>
                     <div class="w-100 px-3 mt-4 d-flex justify-content-between align-items-center">
                         <span class="price">${{ parseFloat(product.price).toFixed(2) }}</span>
                         <span v-if="(product.categories)" class="category">{{ product.categories.name }}</span>

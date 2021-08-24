@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="bg-dark p-5" style="overflow: auto;max-height: calc(100vh - 80px);">
+    <div style="position: sticky;top: 15px;">
+        <div class="bg-dark p-5" style="">
             <div class="p-2">
                 <h3 class="display-6 text-info">Checkout</h3>
                 <p class="text-light small">Lorem ipsum dolor sit amet consectetur adipisicing elit. mollitia autem deserunt.</p>

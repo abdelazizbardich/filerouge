@@ -2,7 +2,7 @@
     <div>
         <mainHeader/>
         <div class="main-cart">
-            <div class="row m-0 h-100">
+            <div class="row m-0">
                 <div class="col-12 col-md-6 text-info h-100 overflow-hidden">
                     <div class="p-5 h-100">
                         <h3 class="display-6 text-info">Cart</h3> <span>TotalCart: <span>{{ totalCart }}</span></span>
@@ -21,14 +21,13 @@
                 </div>
             </div>
         </div>
-        <Footer style="margin-top:-200px;"/>
+        <Footer/>
     </div>
 </template>
 
 <style lang="css" scoped>
 .main-cart{
-    height: calc(100vh - 85px);
-    overflow: hidden;
+    min-height: calc(100vh - 85px);
 }
 .empty-cart {
     color: red;

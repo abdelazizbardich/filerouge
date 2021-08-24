@@ -1,8 +1,8 @@
 <template>
-    <div class="p-5 main-mansory">
+    <div class="p-md-5 main-mansory">
         <div class="container">
             <div class="row ">
-                <div class="col-auto m-auto my-5">
+                <div class="col-auto m-auto my-2 my-md-5">
                     <span class="h3 text-light display-6">Our latested <span class="text-info">products</span></span>
                 </div>
             </div>

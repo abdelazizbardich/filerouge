@@ -8,7 +8,7 @@
                         <router-link to="/">Home</router-link> / <router-link to="/shop">Shop</router-link> / <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link> / <strong>{{ product.title }}</strong>
                     </div>
                     <div class="gallery">
-                            <div class="navigation">
+                            <div class="navigation" v-if="false">
                                 <div class="prev" style="cursor:pointer;" @click="prevSlide()"><i class="fas fa-chevron-up"></i></div>
                                 <div class="dots">
                                     <div style="cursor:pointer;" v-for="(photo,index) in product.gallery" :class="(index == currentSlide)?'active':''" :key=index class="dot" @click="goToSlide(index)"></div>
