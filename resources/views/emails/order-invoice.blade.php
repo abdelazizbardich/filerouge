@@ -2195,11 +2195,11 @@
                             >
                               <span style="color: #c0c0c0; font-size: 12px"
                                 ><a
-                                  href="{{ config(app.url) }}"
+                                  href="{{ config('app.url') }}"
                                   rel="noopener"
                                   style="text-decoration: none; color: #c0c0c0"
                                   target="_blank"
-                                  >{{ config(app.url) }}</a
+                                  >{{ config('app.url') }}</a
                                 ></span
                               >
                             </p>
