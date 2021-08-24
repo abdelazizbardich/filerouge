@@ -21,7 +21,7 @@
                     </div>
                     <div class="details">
                         <div class="category text-dark small">
-                        <router-link :to="'/shop/categoruy/'+product.categoryId">{{ product.categoryName }}</router-link>
+                        <router-link :to="'/shop/category/'+product.categoryId">{{ product.categoryName }}</router-link>
                         </div>
                         <div class="title text-info">
                             <h1><strong>{{ product.title }}</strong></h1>
@@ -348,7 +348,7 @@ export default {
                     this.product.title = response.data.name
                     this.product.price = response.data.price
                     if(response.data.description.length > 250){this.product.description = response.data.description.substring(0,250)+'...'}else{this.product.description = response.data.description}
-                    this.product.thumbnail = '/storage/'+response.data.medias[0].path
+                    this.product.thumbnail = '/storage/'+response.data.thumbnail
                     this.product.full_description = response.data.full_description
                     this.product.dimentions.w = JSON.parse(response.data.dimentions).w
                     this.product.dimentions.b = JSON.parse(response.data.dimentions).b
