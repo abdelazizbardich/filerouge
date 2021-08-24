@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="rounded bg-white p-3 shadow">
+        <div class="rounded bg-white p-3 shadow" style="position: relative;">
             <router-link  :to="/product/+product.id">
                 <div class="productItem">
                     <span class="d-block title m-3">{{ product.name }}</span>
@@ -30,9 +30,6 @@
 a{
     text-decoration: none;
     color: inherit;
-}
-.productItem{
-    position: relative;
 }
 .productItem img{max-width:100%;
     transition: .3s;}
