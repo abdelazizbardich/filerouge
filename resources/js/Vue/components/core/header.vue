@@ -2,7 +2,6 @@
 <div>
     <screenLoader v-if="$store.state.loading"/>
     <div class="main-header border-bottom border-info bg-dark text-info">
-        <div class="screen-loader"></div>
         <div class="container header">
             <div class="row">
                 <div class="col">
@@ -74,14 +73,6 @@ header{
     position: sticky;
     top:0;
     z-index:9;
-}
-.screen-loader{
-    position:fixed;
-    top:0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
 }
  button.navbar-toggler i {
     font-size: 2rem;
