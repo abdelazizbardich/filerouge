@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="related-products border-info py-3 text-center border-top pt-3">
+        <div v-if="similarProducts.length > 0" class="related-products border-info py-3 text-center border-top pt-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
